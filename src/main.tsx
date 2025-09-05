@@ -1,10 +1,10 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import QoC001Landing from './pages/qo_c001_landing';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <QoC001Landing />
   </StrictMode>,
-)
+);
