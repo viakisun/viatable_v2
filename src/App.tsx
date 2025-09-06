@@ -22,16 +22,19 @@ import QoS006TableManagement from './pages/qo_s006_table_management';
 import QoS007CustomerService from './pages/qo_s007_customer_service';
 import QoS008StaffAnalytics from './pages/qo_s008_staff_analytics';
 
+import { LanguageProvider } from './contexts/LanguageContext';
+
 function App() {
   console.log('[App.tsx] Router component rendering. Setting up routes.');
   // A helper function to wrap routes with the iPhone frame
   const framed = (element: React.ReactNode) => <IphoneFrame>{element}</IphoneFrame>;
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Homepage without the frame */}
-        <Route path="/" element={<HomePage />} />
+    <LanguageProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Homepage without the frame */}
+          <Route path="/" element={<HomePage />} />
 
         {/* Customer Pages */}
         <Route path="/qo-c-001" element={framed(<QoC001Landing />)} />
@@ -54,6 +57,7 @@ function App() {
         <Route path="/qo-s-008" element={framed(<QoS008StaffAnalytics />)} />
       </Routes>
     </BrowserRouter>
+  </LanguageProvider>
   );
 }
 
