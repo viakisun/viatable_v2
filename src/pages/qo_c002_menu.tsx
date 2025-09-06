@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, Star, Plus, Clock, Leaf } from 'lucide-react';
+import { useState } from 'react';
+import { Search, Plus } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 

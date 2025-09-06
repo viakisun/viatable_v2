@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Filter, Search, Clock, CheckCircle, RefreshCw, Bell } from 'lucide-react';
+import { useState } from 'react';
+import { Search, RefreshCw, Bell } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOOrderManagement = () => {
   const { language } = useLanguage();
   const [selectedTab, setSelectedTab] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   const content = {
@@ -14,7 +13,7 @@ const QOOrderManagement = () => {
     ko: { title: "주문 관리", searchPlaceholder: "주문 검색...", tabs: { all: "전체", new: "신규", preparing: "조리중", ready: "준비완료" }, orderStatuses: { new: "신규", preparing: "조리중", ready: "준비완료", completed: "완료" }, orderInfo: { orderNumber: "주문번호 #", time: "시간", total: "총액" }, currency: "원" }
   };
 
-  const [orders, setOrders] = useState([
+  const [orders] = useState([
     { id: "128", status: "new", total: { AUD: 42.20, KRW: 62000 }, placedAt: new Date(Date.now() - 2 * 60000) },
     { id: "127", status: "preparing", total: { AUD: 29.80, KRW: 43500 }, placedAt: new Date(Date.now() - 18 * 60000) },
     { id: "126", status: "ready", total: { AUD: 28.50, KRW: 42000 }, placedAt: new Date(Date.now() - 25 * 60000) },

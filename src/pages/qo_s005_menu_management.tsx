@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Plus, BarChart3, Search, Eye, EyeOff } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOMenuManagement = () => {
   const { language } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const content = {
@@ -25,7 +25,7 @@ const QOMenuManagement = () => {
 
   const filteredItems = menuItems.filter(item => (selectedCategory === 'all' || item.category === selectedCategory) && (searchQuery === '' || item.name[language].toLowerCase().includes(searchQuery.toLowerCase())));
 
-  const toggleAvailability = (id) => {
+  const toggleAvailability = (id: number) => {
     setMenuItems(items => items.map(item => item.id === id ? { ...item, availability: item.availability === 'available' ? 'unavailable' : 'available' } : item));
   };
 

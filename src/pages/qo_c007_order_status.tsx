@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Clock, CheckCircle, Phone, MessageSquare, Star, Receipt, Share, Bell, BellOff, ChefHat, Package } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Clock, CheckCircle, Phone, MessageSquare, Bell, BellOff } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOOrderStatus = () => {
   const { language } = useLanguage();
-  const [orderStatus, setOrderStatus] = useState('preparing');
-  const [estimatedTime, setEstimatedTime] = useState(12);
+  const [orderStatus] = useState('preparing');
+  const [estimatedTime] = useState(12);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   const content = {
     en: { title: "Order Status", orderConfirmed: "Confirmed", preparing: "Preparing", ready: "Ready", minutesLeft: "min left", orderTimeline: "Order Timeline", orderItems: "Order Items", callStaff: "Call Staff", sendMessage: "Send Message" },
     ko: { title: "주문 현황", orderConfirmed: "주문 확인", preparing: "조리 중", ready: "준비 완료", minutesLeft: "분 남음", orderTimeline: "주문 진행상황", orderItems: "주문 내역", callStaff: "직원 호출", sendMessage: "메시지" }
-  };
-
-  const orderData = {
-    items: [ { name: { en: 'Avocado Toast', ko: '아보카도 토스트' }, quantity: 2 }, { name: { en: 'Oat Milk Latte', ko: '오트밀크 라떼' }, quantity: 1 } ],
-    total: { AUD: 74.55, KRW: 107625 }
   };
 
   const currentContent = content[language];

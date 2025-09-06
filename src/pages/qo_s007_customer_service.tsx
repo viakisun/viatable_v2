@@ -1,7 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, Bell, BellOff, MessageSquare, ThumbsUp } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
+
+type RequestStatus = 'pending' | 'resolved';
+type RequestType = 'assistance' | 'complaint' | 'compliment';
+
+interface Request {
+  id: number;
+  customer: string;
+  type: RequestType;
+  status: RequestStatus;
+  title: string;
+}
 
 const QOCustomerService = () => {
   const { language } = useLanguage();
@@ -13,7 +24,7 @@ const QOCustomerService = () => {
     ko: { title: "고객 서비스", searchPlaceholder: "요청 검색...", filters: { all: "전체", pending: "대기중", resolved: "해결됨" }, requestTypes: { assistance: "도움", complaint: "불만" }, status: { pending: "대기중", resolved: "해결됨" } }
   };
 
-  const [requests, setRequests] = useState([
+  const [requests] = useState<Request[]>([
     { id: 1, customer: "John Smith", type: "assistance", status: "pending", title: "Need extra napkins" },
     { id: 2, customer: "Sarah Johnson", type: "complaint", status: "pending", title: "Food is taking too long" },
     { id: 3, customer: "Mike Chen", type: "compliment", status: "resolved", title: "Excellent service!" },
@@ -22,7 +33,7 @@ const QOCustomerService = () => {
   const currentContent = content[language];
   const filteredRequests = requests.filter(req => selectedFilter === 'all' || req.status === selectedFilter);
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type: RequestType) => {
     if (type === 'compliment') return <ThumbsUp className="w-4 h-4 text-green-600" />;
     return <MessageSquare className="w-4 h-4 text-blue-600" />;
   };
@@ -64,7 +75,7 @@ const QOCustomerService = () => {
                   </div>
                 </div>
                 <span className={`px-2 py-1 text-xs font-medium rounded-full ${request.status === 'pending' ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'}`}>
-                  {currentContent.status[request.status]}
+                  {currentContent.status[request.status as RequestStatus]}
                 </span>
               </div>
             </div>

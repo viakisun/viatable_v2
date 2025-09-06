@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, Clock, Star, QrCode } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 // This is a "naked" version of the component with all styles removed for debugging.

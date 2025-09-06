@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
-import { Clock, CreditCard, Smartphone, QrCode, User, Mail, Phone, MapPin, AlertCircle, CheckCircle, ArrowRight, Edit3 } from 'lucide-react';
+import { useState } from 'react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOCheckout = () => {
   const { language } = useLanguage();
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('card');
-  const [customerInfo, setCustomerInfo] = useState({ name: '', email: '', phone: '', isGuest: true });
-  const [serviceType, setServiceType] = useState('dine-in');
-  const [tableNumber, setTableNumber] = useState('12');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [errors, setErrors] = useState({});
 
   const content = {
     en: { title: "Checkout", orderSummary: "Order Summary", customerInfo: "Customer Information", name: "Full Name", email: "Email Address", phone: "Phone Number", serviceType: "Service Type", dineIn: "Dine In", takeaway: "Takeaway", paymentMethod: "Payment Method", placeOrder: "Place Order", total: "Total", currency: "AUD" },

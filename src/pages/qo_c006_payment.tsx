@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { CreditCard, Smartphone, QrCode, Lock, Shield, CheckCircle, AlertCircle, Eye, EyeOff, Fingerprint } from 'lucide-react';
+import { useState } from 'react';
+import type { JSX } from 'react';
+import { Lock, CheckCircle, AlertCircle } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
+type PaymentStatusType = 'input' | 'processing' | 'success' | 'failed';
+
 const QOPayment = () => {
   const { language } = useLanguage();
-  const [paymentMethod, setPaymentMethod] = useState('card');
-  const [paymentStep, setPaymentStep] = useState('input');
-  const [cardDetails, setCardDetails] = useState({ number: '', expiry: '', cvv: '', name: '' });
+  const [paymentStep, setPaymentStep] = useState<PaymentStatusType>('input');
 
   const content = {
     en: { title: "Secure Payment", totalAmount: "Total Amount", payNow: "Pay Now", processing: "Processing...", paymentSuccessful: "Payment Successful!", paymentFailed: "Payment Failed", tryAgain: "Try Again", currency: "AUD" },
@@ -26,8 +27,8 @@ const QOPayment = () => {
     }, 2000);
   };
 
-  const PaymentStatus = ({ status }) => {
-    const statuses = {
+  const PaymentStatus = ({ status }: { status: PaymentStatusType }) => {
+    const statuses: Record<string, { icon: JSX.Element, title: string, color: string }> = {
       processing: { icon: <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>, title: currentContent.processing, color: 'blue' },
       success: { icon: <CheckCircle className="w-12 h-12 text-green-500" />, title: currentContent.paymentSuccessful, color: 'green' },
       failed: { icon: <AlertCircle className="w-12 h-12 text-red-500" />, title: currentContent.paymentFailed, color: 'red' }
