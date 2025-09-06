@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   QrCode, Smartphone, TrendingUp, Globe, Users, ShoppingCart,
   Check, Star, ArrowRight, Play, Menu, X, MapPin, Clock,
@@ -602,6 +603,9 @@ const ViableTableLandingPage = () => {
           </div>
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <div className="mb-4">
+              <Link to="/samples" className="text-purple-400 hover:text-white transition-colors">View Component Samples</Link>
+            </div>
             <p>&copy; 2024 VIATABLE. All rights reserved. Making every table viable.</p>
           </div>
         </div>

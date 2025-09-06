@@ -40,16 +40,16 @@ function App() {
     <LanguageProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FramedPage><VTL001 /></FramedPage>} />
+          <Route path="/" element={<VTL001 />} />
           <Route path="/samples" element={<HomePage />} />
 
           {/* Viatable Sample Pages */}
-          <Route path="/vt-l001" element={<FramedPage><VTL001 /></FramedPage>} />
-          <Route path="/vt-l002" element={<FramedPage><VTL002 /></FramedPage>} />
-          <Route path="/vt-l003" element={<FramedPage><VTL003 /></FramedPage>} />
-          <Route path="/vt-l004" element={<FramedPage><VTL004 /></FramedPage>} />
-          <Route path="/vt-l005" element={<FramedPage><VTL005 /></FramedPage>} />
-          <Route path="/vt-l017" element={<FramedPage><VTL017 /></FramedPage>} />
+          <Route path="/vt-l001" element={<VTL001 />} />
+          <Route path="/vt-l002" element={<VTL002 />} />
+          <Route path="/vt-l003" element={<VTL003 />} />
+          <Route path="/vt-l004" element={<VTL004 />} />
+          <Route path="/vt-l005" element={<VTL005 />} />
+          <Route path="/vt-l017" element={<VTL017 />} />
 
           {/* Customer Pages */}
           <Route path="/qo-c-001" element={<FramedPage><QoC001 /></FramedPage>} />
