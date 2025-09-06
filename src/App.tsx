@@ -4,7 +4,8 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import IphoneFrame from './components/iPhoneFrame';
 
 // Import all page components
-import HomePage from './pages/HomePage';
+import ViatableLandingPage from './pages/ViatableLandingPage';
+import SamplePageList from './pages/SamplePageList';
 import QoC001 from './pages/qo_c001_landing';
 import QoC002 from './pages/qo_c002_menu';
 import QoC003 from './pages/qo_c003_item_details';
@@ -22,6 +23,15 @@ import QoS006 from './pages/qo_s006_table_management';
 import QoS007 from './pages/qo_s007_customer_service';
 import QoS008 from './pages/qo_s008_staff_analytics';
 
+// Viatable sample pages
+import VTL001 from './pages/vt-l001-viatable_landing_page';
+import VTL002 from './pages/vt-l002-viatable_signup_flow';
+import VTL003 from './pages/vt-l003-viatable_pricing_plans';
+import VTL004 from './pages/vt-l004-viatable_demo_trial';
+import VTL005 from './pages/vt-l005-viatable_features_new';
+import VTL017 from './pages/vt-l017-viatable_login_new';
+
+
 // A wrapper component to apply the iPhone frame to pages
 const FramedPage = ({ children }: { children: React.ReactNode }) => (
   <IphoneFrame>{children}</IphoneFrame>
@@ -32,7 +42,17 @@ function App() {
     <LanguageProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ViatableLandingPage />} />
+          <Route path="/samples" element={<SamplePageList />} />
+
+          {/* Viatable Sample Pages */}
+          <Route path="/vt-l001" element={<FramedPage><VTL001 /></FramedPage>} />
+          <Route path="/vt-l002" element={<FramedPage><VTL002 /></FramedPage>} />
+          <Route path="/vt-l003" element={<FramedPage><VTL003 /></FramedPage>} />
+          <Route path="/vt-l004" element={<FramedPage><VTL004 /></FramedPage>} />
+          <Route path="/vt-l005" element={<FramedPage><VTL005 /></FramedPage>} />
+          <Route path="/vt-l017" element={<FramedPage><VTL017 /></FramedPage>} />
+
 
           {/* Customer Pages */}
           <Route path="/qo-c-001" element={<FramedPage><QoC001 /></FramedPage>} />
