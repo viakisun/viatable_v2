@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
+    console.log('[HomePage.tsx] Rendering homepage with links.');
     return (
         <div className="home-container">
             <header className="home-header">

@@ -23,6 +23,7 @@ import QoS007CustomerService from './pages/qo_s007_customer_service';
 import QoS008StaffAnalytics from './pages/qo_s008_staff_analytics';
 
 function App() {
+  console.log('[App.tsx] Router component rendering. Setting up routes.');
   // A helper function to wrap routes with the iPhone frame
   const framed = (element: React.ReactNode) => <iPhoneFrame>{element}</iPhoneFrame>;
 
