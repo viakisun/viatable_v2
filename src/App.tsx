@@ -27,6 +27,7 @@ const FramedPage = ({ children }: { children: React.ReactNode }) => (
 );
 
 function App() {
+  console.log('[App.tsx] Router component rendering...');
   return (
     <LanguageProvider>
       <BrowserRouter>
