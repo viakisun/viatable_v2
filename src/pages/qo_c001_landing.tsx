@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Clock, Star, QrCode } from 'lucide-react';
-import AppHeader from '../../components/AppHeader';
+import AppHeader from '../components/AppHeader';
 
 const QOLandingPage = () => {
   console.log('[qo_c001_landing.tsx] Rendering sample page inside the frame.');
