@@ -56,6 +56,7 @@ const JourneyStep = ({ number, title, pageId }) => (
 );
 
 const HomePage: React.FC = () => {
+  console.log('[HomePage.tsx] Rendering showcase page...');
   return (
     <div className="showcase-container">
       <header className="showcase-header">
