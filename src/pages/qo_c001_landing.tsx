@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Globe, Smartphone, Clock, Star, QrCode } from 'lucide-react';
+import { ChevronRight, Clock, Star, QrCode } from 'lucide-react';
+import AppHeader from '../../components/AppHeader';
 
 const QOLandingPage = () => {
   console.log('[qo_c001_landing.tsx] Rendering sample page inside the frame.');
@@ -12,7 +13,7 @@ const QOLandingPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const handleLanguageSwitch = (lang) => {
+  const handleLanguageSwitch = (lang: 'en' | 'ko') => {
     setSelectedLanguage(lang);
   };
 
@@ -61,42 +62,11 @@ const QOLandingPage = () => {
   const currentContent = content[selectedLanguage];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
-      {/* Header with Language Toggle */}
-      <header className="flex justify-between items-center p-4 bg-white/80 backdrop-blur-sm border-b border-slate-200">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
-            <QrCode className="w-5 h-5 text-white" />
-          </div>
-          <span className="font-semibold text-slate-900">QR Order</span>
-        </div>
-        
-        <div className="flex bg-slate-200 rounded-full p-1">
-          <button
-            onClick={() => handleLanguageSwitch('en')}
-            className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-              selectedLanguage === 'en'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-600'
-            }`}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => handleLanguageSwitch('ko')}
-            className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-              selectedLanguage === 'ko'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-600'
-            }`}
-          >
-            한국어
-          </button>
-        </div>
-      </header>
+    <div className="relative min-h-full bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col">
+      <AppHeader selectedLanguage={selectedLanguage} onLanguageChange={handleLanguageSwitch} />
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col justify-center px-6 py-8">
+      {/* Main Content with Safe Area Padding */}
+      <main className="flex-1 flex flex-col justify-center px-6 py-8 pt-20">
         {/* Restaurant Info */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center bg-white rounded-full px-4 py-2 shadow-sm border border-slate-200 mb-4">
