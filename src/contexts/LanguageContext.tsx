@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useContext } from 'react';
+import type { ReactNode } from 'react';
 
 // Define the shape of the language and the context
 type Language = 'en' | 'ko';

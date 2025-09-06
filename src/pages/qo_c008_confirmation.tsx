@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, Clock, QrCode, Home, RotateCcw } from 'lucide-react';
+import { CheckCircle, Home, RotateCcw } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOOrderConfirmation = () => {
   const { language } = useLanguage();
-  const [showQRCode, setShowQRCode] = useState(false);
-  const [estimatedReadyTime, setEstimatedReadyTime] = useState(new Date(Date.now() + 15 * 60000));
 
   const content = {
     en: { title: "Order Confirmed!", thankYou: "Thank you for your order", orderNumber: "Order Number", confirmation: "Your order is confirmed", estimatedTime: "Estimated ready time", trackOrder: "Track Your Order", whatNext: "What's Next?", newOrder: "New Order" },
@@ -15,8 +12,6 @@ const QOOrderConfirmation = () => {
 
   const orderData = { orderNumber: "2024-001" };
   const currentContent = content[language];
-
-  const formatTime = (date) => date.toLocaleTimeString(language === 'ko' ? 'ko-KR' : 'en-AU', { hour: '2-digit', minute: '2-digit' });
 
   return (
     <PageLayout title={currentContent.title} backLink={undefined} removeMainPadding={true}>

@@ -1,18 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
+type Period = 'today' | 'week' | 'month';
+
+interface Trend {
+  ordersProcessed: number;
+  avgOrderTime: number;
+  customerRating: number;
+}
+
+interface Metrics {
+  ordersProcessed: number;
+  avgOrderTime: number;
+  customerRating: number;
+  trend: Trend;
+}
+
 const QOStaffAnalytics = () => {
   const { language } = useLanguage();
-  const [selectedPeriod, setSelectedPeriod] = useState('today');
+  const [selectedPeriod, setSelectedPeriod] = useState<Period>('today');
 
   const content = {
     en: { title: "Staff Analytics", periods: { today: "Today", week: "This Week", month: "This Month" }, metrics: { ordersProcessed: "Orders Processed", avgOrderTime: "Avg Order Time", customerRating: "Customer Rating" }, vs: "vs last period" },
     ko: { title: "직원 분석", periods: { today: "오늘", week: "이번 주", month: "이번 달" }, metrics: { ordersProcessed: "처리 주문", avgOrderTime: "평균 주문시간", customerRating: "고객 평점" }, vs: "지난 기간 대비" }
   };
 
-  const personalMetrics = {
+  const personalMetrics: Record<Period, Metrics> = {
     today: { ordersProcessed: 23, avgOrderTime: 12.5, customerRating: 4.8, trend: { ordersProcessed: 8.7, avgOrderTime: -5.2, customerRating: 2.1 } },
     week: { ordersProcessed: 147, avgOrderTime: 13.2, customerRating: 4.7, trend: { ordersProcessed: 2.1, avgOrderTime: 1.5, customerRating: -1.1 } },
     month: { ordersProcessed: 612, avgOrderTime: 13.8, customerRating: 4.6, trend: { ordersProcessed: 5.2, avgOrderTime: 0.5, customerRating: 0.5 } }
@@ -21,7 +36,7 @@ const QOStaffAnalytics = () => {
   const currentContent = content[language];
   const currentMetrics = personalMetrics[selectedPeriod];
 
-  const getTrendIcon = (trend) => {
+  const getTrendIcon = (trend: number) => {
     if (trend > 0) return <TrendingUp className="w-4 h-4 text-green-600" />;
     if (trend < 0) return <TrendingDown className="w-4 h-4 text-red-600" />;
     return <Activity className="w-4 h-4 text-slate-600" />;
@@ -34,7 +49,7 @@ const QOStaffAnalytics = () => {
         <div className="bg-white rounded-xl p-2">
           <div className="flex space-x-1">
             {Object.entries(currentContent.periods).map(([key, label]) => (
-              <button key={key} onClick={() => setSelectedPeriod(key)} className={`flex-1 py-2 rounded-lg text-sm font-medium ${selectedPeriod === key ? 'bg-blue-600 text-white' : 'text-slate-600 hover:bg-slate-100'}`}>
+              <button key={key} onClick={() => setSelectedPeriod(key as Period)} className={`flex-1 py-2 rounded-lg text-sm font-medium ${selectedPeriod === key ? 'bg-blue-600 text-white' : 'text-slate-600 hover:bg-slate-100'}`}>
                 {label}
               </button>
             ))}

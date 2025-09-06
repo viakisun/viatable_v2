@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
-import IphoneFrame from './components/IphoneFrame';
+import IphoneFrame from './components/iPhoneFrame';
 
 // Import all page components
 import HomePage from './pages/HomePage';

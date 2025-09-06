@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { User, Lock, Eye, EyeOff, Shield, Key, QrCode } from 'lucide-react';
+import { useState } from 'react';
+import { User, Lock } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOStaffLogin = () => {
   const { language } = useLanguage();
   const [loginMethod, setLoginMethod] = useState('password');
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
 
   const content = {

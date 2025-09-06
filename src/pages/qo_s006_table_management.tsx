@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { QrCode, Users, Plus } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
+
+type TableStatus = 'available' | 'occupied' | 'reserved';
+
+interface Table {
+  id: number;
+  tableNumber: string;
+  capacity: number;
+  area: string;
+  status: TableStatus;
+}
 
 const QOTableManagement = () => {
   const { language } = useLanguage();
   const [selectedArea, setSelectedArea] = useState('all');
 
   const content = {
-    en: { title: "Table Management", areas: { all: "All", indoor: "Indoor", outdoor: "Outdoor" }, tableStatus: { available: "Available", occupied: "Occupied", reserved: "Reserved" }, people: "people" },
-    ko: { title: "테이블 관리", areas: { all: "전체", indoor: "실내", outdoor: "야외" }, tableStatus: { available: "이용 가능", occupied: "사용 중", reserved: "예약됨" }, people: "명" }
+    en: { title: "Table Management", areas: { all: "All", indoor: "Indoor", outdoor: "Outdoor" }, tableStatus: { available: "Available", occupied: "Occupied", reserved: "Reserved" }, people: "people", actions: { addTable: "Add Table" } },
+    ko: { title: "테이블 관리", areas: { all: "전체", indoor: "실내", outdoor: "야외" }, tableStatus: { available: "이용 가능", occupied: "사용 중", reserved: "예약됨" }, people: "명", actions: { addTable: "테이블 추가" } }
   };
 
-  const [tables, setTables] = useState([
+  const [tables] = useState<Table[]>([
     { id: 1, tableNumber: "1", capacity: 2, area: "indoor", status: "occupied" },
     { id: 2, tableNumber: "2", capacity: 4, area: "indoor", status: "available" },
     { id: 5, tableNumber: "5", capacity: 4, area: "outdoor", status: "occupied" },
@@ -22,7 +32,7 @@ const QOTableManagement = () => {
   const currentContent = content[language];
   const filteredTables = tables.filter(table => selectedArea === 'all' || table.area === selectedArea);
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: TableStatus) => {
     switch (status) {
       case 'available': return 'bg-green-100 text-green-800 border-green-200';
       case 'occupied': return 'bg-blue-100 text-blue-800 border-blue-200';
@@ -34,7 +44,7 @@ const QOTableManagement = () => {
   const HeaderActions = () => (
     <button className="flex items-center space-x-2 px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium">
       <Plus className="w-4 h-4" />
-      <span>{content.en.actions?.addTable || 'Add Table'}</span>
+      <span>{currentContent.actions.addTable}</span>
     </button>
   );
 

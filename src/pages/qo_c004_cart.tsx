@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import { Plus, Minus, Trash2, Tag, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { Plus, Minus, Trash2, ArrowRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOShoppingCart = () => {
   const { language } = useLanguage();
-  const [promoCode, setPromoCode] = useState('');
-  const [appliedPromo, setAppliedPromo] = useState(null);
-  const [cartItems, setCartItems] = useState([
+  const [cartItems] = useState([
     { id: 1, name: { en: 'Avocado Toast Supreme', ko: '슈프림 아보카도 토스트' }, price: { AUD: 22.50, KRW: 32500 }, quantity: 2, image: '🥑' },
     { id: 2, name: { en: 'Oat Milk Latte', ko: '오트밀크 라떼' }, price: { AUD: 7.20, KRW: 10500 }, quantity: 1, image: '☕' },
   ]);

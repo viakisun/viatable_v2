@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Bell, Settings, LogOut, Clock, TrendingUp, Users, ShoppingBag, CheckCircle, Package } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Bell, Settings, LogOut } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOStaffDashboard = () => {
   const { language } = useLanguage();
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [isOnShift, setIsOnShift] = useState(true);
+  const [, setCurrentTime] = useState(new Date());
+  const [, setIsOnShift] = useState(true);
 
   const content = {
     en: { title: "Dashboard", welcome: "Welcome back", shiftStatus: "Shift Status", clockOut: "Clock Out", todayStats: "Today's Overview", totalOrders: "Total Orders", totalRevenue: "Revenue", quickActions: "Quick Actions", viewOrders: "View Orders" },

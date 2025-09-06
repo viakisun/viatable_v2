@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import { Star, Clock, Leaf, Plus, Minus, Heart, Info, Users } from 'lucide-react';
+import { useState } from 'react';
+import { Plus, Minus, Heart } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const QOItemDetails = () => {
   const { language } = useLanguage();
   const [quantity, setQuantity] = useState(1);
-  const [selectedCustomizations, setSelectedCustomizations] = useState({});
-  const [specialNotes, setSpecialNotes] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
-  const [showNutrition, setShowNutrition] = useState(false);
 
   const content = {
     en: { addToCart: "Add to Cart", quantity: "Quantity", customizations: "Customizations", specialNotes: "Special Notes", notesPlaceholder: "Any special requests?", ingredients: "Ingredients", nutrition: "Nutrition Info", allergens: "Contains", currency: "AUD" },
@@ -22,11 +19,6 @@ const QOItemDetails = () => {
     price: { AUD: 18.50, KRW: 26500 }, prepTime: 12, servings: 1, rating: 4.9, reviews: 203, calories: 450, tags: ['popular', 'vegetarian'],
     allergens: { en: ['Gluten', 'Dairy', 'Eggs'], ko: ['글루텐', '유제품', '달걀'] },
     ingredients: { en: ['Sourdough', 'Avocado', 'Egg', 'Feta'], ko: ['사워도우', '아보카도', '계란', '페타치즈'] }
-  };
-
-  const customizationOptions = {
-    en: { 'Bread Type': { options: ['Sourdough', 'Multigrain (+$1)'], prices: [0, 1] }, 'Egg Style': { options: ['Poached', 'Fried'], prices: [0, 0] } },
-    ko: { '빵 종류': { options: ['사워도우', '멀티그레인 (+1천원)'], prices: [0, 1500] }, '계란 스타일': { options: ['수란', '후라이'], prices: [0, 0] } }
   };
 
   const currentContent = content[language];
