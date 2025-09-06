@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
-  MapPin, Store, Plus, Edit, Trash2, Users, Clock, Wifi, Power,
-  Search, Filter, MoreVertical, Eye, Settings, TrendingUp, TrendingDown,
-  CheckCircle, XCircle, AlertTriangle, Calendar, Globe, Phone, Mail
+  MapPin, Store, Plus, Wifi, Power,
+  Search, MoreVertical, Eye, Settings, TrendingUp, TrendingDown,
+  CheckCircle, XCircle, AlertTriangle
 } from 'lucide-react';
 
 const MultiLocationManagement = () => {
@@ -10,8 +10,7 @@ const MultiLocationManagement = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterRegion, setFilterRegion] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [, setShowAddModal] = useState(false);
 
   // Mock data for locations
   const locations = [

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
-  Settings, Globe, Shield, CreditCard, Bell, 
+  Settings, Shield, CreditCard, Bell,
   Save, RefreshCw, Upload, Download, 
-  MapPin, Zap, Palette, Info
+  Info
 } from 'lucide-react';
 
 const SystemSettings = () => {
