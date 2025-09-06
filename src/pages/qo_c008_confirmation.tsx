@@ -46,7 +46,7 @@ const QOOrderConfirmation = () => {
             {/* ... rest of the component JSX is unchanged */}
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
