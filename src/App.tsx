@@ -4,8 +4,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import IphoneFrame from './components/iPhoneFrame';
 
 // Import all page components
-import ViatableLandingPage from './pages/ViatableLandingPage';
-import SamplePageList from './pages/SamplePageList';
+import HomePage from './pages/HomePage';
 import QoC001 from './pages/qo_c001_landing';
 import QoC002 from './pages/qo_c002_menu';
 import QoC003 from './pages/qo_c003_item_details';
@@ -31,7 +30,6 @@ import VTL004 from './pages/vt-l004-viatable_demo_trial';
 import VTL005 from './pages/vt-l005-viatable_features_new';
 import VTL017 from './pages/vt-l017-viatable_login_new';
 
-
 // A wrapper component to apply the iPhone frame to pages
 const FramedPage = ({ children }: { children: React.ReactNode }) => (
   <IphoneFrame>{children}</IphoneFrame>
@@ -42,8 +40,8 @@ function App() {
     <LanguageProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ViatableLandingPage />} />
-          <Route path="/samples" element={<SamplePageList />} />
+          <Route path="/" element={<FramedPage><VTL001 /></FramedPage>} />
+          <Route path="/samples" element={<HomePage />} />
 
           {/* Viatable Sample Pages */}
           <Route path="/vt-l001" element={<FramedPage><VTL001 /></FramedPage>} />
@@ -52,7 +50,6 @@ function App() {
           <Route path="/vt-l004" element={<FramedPage><VTL004 /></FramedPage>} />
           <Route path="/vt-l005" element={<FramedPage><VTL005 /></FramedPage>} />
           <Route path="/vt-l017" element={<FramedPage><VTL017 /></FramedPage>} />
-
 
           {/* Customer Pages */}
           <Route path="/qo-c-001" element={<FramedPage><QoC001 /></FramedPage>} />
