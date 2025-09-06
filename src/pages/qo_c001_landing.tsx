@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Globe, Smartphone, Clock, Star, QrCode } from 'lucide-react';
 
 const QOLandingPage = () => {
+  console.log('[qo_c001_landing.tsx] Rendering sample page inside the frame.');
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
