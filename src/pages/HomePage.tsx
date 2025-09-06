@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Users, Briefcase } from 'lucide-react';
+import { ExternalLink, Users, Briefcase, Shield } from 'lucide-react';
+
+const adminPages = [
+  { href: '/qo-a-001', title: 'QO-A001: Admin Dashboard' },
+  { href: '/qo-a-002', title: 'QO-A002: Multi-Location Management' },
+  { href: '/qo-a-003', title: 'QO-A003: Global Menu Management' },
+  { href: '/qo-a-004', title: 'QO-A004: Staff Management' },
+  { href: '/qo-a-005', title: 'QO-A005: Analytics & Reports' },
+  { href: '/qo-a-006', title: 'QO-A006: System Settings' },
+];
 
 const customerPages = [
   { href: '/qo-c-001', title: 'QO-C001: Landing Page' },
@@ -52,7 +61,20 @@ const HomePage: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-12 md:grid-cols-2">
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {/* Admin Pages */}
+          <div className="bg-white p-6 rounded-xl shadow-md">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+              <Shield className="w-7 h-7 mr-3 text-red-500" />
+              Admin Pages
+            </h2>
+            <ul>
+              {adminPages.map((page) => (
+                <PageLink key={page.href} {...page} />
+              ))}
+            </ul>
+          </div>
+
           {/* Customer Pages */}
           <div className="bg-white p-6 rounded-xl shadow-md">
             <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">

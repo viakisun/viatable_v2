@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
-  BarChart3, Users, ShoppingCart, DollarSign, TrendingUp, TrendingDown,
-  Bell, Settings, Search, Calendar, ChevronDown, Store, Globe,
-  ArrowUpRight, ArrowDownRight, Clock, Star, AlertTriangle
+  BarChart3, ShoppingCart, DollarSign,
+  Bell, Settings, Search, Store, Globe,
+  ArrowUpRight, ArrowDownRight, Star, AlertTriangle
 } from 'lucide-react';
 
 const AdminDashboard = () => {

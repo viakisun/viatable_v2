@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { 
-  Plus, Search, Filter, Edit, Trash2, Copy, Eye, EyeOff, 
-  Upload, Download, Globe, Store, Clock, DollarSign,
-  ChefHat, Leaf, Zap, Star, AlertTriangle, CheckCircle,
-  MoreVertical, Image, Tag, Users, TrendingUp, Camera
+  Plus, Search, Edit, Copy, Eye, EyeOff,
+  Upload, Download, Clock,
+  ChefHat, Star, AlertTriangle, CheckCircle,
+  MoreVertical, Users, TrendingUp
 } from 'lucide-react';
 
 const GlobalMenuManagement = () => {
@@ -12,7 +12,7 @@ const GlobalMenuManagement = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('grid');
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [, setShowAddModal] = useState(false);
 
   // Mock data for menu items
   const menuItems = [
@@ -187,7 +187,7 @@ const GlobalMenuManagement = () => {
   });
 
   const MenuCard = ({ item }) => {
-    const availableLocations = Object.entries(item.availability).filter(([_, available]) => available).length;
+    const availableLocations = Object.entries(item.availability).filter(([, available]) => available).length;
     
     return (
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
@@ -514,7 +514,7 @@ const GlobalMenuManagement = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {Object.entries(item.availability).filter(([_, available]) => available).length}/5 locations
+                      {Object.entries(item.availability).filter(([, available]) => available).length}/5 locations
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       <div className="flex items-center space-x-1">

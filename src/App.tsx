@@ -2,9 +2,16 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import IphoneFrame from './components/iPhoneFrame';
+import TabletFrame from './components/TabletFrame';
 
 // Import all page components
 import HomePage from './pages/HomePage';
+import QoA001 from './pages/samples/admin/qo-a001-admin_dashboard';
+import QoA002 from './pages/samples/admin/qo-a002-multi_location_management';
+import QoA003 from './pages/samples/admin/qo-a003-global_menu_management';
+import QoA004 from './pages/samples/admin/qo-a004-staff_management';
+import QoA005 from './pages/samples/admin/qo-a005-analytics_reports';
+import QoA006 from './pages/samples/admin/qo-a006-system_settings_fixed';
 import QoC001 from './pages/qo_c001_landing';
 import QoC002 from './pages/qo_c002_menu';
 import QoC003 from './pages/qo_c003_item_details';
@@ -33,6 +40,11 @@ import VTL017 from './pages/vt-l017-viatable_login_new';
 // A wrapper component to apply the iPhone frame to pages
 const FramedPage = ({ children }: { children: React.ReactNode }) => (
   <IphoneFrame>{children}</IphoneFrame>
+);
+
+// A wrapper component to apply the tablet frame to pages
+const TabletFramedPage = ({ children }: { children: React.ReactNode }) => (
+  <TabletFrame>{children}</TabletFrame>
 );
 
 function App() {
@@ -70,6 +82,14 @@ function App() {
           <Route path="/qo-s-006" element={<FramedPage><QoS006 /></FramedPage>} />
           <Route path="/qo-s-007" element={<FramedPage><QoS007 /></FramedPage>} />
           <Route path="/qo-s-008" element={<FramedPage><QoS008 /></FramedPage>} />
+
+          {/* Admin Pages */}
+          <Route path="/qo-a-001" element={<TabletFramedPage><QoA001 /></TabletFramedPage>} />
+          <Route path="/qo-a-002" element={<TabletFramedPage><QoA002 /></TabletFramedPage>} />
+          <Route path="/qo-a-003" element={<TabletFramedPage><QoA003 /></TabletFramedPage>} />
+          <Route path="/qo-a-004" element={<TabletFramedPage><QoA004 /></TabletFramedPage>} />
+          <Route path="/qo-a-005" element={<TabletFramedPage><QoA005 /></TabletFramedPage>} />
+          <Route path="/qo-a-006" element={<TabletFramedPage><QoA006 /></TabletFramedPage>} />
         </Routes>
       </BrowserRouter>
     </LanguageProvider>
