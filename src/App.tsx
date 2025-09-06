@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Layout Component (will be created later)
-import iPhoneFrame from './components/iPhoneFrame';
+// Layout Component
+import IphoneFrame from './components/iPhoneFrame';
 
 // Page Components
 import HomePage from './pages/HomePage';
@@ -25,7 +25,7 @@ import QoS008StaffAnalytics from './pages/qo_s008_staff_analytics';
 function App() {
   console.log('[App.tsx] Router component rendering. Setting up routes.');
   // A helper function to wrap routes with the iPhone frame
-  const framed = (element: React.ReactNode) => <iPhoneFrame>{element}</iPhoneFrame>;
+  const framed = (element: React.ReactNode) => <IphoneFrame>{element}</IphoneFrame>;
 
   return (
     <BrowserRouter>
