@@ -1,82 +1,72 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Home, Coffee, ShoppingCart, CreditCard, CheckCircle, User, Settings, BarChart2,
-  Users, ClipboardList, ChefHat, LayoutGrid, MessageSquare, Star
-} from 'lucide-react';
-import './HomePage.css';
+import IphoneFrame from '../components/IphoneFrame';
+
+// Import all page components
+import QoC001 from './qo_c001_landing';
+import QoC002 from './qo_c002_menu';
+import QoC003 from './qo_c003_item_details';
+import QoC004 from './qo_c004_cart';
+import QoC005 from './qo_c005_checkout';
+import QoC006 from './qo_c006_payment';
+import QoC007 from './qo_c007_order_status';
+import QoC008 from './qo_c008_confirmation';
+import QoS001 from './qo_s001_staff_login';
+import QoS002 from './qo_s002_dashboard';
+import QoS003 from './qo_s003_order_management';
+import QoS004 from './qo_s004_kitchen_display';
+import QoS005 from './qo_s005_menu_management';
+import QoS006 from './qo_s006_table_management';
+import QoS007 from './qo_s007_customer_service';
+import QoS008 from './qo_s008_staff_analytics';
 
 const customerPages = [
-  { id: 'QO-C001', title: 'Landing Page', description: '언어 선택, 테이블 정보', icon: <Home />, link: '/qo-c-001' },
-  { id: 'QO-C002', title: 'Menu Catalog', description: '메뉴 카탈로그, 카테고리 필터', icon: <Coffee />, link: '/qo-c-002' },
-  { id: 'QO-C003', title: 'Item Details', description: '상세 페이지, 커스터마이징', icon: <Star />, link: '/qo-c-003' },
-  { id: 'QO-C004', title: 'Shopping Cart', description: '장바구니, 프로모 코드', icon: <ShoppingCart />, link: '/qo-c-004' },
-  { id: 'QO-C005', title: 'Checkout', description: '고객 정보, 결제 방법 선택', icon: <CreditCard />, link: '/qo-c-005' },
-  { id: 'QO-C008', title: 'Confirmation', description: '주문 완료, QR 코드', icon: <CheckCircle />, link: '/qo-c-008' },
+  { id: 'QO-C001', title: 'Landing Page', Component: QoC001 },
+  { id: 'QO-C002', title: 'Menu Catalog', Component: QoC002 },
+  { id: 'QO-C003', title: 'Item Details', Component: QoC003 },
+  { id: 'QO-C004', title: 'Shopping Cart', Component: QoC004 },
+  { id: 'QO-C005', title: 'Checkout', Component: QoC005 },
+  { id: 'QO-C006', title: 'Payment', Component: QoC006 },
+  { id: 'QO-C007', title: 'Order Status', Component: QoC007 },
+  { id: 'QO-C008', title: 'Confirmation', Component: QoC008 },
 ];
 
 const staffPages = [
-  { id: 'QO-S001', title: 'Staff Login', description: '다중 로그인, 보안 인증', icon: <User />, link: '/qo-s-001' },
-  { id: 'QO-S002', title: 'Dashboard', description: '개인화 대시보드, 통계', icon: <LayoutGrid />, link: '/qo-s-002' },
-  { id: 'QO-S003', title: 'Order Mgmt', description: '주문 관리, 상태별 필터링', icon: <ClipboardList />, link: '/qo-s-003' },
-  { id: 'QO-S004', title: 'Kitchen Display', description: '주방용 디스플레이, 칸반 보드', icon: <ChefHat />, link: '/qo-s-004' },
-  { id: 'QO-S005', title: 'Menu Mgmt', description: '실시간 메뉴, 재고 관리', icon: <Settings />, link: '/qo-s-005' },
-  { id: 'QO-S007', title: 'Customer Svc', description: '고객 요청 관리, 실시간 채팅', icon: <MessageSquare />, link: '/qo-s-007' },
-  { id: 'QO-S008', title: 'Analytics', description: '개인/팀 성과 분석', icon: <BarChart2 />, link: '/qo-s-008' },
+  { id: 'QO-S001', title: 'Staff Login', Component: QoS001 },
+  { id: 'QO-S002', title: 'Dashboard', Component: QoS002 },
+  { id: 'QO-S003', title: 'Order Management', Component: QoS003 },
+  { id: 'QO-S004', title: 'Kitchen Display', Component: QoS004 },
+  { id: 'QO-S005', title: 'Menu Management', Component: QoS005 },
+  { id: 'QO-S006', title: 'Table Management', Component: QoS006 },
+  { id: 'QO-S007', title: 'Customer Service', Component: QoS007 },
+  { id: 'QO-S008', title: 'Staff Analytics', Component: QoS008 },
 ];
 
-
-const PageCard = ({ id, title, description, icon, link }) => (
-  <Link to={link} className="page-card">
-    <div className="card-icon">{icon}</div>
-    <div className="card-content">
-      <div className="card-id">{id}</div>
-      <h3 className="card-title">{title}</h3>
-      <p className="card-description">{description}</p>
+const ShowcaseItem = ({ id, title, Component }) => (
+  <div className="showcase-item">
+    <h3 className="page-title">{id}: {title}</h3>
+    <div className="frame-container">
+      <IphoneFrame>
+        <Component />
+      </IphoneFrame>
     </div>
-  </Link>
+  </div>
 );
 
-const FlowConnector = () => <div className="flow-connector">→</div>;
-
 const HomePage: React.FC = () => {
-  console.log('[HomePage.tsx] Rendering interactive dashboard.');
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>QO-DEMO Interactive Dashboard</h1>
-        <p>프로젝트의 전체 구조와 사용자 흐름을 확인하세요.</p>
+    <div className="showcase-container">
+      <header className="showcase-header">
+        <h1>QO-DEMO Application Showcase</h1>
+        <p>Scroll down to see the entire application flow at a glance.</p>
       </header>
-
       <main>
-        <section className="flow-section">
-          <h2 className="section-title">
-            <Users className="inline-block mr-2" />
-            고객용 페이지 흐름 (Customer Flow)
-          </h2>
-          <div className="flow-grid">
-            {customerPages.map((page, index) => (
-              <React.Fragment key={page.id}>
-                <PageCard {...page} />
-                {index < customerPages.length - 1 && <FlowConnector />}
-              </React.Fragment>
-            ))}
-          </div>
+        <section className="showcase-section">
+          <h2 className="section-title">Customer Flow</h2>
+          {customerPages.map(page => <ShowcaseItem key={page.id} {...page} />)}
         </section>
-
-        <section className="flow-section">
-          <h2 className="section-title">
-            <Users className="inline-block mr-2" />
-            직원용 페이지 흐름 (Staff Flow)
-          </h2>
-          <div className="flow-grid">
-            {staffPages.map((page, index) => (
-              <React.Fragment key={page.id}>
-                <PageCard {...page} />
-                {index < staffPages.length - 1 && <FlowConnector />}
-              </React.Fragment>
-            ))}
-          </div>
+        <section className="showcase-section">
+          <h2 className="section-title">Staff Flow</h2>
+          {staffPages.map(page => <ShowcaseItem key={page.id} {...page} />)}
         </section>
       </main>
     </div>
