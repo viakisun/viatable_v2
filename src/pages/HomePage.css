@@ -1,76 +1,104 @@
-/* Styles for the HomePage component */
-.home-container {
-    max-width: 960px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    color: #333;
+/* Styles for the new Interactive Dashboard Homepage */
+.dashboard-container {
+  padding: 2rem;
+  background-color: #f7fafc;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.home-header {
-    text-align: center;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e0e0e0;
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
-.home-header h1 {
-    color: #2c6b2f;
-    margin-bottom: 0.5rem;
+.dashboard-header h1 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #2d3748;
 }
 
-.home-header .comment {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 0.5rem;
+.dashboard-header p {
+  font-size: 1.125rem;
+  color: #718096;
+  margin-top: 0.5rem;
 }
 
-.home-container h2 {
-    color: #3e8e41;
-    border-bottom: 2px solid #a5d6a7;
-    padding-bottom: 0.5rem;
-    margin-top: 2rem;
+.flow-section {
+  margin-bottom: 4rem;
 }
 
-.home-container ul {
-    list-style-type: none;
-    padding: 0;
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
-.home-container li {
-    display: flex;
-    align-items: center;
-    padding: 12px 8px;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background-color 0.2s ease-in-out;
+.flow-grid {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 1rem;
 }
 
-.home-container li:last-child {
-    border-bottom: none;
+.page-card {
+  flex-shrink: 0;
+  width: 220px;
+  height: 180px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-decoration: none;
+  color: inherit;
 }
 
-.home-container li:hover {
-    background-color: #f5fbf5;
+.page-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.page-id {
-    font-weight: bold;
-    color: #4caf50;
-    background-color: #e8f5e9;
-    padding: 4px 8px;
-    border-radius: 6px;
-    margin-right: 16px;
-    font-size: 0.9em;
+.card-icon {
+  color: #4299e1;
+  margin-bottom: 1rem;
 }
 
-.home-container a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    flex-grow: 1;
+.card-icon svg {
+  width: 32px;
+  height: 32px;
 }
 
-.home-container a:hover {
-    color: #1b5e20;
+.card-id {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a5568;
+  background-color: #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-top: 0.25rem;
+}
+
+.flow-connector {
+  flex-shrink: 0;
+  font-size: 2.5rem;
+  color: #cbd5e0;
+  margin: 0 1rem;
 }

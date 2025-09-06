@@ -1,48 +1,86 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Home, Coffee, ShoppingCart, CreditCard, CheckCircle, User, Settings, BarChart2,
+  Users, ClipboardList, ChefHat, LayoutGrid, MessageSquare, Star
+} from 'lucide-react';
 import './HomePage.css';
 
+const customerPages = [
+  { id: 'QO-C001', title: 'Landing Page', description: '언어 선택, 테이블 정보', icon: <Home />, link: '/qo-c-001' },
+  { id: 'QO-C002', title: 'Menu Catalog', description: '메뉴 카탈로그, 카테고리 필터', icon: <Coffee />, link: '/qo-c-002' },
+  { id: 'QO-C003', title: 'Item Details', description: '상세 페이지, 커스터마이징', icon: <Star />, link: '/qo-c-003' },
+  { id: 'QO-C004', title: 'Shopping Cart', description: '장바구니, 프로모 코드', icon: <ShoppingCart />, link: '/qo-c-004' },
+  { id: 'QO-C005', title: 'Checkout', description: '고객 정보, 결제 방법 선택', icon: <CreditCard />, link: '/qo-c-005' },
+  { id: 'QO-C008', title: 'Confirmation', description: '주문 완료, QR 코드', icon: <CheckCircle />, link: '/qo-c-008' },
+];
+
+const staffPages = [
+  { id: 'QO-S001', title: 'Staff Login', description: '다중 로그인, 보안 인증', icon: <User />, link: '/qo-s-001' },
+  { id: 'QO-S002', title: 'Dashboard', description: '개인화 대시보드, 통계', icon: <LayoutGrid />, link: '/qo-s-002' },
+  { id: 'QO-S003', title: 'Order Mgmt', description: '주문 관리, 상태별 필터링', icon: <ClipboardList />, link: '/qo-s-003' },
+  { id: 'QO-S004', title: 'Kitchen Display', description: '주방용 디스플레이, 칸반 보드', icon: <ChefHat />, link: '/qo-s-004' },
+  { id: 'QO-S005', title: 'Menu Mgmt', description: '실시간 메뉴, 재고 관리', icon: <Settings />, link: '/qo-s-005' },
+  { id: 'QO-S007', title: 'Customer Svc', description: '고객 요청 관리, 실시간 채팅', icon: <MessageSquare />, link: '/qo-s-007' },
+  { id: 'QO-S008', title: 'Analytics', description: '개인/팀 성과 분석', icon: <BarChart2 />, link: '/qo-s-008' },
+];
+
+
+const PageCard = ({ id, title, description, icon, link }) => (
+  <Link to={link} className="page-card">
+    <div className="card-icon">{icon}</div>
+    <div className="card-content">
+      <div className="card-id">{id}</div>
+      <h3 className="card-title">{title}</h3>
+      <p className="card-description">{description}</p>
+    </div>
+  </Link>
+);
+
+const FlowConnector = () => <div className="flow-connector">→</div>;
+
 const HomePage: React.FC = () => {
-    console.log('[HomePage.tsx] Rendering homepage with links.');
-    return (
-        <div className="home-container">
-            <header className="home-header">
-                <h1>QO-DEMO 프로젝트</h1>
-                <p>전체 데모 페이지 링크 목록</p>
-                <p className="comment">각 페이지는 아이폰 프레임 안에서 보여집니다.</p>
-            </header>
+  console.log('[HomePage.tsx] Rendering interactive dashboard.');
+  return (
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1>QO-DEMO Interactive Dashboard</h1>
+        <p>프로젝트의 전체 구조와 사용자 흐름을 확인하세요.</p>
+      </header>
 
-            <main>
-                <section id="customer-pages">
-                    <h2>👥 고객용 페이지 (QO-C)</h2>
-                    <ul>
-                        <li><span className="page-id">QO-C001</span> <Link to="/qo-c-001">Landing/Welcome Page</Link></li>
-                        <li><span className="page-id">QO-C002</span> <Link to="/qo-c-002">Menu Catalog</Link></li>
-                        <li><span className="page-id">QO-C003</span> <Link to="/qo-c-003">Item Details</Link></li>
-                        <li><span className="page-id">QO-C004</span> <Link to="/qo-c-004">Shopping Cart</Link></li>
-                        <li><span className="page-id">QO-C005</span> <Link to="/qo-c-005">Checkout</Link></li>
-                        <li><span className="page-id">QO-C006</span> <Link to="/qo-c-006">Payment</Link></li>
-                        <li><span className="page-id">QO-C007</span> <Link to="/qo-c-007">Order Status</Link></li>
-                        <li><span className="page-id">QO-C008</span> <Link to="/qo-c-008">Order Confirmation</Link></li>
-                    </ul>
-                </section>
+      <main>
+        <section className="flow-section">
+          <h2 className="section-title">
+            <Users className="inline-block mr-2" />
+            고객용 페이지 흐름 (Customer Flow)
+          </h2>
+          <div className="flow-grid">
+            {customerPages.map((page, index) => (
+              <React.Fragment key={page.id}>
+                <PageCard {...page} />
+                {index < customerPages.length - 1 && <FlowConnector />}
+              </React.Fragment>
+            ))}
+          </div>
+        </section>
 
-                <section id="staff-pages">
-                    <h2>🛠️ 직원용 페이지 (QO-S)</h2>
-                    <ul>
-                        <li><span className="page-id">QO-S001</span> <Link to="/qo-s-001">Staff Login</Link></li>
-                        <li><span className="page-id">QO-S002</span> <Link to="/qo-s-002">Staff Dashboard</Link></li>
-                        <li><span className="page-id">QO-S003</span> <Link to="/qo-s-003">Order Management</Link></li>
-                        <li><span className="page-id">QO-S004</span> <Link to="/qo-s-004">Kitchen Display</Link></li>
-                        <li><span className="page-id">QO-S005</span> <Link to="/qo-s-005">Menu Management</Link></li>
-                        <li><span className="page-id">QO-S006</span> <Link to="/qo-s-006">Table Management</Link></li>
-                        <li><span className="page-id">QO-S007</span> <Link to="/qo-s-007">Customer Service</Link></li>
-                        <li><span className="page-id">QO-S008</span> <Link to="/qo-s-008">Staff Analytics</Link></li>
-                    </ul>
-                </section>
-            </main>
-        </div>
-    );
+        <section className="flow-section">
+          <h2 className="section-title">
+            <Users className="inline-block mr-2" />
+            직원용 페이지 흐름 (Staff Flow)
+          </h2>
+          <div className="flow-grid">
+            {staffPages.map((page, index) => (
+              <React.Fragment key={page.id}>
+                <PageCard {...page} />
+                {index < staffPages.length - 1 && <FlowConnector />}
+              </React.Fragment>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
+  );
 };
 
 export default HomePage;
