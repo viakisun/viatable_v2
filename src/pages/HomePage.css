@@ -1,138 +1,92 @@
-/* Styles for the Polished Showcase Homepage */
-.showcase-container {
-  background-color: #f8fafc;
-  padding: 4rem 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+/* Styles for the new Card-based Dashboard Homepage */
+.dashboard-container {
+  padding: 2rem;
+  background-color: #f7fafc;
+  min-height: 100vh;
 }
 
-.showcase-header {
+.dashboard-header {
   text-align: center;
-  margin-bottom: 4rem;
-  padding: 0 2rem;
+  margin-bottom: 3rem;
 }
 
-.showcase-header h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #1e293b;
+.dashboard-header h1 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #2d3748;
 }
 
-.showcase-header .intro-text {
-  font-size: 1.25rem;
-  color: #475569;
-  margin-top: 1rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+.dashboard-header p {
+  font-size: 1.125rem;
+  color: #718096;
+  margin-top: 0.5rem;
 }
 
-.showcase-section {
-  max-width: 1400px;
-  margin: 0 auto 5rem auto;
-  padding: 0 2rem;
+.flow-section {
+  margin-bottom: 3rem;
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #334155;
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-/* Key Features Styles */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-.feature-card {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  text-align: center;
-}
-.feature-icon {
-  margin: 0 auto 1rem auto;
-  color: #3b82f6; /* Blue-500 */
-}
-.feature-card strong {
-  display: block;
-  font-size: 1.125rem;
-  color: #1e293b;
-}
-.feature-card p {
-  color: #64748b;
-  font-size: 0.9rem;
-}
-
-/* Customer Journey Styles */
-.journey-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-.journey-step {
-  background-color: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0.75rem 1.25rem;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-.step-number {
-  background-color: #3b82f6;
-  color: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-.step-title {
-  font-weight: 600;
-  color: #334155;
-}
-.step-page-id {
-  font-size: 0.8rem;
-  color: #64748b;
-}
-.journey-arrow {
-  font-size: 1.5rem;
-  color: #94a3b8;
-}
-
-/* Showcase Item Styles */
-.showcase-item {
-  margin-bottom: 4rem;
-}
-.page-title-container {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.page-title {
   font-size: 1.5rem;
   font-weight: 600;
   color: #4a5568;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
 }
-.page-description {
-  font-size: 1rem;
-  color: #64748b;
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.page-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-icon {
+  color: #3b82f6;
+  margin-bottom: 1rem;
+}
+
+.card-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.card-id {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a5568;
+  background-color: #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #718096;
   margin-top: 0.25rem;
-  max-width: 600px;
-  margin: 0.25rem auto 0 auto;
-}
-.frame-container {
-  transform: scale(0.85);
-  transform-origin: top;
-  border-radius: 68px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  margin: 0 auto;
 }

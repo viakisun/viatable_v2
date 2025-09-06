@@ -22,20 +22,19 @@ import QoS006 from './pages/qo_s006_table_management';
 import QoS007 from './pages/qo_s007_customer_service';
 import QoS008 from './pages/qo_s008_staff_analytics';
 
+// A wrapper component to apply the iPhone frame to pages
 const FramedPage = ({ children }: { children: React.ReactNode }) => (
   <IphoneFrame>{children}</IphoneFrame>
 );
 
 function App() {
-  console.log('[App.tsx] Router component rendering...');
   return (
     <LanguageProvider>
       <BrowserRouter>
         <Routes>
-          {/* The showcase homepage is the root */}
           <Route path="/" element={<HomePage />} />
 
-          {/* Direct routes to each page, wrapped in the iPhone Frame */}
+          {/* Customer Pages */}
           <Route path="/qo-c-001" element={<FramedPage><QoC001 /></FramedPage>} />
           <Route path="/qo-c-002" element={<FramedPage><QoC002 /></FramedPage>} />
           <Route path="/qo-c-003" element={<FramedPage><QoC003 /></FramedPage>} />
@@ -45,6 +44,7 @@ function App() {
           <Route path="/qo-c-007" element={<FramedPage><QoC007 /></FramedPage>} />
           <Route path="/qo-c-008" element={<FramedPage><QoC008 /></FramedPage>} />
 
+          {/* Staff Pages */}
           <Route path="/qo-s-001" element={<FramedPage><QoS001 /></FramedPage>} />
           <Route path="/qo-s-002" element={<FramedPage><QoS002 /></FramedPage>} />
           <Route path="/qo-s-003" element={<FramedPage><QoS003 /></FramedPage>} />
