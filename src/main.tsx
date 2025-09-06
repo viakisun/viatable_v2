@@ -1,10 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App';
+import QoC001Landing from './pages/qo_c001_landing';
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <QoC001Landing />
   </React.StrictMode>
 );
