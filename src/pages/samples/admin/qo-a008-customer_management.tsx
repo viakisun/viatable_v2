@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomerManagement = () => {
+const Page = () => {
   return (
     <div className="p-6 text-center text-gray-500">
       <h1 className="text-2xl font-bold mb-4">QO-A008: Customer Management</h1>
@@ -9,4 +9,4 @@ const CustomerManagement = () => {
   );
 };
 
-export default CustomerManagement;
+export default Page;

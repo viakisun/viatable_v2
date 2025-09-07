@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InventoryManagement = () => {
+const Page = () => {
   return (
     <div className="p-6 text-center text-gray-500">
       <h1 className="text-2xl font-bold mb-4">QO-A009: Inventory Management</h1>
@@ -9,4 +9,4 @@ const InventoryManagement = () => {
   );
 };
 
-export default InventoryManagement;
+export default Page;
