@@ -9,7 +9,7 @@ const IphoneFrame: React.FC<iPhoneFrameProps> = ({ children }) => {
   console.log('[IphoneFrame.tsx] Received children:', children ? 'Yes' : 'No');
 
   const backgroundClasses = "flex min-h-screen w-full items-center justify-center bg-gray-100 p-4 sm:p-8";
-  const frameClasses = "relative mx-auto h-[896px] w-[414px] rounded-[60px] border-[14px] border-black bg-black shadow-2xl";
+  const frameClasses = "relative mx-auto h-[786px] w-[414px] rounded-[60px] border-[14px] border-black bg-black shadow-2xl";
   const screenClasses = "relative h-full w-full overflow-hidden rounded-[46px] bg-white";
 
   console.log('[iPhoneFrame.tsx] Applying background classes:', backgroundClasses);

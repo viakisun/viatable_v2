@@ -8,7 +8,7 @@ const TabletFrame: React.FC<TabletFrameProps> = ({ children }) => {
   const backgroundClasses = "flex min-h-screen w-full items-center justify-center bg-gray-100 p-8";
 
   // Original, smaller dimensions
-  const frameClasses = "relative mx-auto h-[768px] w-[1024px] rounded-[36px] border-[16px] border-black bg-black shadow-2xl";
+  const frameClasses = "relative mx-auto h-[788px] w-[1300px] rounded-[36px] border-[16px] border-black bg-black shadow-2xl";
   const screenClasses = "relative h-full w-full overflow-hidden rounded-[20px] bg-white";
 
   return (
