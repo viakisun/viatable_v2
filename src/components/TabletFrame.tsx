@@ -19,9 +19,8 @@ const TabletFrame: React.FC<TabletFrameProps> = ({ children }) => {
 
         {/* Screen */}
         <div className={screenClasses}>
-            <div className="h-full w-full overflow-y-auto">
-              {children}
-            </div>
+          <div className="h-full w-full overflow-y-auto">
+            {children}
           </div>
         </div>
       </div>
