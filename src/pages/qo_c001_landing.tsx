@@ -1,91 +1,155 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight, Clock, Star, QrCode } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import PageLayout from '../components/PageLayout';
+import { useNavigate } from 'react-router-dom';
 
 const QOLandingPage = () => {
   const { language, setLanguage } = useLanguage();
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  const handleStartOrdering = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      navigate('/qo-c-002');
+      setIsLoading(false);
+    }, 1500);
+  };
+
   const content = {
     en: {
-      title: "Welcome!",
-      subtitle: "Order from your table",
+      title: "Welcome to Smart Dining",
+      subtitle: "Order directly from your table",
+      description: "Scan, browse, order, and pay - all from your smartphone",
+      features: [
+        { icon: <QrCode className="w-5 h-5 mx-auto" />, text: "Contactless Ordering" },
+        { icon: <Clock className="w-5 h-5 mx-auto" />, text: "Real-time Updates" },
+        { icon: <Star className="w-5 h-5 mx-auto" />, text: "Premium Experience" }
+      ],
       startButton: "Start Ordering",
+      menuPreview: "View Menu",
       tableInfo: "Table 12 • The Bistro",
-      feature1: "Scan & Order",
-      feature2: "Pay Online",
-      feature3: "Track Status"
+      openingHours: "Open until 10:00 PM",
+      loading: "Loading menu..."
     },
     ko: {
-      title: "환영합니다!",
+      title: "스마트 다이닝에 오신 것을 환영합니다",
       subtitle: "테이블에서 바로 주문하세요",
+      description: "스캔, 둘러보기, 주문, 결제 - 모든 것을 스마트폰으로",
+      features: [
+        { icon: <QrCode className="w-5 h-5 mx-auto" />, text: "비접촉 주문" },
+        { icon: <Clock className="w-5 h-5 mx-auto" />, text: "실시간 업데이트" },
+        { icon: <Star className="w-5 h-5 mx-auto" />, text: "프리미엄 경험" }
+      ],
       startButton: "주문 시작",
+      menuPreview: "메뉴 보기",
       tableInfo: "테이블 12 • 더 비스트로",
-      feature1: "스캔 & 주문",
-      feature2: "온라인 결제",
-      feature3: "상태 추적"
+      openingHours: "오후 10시까지 영업",
+      loading: "메뉴 로딩 중..."
     }
   };
 
   const currentContent = content[language];
 
   const LanguageSwitcher = () => (
-    <div className="flex bg-slate-100 rounded-full p-1">
+    <div className="flex bg-slate-200 rounded-full p-1">
       <button
         onClick={() => setLanguage('en')}
-        className={`px-3 py-1 text-sm font-semibold rounded-full ${language === 'en' ? 'bg-white shadow' : 'text-slate-500'}`}
+        className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
+          language === 'en'
+            ? 'bg-white text-slate-900 shadow-sm'
+            : 'text-slate-600'
+        }`}
       >
         EN
       </button>
       <button
         onClick={() => setLanguage('ko')}
-        className={`px-3 py-1 text-sm font-semibold rounded-full ${language === 'ko' ? 'bg-white shadow' : 'text-slate-500'}`}
+        className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
+          language === 'ko'
+            ? 'bg-white text-slate-900 shadow-sm'
+            : 'text-slate-600'
+        }`}
       >
-        KO
+        한국어
       </button>
     </div>
   );
 
   return (
     <PageLayout title={currentContent.tableInfo} backLink={undefined} headerActions={<LanguageSwitcher />}>
-      <div className="flex flex-col items-center justify-center text-center pt-8 pb-12">
-        <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
-          <QrCode className="w-12 h-12 text-white" />
+      <main className="flex-1 flex flex-col justify-center px-0 py-4">
+        {/* Restaurant Info */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-slate-900 mb-2 leading-tight">
+            {currentContent.title}
+          </h1>
+          <p className="text-lg text-slate-600 mb-2">
+            {currentContent.subtitle}
+          </p>
+          <p className="text-sm text-slate-500">
+            {currentContent.description}
+          </p>
         </div>
-        <h1 className="text-4xl font-bold text-slate-900 mb-2">{currentContent.title}</h1>
-        <p className="text-lg text-slate-600 mb-8">{currentContent.subtitle}</p>
 
-        <a href="/qo-c-002" className="w-full bg-slate-900 text-white py-4 rounded-xl font-semibold text-lg flex items-center justify-center hover:bg-slate-800 transition-colors">
-          <span>{currentContent.startButton}</span>
-          <ChevronRight className="w-5 h-5 ml-2" />
-        </a>
-      </div>
-
-      <div className="bg-white rounded-xl p-6">
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="flex flex-col items-center">
-            <Star className="w-8 h-8 text-yellow-500 mb-2" />
-            <span className="text-sm font-medium text-slate-700">{currentContent.feature1}</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <Clock className="w-8 h-8 text-blue-500 mb-2" />
-            <span className="text-sm font-medium text-slate-700">{currentContent.feature2}</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <ChevronRight className="w-8 h-8 text-green-500 mb-2" />
-            <span className="text-sm font-medium text-slate-700">{currentContent.feature3}</span>
-          </div>
+        {/* Features */}
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          {currentContent.features.map((feature, index) => (
+            <div key={index} className="bg-white rounded-xl p-4 shadow-sm border border-slate-200 text-center">
+              <div className="text-slate-700 mb-2 flex justify-center">
+                {feature.icon}
+              </div>
+              <p className="text-xs font-medium text-slate-600">
+                {feature.text}
+              </p>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="text-center mt-4 text-slate-500 text-sm">
-        {currentTime.toLocaleTimeString()}
-      </div>
+
+        {/* Action Buttons */}
+        <div className="space-y-3">
+          <button
+            onClick={handleStartOrdering}
+            disabled={isLoading}
+            className="w-full bg-slate-900 text-white rounded-xl py-4 font-semibold text-lg flex items-center justify-center space-x-2 shadow-lg hover:bg-slate-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>{currentContent.loading}</span>
+              </>
+            ) : (
+              <>
+                <span>{currentContent.startButton}</span>
+                <ChevronRight className="w-5 h-5" />
+              </>
+            )}
+          </button>
+
+          <button onClick={() => navigate('/qo-c-002')} className="w-full bg-white text-slate-700 border border-slate-300 rounded-xl py-3 font-medium flex items-center justify-center space-x-2 hover:bg-slate-50 transition-colors">
+            <span>{currentContent.menuPreview}</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </main>
+
+      {/* Footer Info */}
+      <footer className="mt-8 py-4 border-t border-slate-200">
+        <div className="flex justify-between items-center text-sm text-slate-500">
+          <span>{currentContent.openingHours}</span>
+          <span>{currentTime.toLocaleTimeString(language === 'ko' ? 'ko-KR' : 'en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}</span>
+        </div>
+      </footer>
     </PageLayout>
   );
 };
