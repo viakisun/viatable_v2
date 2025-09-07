@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
-import IphoneFrame from './components/iPhoneFrame';
-import TabletFrame from './components/TabletFrame';
+import ShowcasePageLayout from './components/ShowcasePageLayout';
 
 // Import all page components
 import HomePage from './pages/HomePage';
@@ -37,15 +36,38 @@ import VTL004 from './pages/vt-l004-viatable_demo_trial';
 import VTL005 from './pages/vt-l005-viatable_features_new';
 import VTL017 from './pages/vt-l017-viatable_login_new';
 
-// A wrapper component to apply the iPhone frame to pages
-const FramedPage = ({ children }: { children: React.ReactNode }) => (
-  <IphoneFrame>{children}</IphoneFrame>
-);
+const customerJourney = [
+  { path: '/qo-c-001', component: QoC001, title: 'QO-C001: Landing Page' },
+  { path: '/qo-c-002', component: QoC002, title: 'QO-C002: Menu Catalog' },
+  { path: '/qo-c-003', component: QoC003, title: 'QO-C003: Item Details' },
+  { path: '/qo-c-004', component: QoC004, title: 'QO-C004: Shopping Cart' },
+  { path: '/qo-c-005', component: QoC005, title: 'QO-C005: Checkout' },
+  { path: '/qo-c-006', component: QoC006, title: 'QO-C006: Payment' },
+  { path: '/qo-c-007', component: QoC007, title: 'QO-C007: Order Status' },
+  { path: '/qo-c-008', component: QoC008, title: 'QO-C008: Order Confirmation' },
+];
 
-// A wrapper component to apply the tablet frame to pages
-const TabletFramedPage = ({ children }: { children: React.ReactNode }) => (
-  <TabletFrame>{children}</TabletFrame>
-);
+const staffJourney = [
+  { path: '/qo-s-001', component: QoS001, title: 'QO-S001: Staff Login' },
+  { path: '/qo-s-002', component: QoS002, title: 'QO-S002: Dashboard' },
+  { path: '/qo-s-003', component: QoS003, title: 'QO-S003: Order Management' },
+  { path: '/qo-s-004', component: QoS004, title: 'QO-S004: Kitchen Display' },
+  { path: '/qo-s-005', component: QoS005, title: 'QO-S005: Menu Management' },
+  { path: '/qo-s-006', component: QoS006, title: 'QO-S006: Table Management' },
+  { path: '/qo-s-007', component: QoS007, title: 'QO-S007: Customer Service' },
+  { path: '/qo-s-008', component: QoS008, title: 'QO-S008: Staff Analytics' },
+];
+
+const adminJourney = [
+  { path: '/qo-a-001', component: QoA001, title: 'QO-A001: Admin Dashboard' },
+  { path: '/qo-a-002', component: QoA002, title: 'QO-A002: Multi-Location Management' },
+  { path: '/qo-a-003', component: QoA003, title: 'QO-A003: Global Menu Management' },
+  { path: '/qo-a-004', component: QoA004, title: 'QO-A004: Staff Management' },
+  { path: '/qo-a-005', component: QoA005, title: 'QO-A005: Analytics & Reports' },
+  { path: '/qo-a-006', component: QoA006, title: 'QO-A006: System Settings' },
+];
+
+const placeholderDescription = "This is a placeholder description for the page. It will be replaced with more detailed information about the specific features and user interactions available on this screen.";
 
 function App() {
   return (
@@ -63,33 +85,62 @@ function App() {
           <Route path="/vt-l005" element={<VTL005 />} />
           <Route path="/vt-l017" element={<VTL017 />} />
 
-          {/* Customer Pages */}
-          <Route path="/qo-c-001" element={<FramedPage><QoC001 /></FramedPage>} />
-          <Route path="/qo-c-002" element={<FramedPage><QoC002 /></FramedPage>} />
-          <Route path="/qo-c-003" element={<FramedPage><QoC003 /></FramedPage>} />
-          <Route path="/qo-c-004" element={<FramedPage><QoC004 /></FramedPage>} />
-          <Route path="/qo-c-005" element={<FramedPage><QoC005 /></FramedPage>} />
-          <Route path="/qo-c-006" element={<FramedPage><QoC006 /></FramedPage>} />
-          <Route path="/qo-c-007" element={<FramedPage><QoC007 /></FramedPage>} />
-          <Route path="/qo-c-008" element={<FramedPage><QoC008 /></FramedPage>} />
+          {/* Customer Journey */}
+          {customerJourney.map((page, index) => (
+            <Route
+              key={page.path}
+              path={page.path}
+              element={
+                <ShowcasePageLayout
+                  title={page.title}
+                  description={placeholderDescription}
+                  previousLink={index > 0 ? customerJourney[index - 1].path : undefined}
+                  nextLink={index < customerJourney.length - 1 ? customerJourney[index + 1].path : undefined}
+                  journeyType="customer"
+                >
+                  <page.component />
+                </ShowcasePageLayout>
+              }
+            />
+          ))}
 
-          {/* Staff Pages */}
-          <Route path="/qo-s-001" element={<FramedPage><QoS001 /></FramedPage>} />
-          <Route path="/qo-s-002" element={<FramedPage><QoS002 /></FramedPage>} />
-          <Route path="/qo-s-003" element={<FramedPage><QoS003 /></FramedPage>} />
-          <Route path="/qo-s-004" element={<FramedPage><QoS004 /></FramedPage>} />
-          <Route path="/qo-s-005" element={<FramedPage><QoS005 /></FramedPage>} />
-          <Route path="/qo-s-006" element={<FramedPage><QoS006 /></FramedPage>} />
-          <Route path="/qo-s-007" element={<FramedPage><QoS007 /></FramedPage>} />
-          <Route path="/qo-s-008" element={<FramedPage><QoS008 /></FramedPage>} />
+          {/* Staff Journey */}
+          {staffJourney.map((page, index) => (
+            <Route
+              key={page.path}
+              path={page.path}
+              element={
+                <ShowcasePageLayout
+                  title={page.title}
+                  description={placeholderDescription}
+                  previousLink={index > 0 ? staffJourney[index - 1].path : undefined}
+                  nextLink={index < staffJourney.length - 1 ? staffJourney[index + 1].path : undefined}
+                  journeyType="staff"
+                >
+                  <page.component />
+                </ShowcasePageLayout>
+              }
+            />
+          ))}
 
-          {/* Admin Pages */}
-          <Route path="/qo-a-001" element={<TabletFramedPage><QoA001 /></TabletFramedPage>} />
-          <Route path="/qo-a-002" element={<TabletFramedPage><QoA002 /></TabletFramedPage>} />
-          <Route path="/qo-a-003" element={<TabletFramedPage><QoA003 /></TabletFramedPage>} />
-          <Route path="/qo-a-004" element={<TabletFramedPage><QoA004 /></TabletFramedPage>} />
-          <Route path="/qo-a-005" element={<TabletFramedPage><QoA005 /></TabletFramedPage>} />
-          <Route path="/qo-a-006" element={<TabletFramedPage><QoA006 /></TabletFramedPage>} />
+          {/* Admin Journey */}
+          {adminJourney.map((page, index) => (
+            <Route
+              key={page.path}
+              path={page.path}
+              element={
+                <ShowcasePageLayout
+                  title={page.title}
+                  description={placeholderDescription}
+                  previousLink={index > 0 ? adminJourney[index - 1].path : undefined}
+                  nextLink={index < adminJourney.length - 1 ? adminJourney[index + 1].path : undefined}
+                  journeyType="admin"
+                >
+                  <page.component />
+                </ShowcasePageLayout>
+              }
+            />
+          ))}
         </Routes>
       </BrowserRouter>
     </LanguageProvider>
