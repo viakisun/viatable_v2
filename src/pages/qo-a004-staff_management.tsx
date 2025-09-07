@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-  Users, Search, Eye, EyeOff,
-  Shield, Crown, User, Clock,
-  TrendingUp, AlertTriangle, CheckCircle,
-  MoreVertical, Key, UserPlus, Download, Upload
+  Users, Plus, Search, Filter, Edit, Trash2, Eye, EyeOff,
+  Shield, Crown, User, Clock, Phone, Mail, MapPin,
+  Calendar, Award, TrendingUp, AlertTriangle, CheckCircle,
+  MoreVertical, Settings, Key, UserPlus, Download, Upload
 } from 'lucide-react';
 
 const StaffManagement = () => {
@@ -12,7 +12,7 @@ const StaffManagement = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('grid');
-  const [, setShowAddModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   // Mock data for staff members
   const staffMembers = [
@@ -338,8 +338,8 @@ const StaffManagement = () => {
 
       <div className="p-6">
         {/* Filters and Search */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-6">
-          <div className="lg:col-span-2 relative">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-6">
+          <div className="md:col-span-2 relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
@@ -405,7 +405,7 @@ const StaffManagement = () => {
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-blue-100 rounded-lg">

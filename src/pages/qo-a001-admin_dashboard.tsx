@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  BarChart3, ShoppingCart, DollarSign,
-  Bell, Settings, Search, Store, Globe,
-  ArrowUpRight, ArrowDownRight, Star, AlertTriangle
+  BarChart3, Users, ShoppingCart, DollarSign, TrendingUp, TrendingDown,
+  Bell, Settings, Search, Calendar, ChevronDown, Store, Globe,
+  ArrowUpRight, ArrowDownRight, Clock, Star, AlertTriangle
 } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -120,7 +120,7 @@ const AdminDashboard = () => {
 
       <div className="p-6">
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-3">

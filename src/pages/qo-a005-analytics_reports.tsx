@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
-  BarChart3, TrendingUp, DollarSign, Users, Clock,
-  Download, RefreshCw, Share,
-  Activity, Target, Award, MapPin, ShoppingCart,
-  Star, Utensils, ArrowUpRight,
-  ArrowDownRight, AlertTriangle
+  BarChart3, TrendingUp, TrendingDown, DollarSign, Users, Clock,
+  Download, Calendar, Filter, RefreshCw, Eye, Share,
+  PieChart, Activity, Target, Award, MapPin, ShoppingCart,
+  Star, Coffee, Utensils, CreditCard, Globe, ArrowUpRight,
+  ArrowDownRight, AlertTriangle, CheckCircle, Zap
 } from 'lucide-react';
 
 const AnalyticsReports = () => {
@@ -380,7 +380,7 @@ const AnalyticsReports = () => {
         </div>
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <MetricCard
             title="Total Revenue"
             value={analyticsData.overview.totalRevenue.value}
@@ -429,7 +429,7 @@ const AnalyticsReports = () => {
         </div>
 
         {/* Additional Insights */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center space-x-3 mb-4">
               <div className="p-2 bg-green-100 rounded-lg">
