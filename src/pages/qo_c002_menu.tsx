@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Search, Star, Plus, Clock, Leaf } from 'lucide-react';
+import { Search } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
+import MenuItemCard, { MenuItemType, CardContent } from '../components/MenuItemCard';
 
 const QOMenuCatalog = () => {
   const { language, setLanguage } = useLanguage();
@@ -48,7 +49,7 @@ const QOMenuCatalog = () => {
     }
   };
 
-  const menuItems = [
+  const menuItems: MenuItemType[] = [
     { id: 1, category: 'coffee', name: { en: 'Signature Espresso', ko: '시그니처 에스프레소' }, description: { en: 'Rich, full-bodied espresso with caramel notes', ko: '카라멜 향이 풍부한 진한 에스프레소' }, price: { AUD: 4.50, KRW: 6500 }, image: '☕', prepTime: 3, tags: ['popular'], rating: 4.8, reviews: 124 },
     { id: 2, category: 'coffee', name: { en: 'Oat Milk Latte', ko: '오트밀크 라떼' }, description: { en: 'Creamy oat milk latte with vanilla undertones', ko: '바닐라 향이 은은한 부드러운 오트밀크 라떼' }, price: { AUD: 5.20, KRW: 7500 }, image: '🥛', prepTime: 4, tags: ['vegetarian', 'new'], rating: 4.6, reviews: 89 },
     { id: 3, category: 'brunch', name: { en: 'Avocado Toast Supreme', ko: '슈프림 아보카도 토스트' }, description: { en: 'Sourdough toast, smashed avocado, poached egg, feta', ko: '사워도우 토스트, 으깬 아보카도, 수란, 페타치즈' }, price: { AUD: 18.50, KRW: 26500 }, image: '🥑', prepTime: 12, tags: ['popular', 'vegetarian'], rating: 4.9, reviews: 203 },
@@ -69,7 +70,8 @@ const QOMenuCatalog = () => {
     return matchesCategory && matchesSearch;
   });
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (item: MenuItemType) => {
+    console.log('Added to cart:', item.name[language]);
     setCartCount(prev => prev + 1);
   };
 
@@ -86,6 +88,14 @@ const QOMenuCatalog = () => {
       </div>
     </div>
   );
+
+  const cardContent: CardContent = {
+    popular: currentContent.popular,
+    new: currentContent.new,
+    vegetarian: currentContent.vegetarian,
+    estimatedTime: currentContent.estimatedTime,
+    addToCart: currentContent.addToCart,
+  };
 
   return (
     <PageLayout title={currentContent.title} backLink="/qo-c-001" headerActions={<HeaderActions />}>
@@ -121,41 +131,15 @@ const QOMenuCatalog = () => {
       {/* Menu Items */}
       <main className="space-y-4">
         {filteredItems.map((item) => (
-          <div key={item.id} className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200">
-            <div className="flex space-x-4">
-              <div className="w-20 h-20 bg-slate-100 rounded-xl flex items-center justify-center text-3xl">{item.image}</div>
-              <div className="flex-1 flex flex-col">
-                <div className="flex-grow">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <div className="flex items-center space-x-2 mb-1">
-                        <h3 className="font-semibold text-slate-900">{item.name[language]}</h3>
-                        {item.tags.includes('popular') && <span className="px-2 py-0.5 bg-orange-100 text-orange-600 text-xs rounded-full font-medium">{currentContent.popular}</span>}
-                        {item.tags.includes('new') && <span className="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded-full font-medium">{currentContent.new}</span>}
-                      </div>
-                      <p className="text-sm text-slate-600 leading-relaxed">{item.description[language]}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-slate-900">{currencySymbol}{item.price[currencyCode].toLocaleString()}{language === 'ko' ? '원' : ''}</span>
-                      <div className="flex items-center space-x-1 text-xs text-slate-500"><Clock className="w-3 h-3" /><span>{item.prepTime}{currentContent.estimatedTime}</span></div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="flex items-center space-x-1"><Star className="w-3 h-3 fill-yellow-400 text-yellow-400" /><span className="text-xs font-medium">{item.rating}</span><span className="text-xs text-slate-500">({item.reviews})</span></div>
-                      {item.tags.includes('vegetarian') && <div className="flex items-center space-x-1"><Leaf className="w-3 h-3 text-green-500" /><span className="text-xs text-green-600">{currentContent.vegetarian}</span></div>}
-                    </div>
-                  </div>
-                  <button onClick={handleAddToCart} className="bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center space-x-2 hover:bg-slate-800 transition-colors">
-                    <Plus className="w-4 h-4" />
-                    <span>{currentContent.addToCart}</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MenuItemCard
+            key={item.id}
+            item={item}
+            language={language}
+            currencyCode={currencyCode}
+            currencySymbol={currencySymbol}
+            content={cardContent}
+            onAddToCart={handleAddToCart}
+          />
         ))}
         {filteredItems.length === 0 && (
           <div className="text-center py-12">
