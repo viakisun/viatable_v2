@@ -1,7 +1,7 @@
 import React from 'react';
 import { Star, Plus, Clock, Leaf } from 'lucide-react';
 
-export type MenuItemType = {
+type MenuItemType = {
   id: number;
   category: string;
   name: { en: string; ko: string };
@@ -14,13 +14,15 @@ export type MenuItemType = {
   reviews: number;
 };
 
-export type MenuItemCardContent = {
+type MenuItemCardContent = {
   popular: string;
   new: string;
   vegetarian: string;
   estimatedTime: string;
   addToCart: string;
 };
+
+export type { MenuItemType, MenuItemCardContent };
 
 interface MenuItemCardProps {
   item: MenuItemType;
