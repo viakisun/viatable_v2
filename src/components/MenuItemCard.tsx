@@ -14,7 +14,7 @@ export type MenuItemType = {
   reviews: number;
 };
 
-export type CardContent = {
+export type MenuItemCardContent = {
   popular: string;
   new: string;
   vegetarian: string;
@@ -27,7 +27,7 @@ interface MenuItemCardProps {
   currencySymbol: string;
   currencyCode: 'AUD' | 'KRW';
   language: 'en' | 'ko';
-  content: CardContent;
+  content: MenuItemCardContent;
   onAddToCart: (item: MenuItemType) => void;
 }
 

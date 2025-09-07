@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../contexts/LanguageContext';
-import MenuItemCard, { MenuItemType, CardContent } from '../components/MenuItemCard';
+import MenuItemCard, { MenuItemType, MenuItemCardContent } from '../components/MenuItemCard';
 
 const QOMenuCatalog = () => {
   const { language, setLanguage } = useLanguage();
@@ -89,7 +89,7 @@ const QOMenuCatalog = () => {
     </div>
   );
 
-  const cardContent: CardContent = {
+  const cardContent: MenuItemCardContent = {
     popular: currentContent.popular,
     new: currentContent.new,
     vegetarian: currentContent.vegetarian,
