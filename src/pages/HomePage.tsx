@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Users, Shield, UserCheck } from 'lucide-react';
+import { ArrowRight, Users, Shield, UserCheck } from 'lucide-react';
 
 const adminPages = [
   { href: '/qo-a-001', title: 'QO-A001: Admin Dashboard' },
@@ -37,12 +37,10 @@ const PageLink: React.FC<{ href: string; title: string }> = ({ href, title }) =>
   <li className="mb-2">
     <Link
       to={href}
-      target="_blank"
-      rel="noopener noreferrer"
       className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 group"
     >
       <span className="font-medium text-gray-700 group-hover:text-purple-600">{title}</span>
-      <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-purple-600 transition-colors" />
+      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-purple-600 transition-colors" />
     </Link>
   </li>
 );
