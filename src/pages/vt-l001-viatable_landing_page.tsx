@@ -19,6 +19,7 @@ const ViableTableLandingPage = () => {
         features: 'Features',
         pricing: 'Pricing',
         demo: 'Demo',
+        showcase: 'Showcase',
         contact: 'Contact',
         login: 'Login',
         signup: 'Get Started'
@@ -172,6 +173,7 @@ const ViableTableLandingPage = () => {
         features: '기능',
         pricing: '요금제',
         demo: '데모',
+        showcase: '쇼케이스',
         contact: '문의',
         login: '로그인',
         signup: '시작하기'
@@ -302,6 +304,7 @@ const ViableTableLandingPage = () => {
               <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">{currentContent.nav.features}</a>
               <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">{currentContent.nav.pricing}</a>
               <a href="#demo" className="text-gray-600 hover:text-gray-900 transition-colors">{currentContent.nav.demo}</a>
+              <Link to="/samples" className="text-gray-600 hover:text-gray-900 transition-colors">{currentContent.nav.showcase}</Link>
               <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">{currentContent.nav.contact}</a>
               
               <div className="flex items-center space-x-2">
