@@ -124,15 +124,17 @@ const QOMenuCatalog = () => {
           <div key={item.id} className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200">
             <div className="flex space-x-4">
               <div className="w-20 h-20 bg-slate-100 rounded-xl flex items-center justify-center text-3xl">{item.image}</div>
-              <div className="flex-1">
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <div className="flex items-center space-x-2 mb-1">
-                      <h3 className="font-semibold text-slate-900">{item.name[language]}</h3>
-                      {item.tags.includes('popular') && <span className="px-2 py-0.5 bg-orange-100 text-orange-600 text-xs rounded-full font-medium">{currentContent.popular}</span>}
-                      {item.tags.includes('new') && <span className="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded-full font-medium">{currentContent.new}</span>}
+              <div className="flex-1 flex flex-col">
+                <div className="flex-grow">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <div className="flex items-center space-x-2 mb-1">
+                        <h3 className="font-semibold text-slate-900">{item.name[language]}</h3>
+                        {item.tags.includes('popular') && <span className="px-2 py-0.5 bg-orange-100 text-orange-600 text-xs rounded-full font-medium">{currentContent.popular}</span>}
+                        {item.tags.includes('new') && <span className="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded-full font-medium">{currentContent.new}</span>}
+                      </div>
+                      <p className="text-sm text-slate-600 leading-relaxed">{item.description[language]}</p>
                     </div>
-                    <p className="text-sm text-slate-600 leading-relaxed">{item.description[language]}</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
