@@ -40,7 +40,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
   onAddToCart,
 }) => {
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-col">
+    <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200">
       <div className="flex space-x-4">
         <div className="w-20 h-20 bg-slate-100 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">{item.image}</div>
         <div className="flex-1 flex flex-col">

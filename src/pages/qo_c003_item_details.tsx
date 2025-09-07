@@ -4,7 +4,7 @@ import PageLayout from '../components/PageLayout';
 import { useLanguage } from '../hooks/useLanguage';
 
 const QOItemDetails = () => {
-  const { language } = useLanguage(); // Correctly use the language context
+  const { language } = useLanguage();
   const [quantity, setQuantity] = useState(1);
   const [selectedCustomizations, setSelectedCustomizations] = useState({});
   const [specialNotes, setSpecialNotes] = useState('');
