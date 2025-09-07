@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-  Plus, Search, Edit, Copy, Eye, EyeOff,
-  Upload, Download, Clock,
-  ChefHat, Star, AlertTriangle, CheckCircle,
-  MoreVertical, Users, TrendingUp
+  Plus, Search, Filter, Edit, Trash2, Copy, Eye, EyeOff,
+  Upload, Download, Globe, Store, Clock, DollarSign,
+  ChefHat, Leaf, Zap, Star, AlertTriangle, CheckCircle,
+  MoreVertical, Image, Tag, Users, TrendingUp, Camera
 } from 'lucide-react';
 
 const GlobalMenuManagement = () => {
@@ -12,7 +12,7 @@ const GlobalMenuManagement = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('grid');
-  const [, setShowAddModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   // Mock data for menu items
   const menuItems = [
@@ -187,7 +187,7 @@ const GlobalMenuManagement = () => {
   });
 
   const MenuCard = ({ item }) => {
-    const availableLocations = Object.entries(item.availability).filter(([, available]) => available).length;
+    const availableLocations = Object.entries(item.availability).filter(([_, available]) => available).length;
 
     return (
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
@@ -342,8 +342,8 @@ const GlobalMenuManagement = () => {
 
       <div className="p-6">
         {/* Filters and Search */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 mb-6">
-          <div className="lg:col-span-2 relative">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-6">
+          <div className="md:col-span-2 relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
@@ -409,7 +409,7 @@ const GlobalMenuManagement = () => {
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-blue-100 rounded-lg">
@@ -514,7 +514,7 @@ const GlobalMenuManagement = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {Object.entries(item.availability).filter(([, available]) => available).length}/5 locations
+                      {Object.entries(item.availability).filter(([_, available]) => available).length}/5 locations
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       <div className="flex items-center space-x-1">
