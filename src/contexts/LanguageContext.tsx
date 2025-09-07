@@ -1,16 +1,14 @@
-import { createContext, useState, useContext } from 'react';
+import { useState } from 'react';
 import type { ReactNode } from 'react';
+import { LanguageContext } from './LanguageContextObject';
 
-// Define the shape of the language and the context
-type Language = 'en' | 'ko';
+// Define and export the shape of the language and the context
+export type Language = 'en' | 'ko';
 
-interface LanguageContextType {
+export interface LanguageContextType {
   language: Language;
   setLanguage: (language: Language) => void;
 }
-
-// Create the context with a default undefined value
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 // Create the Provider component
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
@@ -23,13 +21,4 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </LanguageContext.Provider>
   );
-};
-
-// Create a custom hook for easy consumption of the context
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
 };

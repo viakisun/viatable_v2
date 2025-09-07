@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 type Period = 'today' | 'week' | 'month';
 

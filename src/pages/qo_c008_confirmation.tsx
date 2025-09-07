@@ -1,6 +1,6 @@
 import { CheckCircle, Home, RotateCcw } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const QOOrderConfirmation = () => {
   const { language } = useLanguage();

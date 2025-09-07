@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { JSX } from 'react';
 import { Lock, CheckCircle, AlertCircle } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 type PaymentStatusType = 'input' | 'processing' | 'success' | 'failed';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const QOCheckout = () => {
   const { language } = useLanguage();

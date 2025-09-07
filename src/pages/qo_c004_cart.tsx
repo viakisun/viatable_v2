@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Plus, Minus, Trash2, ArrowRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const QOShoppingCart = () => {
   const { language } = useLanguage();

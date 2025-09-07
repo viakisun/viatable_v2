@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Star, Clock, Leaf, Plus, Minus, Heart, Info, Users } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const QOItemDetails = () => {
   const { language } = useLanguage(); // Correctly use the language context

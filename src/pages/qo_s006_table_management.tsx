@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { QrCode, Users, Plus } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 type TableStatus = 'available' | 'occupied' | 'reserved';
 

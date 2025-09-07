@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Plus, BarChart3, Search, Eye, EyeOff } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const QOMenuManagement = () => {
   const { language } = useLanguage();

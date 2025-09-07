@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import MenuItemCard, { MenuItemType, MenuItemCardContent } from '../components/MenuItemCard';
 
 const QOMenuCatalog = () => {

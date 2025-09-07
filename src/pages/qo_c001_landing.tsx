@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Clock, Star, QrCode } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import PageLayout from '../components/PageLayout';
 import { useNavigate } from 'react-router-dom';
 
