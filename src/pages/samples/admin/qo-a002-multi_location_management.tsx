@@ -172,17 +172,17 @@ const MultiLocationManagement = () => {
             <Store className="w-5 h-5 text-blue-600" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">{location.name}</h3>
+            <h3 className="text-lg font-semibold text-gray-900">{location.name as any}</h3>
             <p className="text-sm text-gray-500 flex items-center">
               <MapPin className="w-3 h-3 mr-1" />
-              {location.address}
+              {location.address as any}
             </p>
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(location.status)}`}>
-            {getStatusIcon(location.status)}
-            <span className="capitalize">{location.status}</span>
+          <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(location.status as any)}`}>
+            {getStatusIcon(location.status as any)}
+            <span className="capitalize">{location.status as any}</span>
           </div>
           <button className="p-1 text-gray-400 hover:text-gray-600">
             <MoreVertical className="w-4 h-4" />
@@ -193,19 +193,19 @@ const MultiLocationManagement = () => {
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <p className="text-lg font-bold text-gray-900">{location.revenue}</p>
+          <p className="text-lg font-bold text-gray-900">{location.revenue as any}</p>
           <p className="text-xs text-gray-500">Today's Revenue</p>
           <div className={`flex items-center justify-center space-x-1 text-xs font-medium mt-1 ${
             location.isGrowthPositive ? 'text-green-600' : 'text-red-600'
           }`}>
             {location.isGrowthPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-            <span>{location.growth}</span>
+            <span>{location.growth as any}</span>
           </div>
         </div>
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <p className="text-lg font-bold text-gray-900">{location.orders}</p>
+          <p className="text-lg font-bold text-gray-900">{location.orders as any}</p>
           <p className="text-xs text-gray-500">Orders</p>
-          <p className="text-xs text-gray-500 mt-1">Avg wait: {location.avgWaitTime}</p>
+          <p className="text-xs text-gray-500 mt-1">Avg wait: {location.avgWaitTime as any}</p>
         </div>
       </div>
 
@@ -213,26 +213,26 @@ const MultiLocationManagement = () => {
       <div className="space-y-2 text-sm">
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Manager:</span>
-          <span className="font-medium text-gray-900">{location.manager}</span>
+          <span className="font-medium text-gray-900">{location.manager as any}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Tables:</span>
-          <span className="font-medium text-gray-900">{location.tables}</span>
+          <span className="font-medium text-gray-900">{location.tables as any}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Staff:</span>
-          <span className="font-medium text-gray-900">{location.staff}</span>
+          <span className="font-medium text-gray-900">{location.staff as any}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Rating:</span>
           <div className="flex items-center space-x-1">
-            <span className="font-medium text-gray-900">{location.customerSatisfaction}</span>
+            <span className="font-medium text-gray-900">{location.customerSatisfaction as any}</span>
             <span className="text-yellow-400">★</span>
           </div>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Last Online:</span>
-          <span className="font-medium text-gray-900">{location.lastOnline}</span>
+          <span className="font-medium text-gray-900">{location.lastOnline as any}</span>
         </div>
       </div>
 
@@ -241,7 +241,7 @@ const MultiLocationManagement = () => {
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">Features:</span>
           <div className="flex items-center space-x-2">
-            {location.features.map((feature: string, index: number) => (
+            {(location.features as any).map((feature: string, index: number) => (
               <div key={index} className="p-1 bg-blue-50 rounded text-blue-600" title={feature}>
                 {getFeatureIcon(feature)}
               </div>
@@ -435,22 +435,22 @@ const MultiLocationManagement = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(location.status)}`}>
-                        {getStatusIcon(location.status)}
-                        <span className="capitalize">{location.status}</span>
+                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(location.status as any)}`}>
+                        {getStatusIcon(location.status as any)}
+                        <span className="capitalize">{location.status as any}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {location.manager}
+                      {location.manager as any}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{location.revenue}</div>
+                      <div className="text-sm text-gray-900">{location.revenue as any}</div>
                       <div className={`text-xs ${location.isGrowthPositive ? 'text-green-600' : 'text-red-600'}`}>
-                        {location.growth}
+                        {location.growth as any}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {location.lastOnline}
+                      {location.lastOnline as any}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">

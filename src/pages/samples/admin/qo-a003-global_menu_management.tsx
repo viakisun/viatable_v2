@@ -187,21 +187,21 @@ const GlobalMenuManagement = () => {
   });
 
   const MenuCard = ({ item }: { item: any }) => {
-    const availableLocations = Object.entries(item.availability).filter(([, available]) => available).length;
+    const availableLocations = Object.entries(item.availability as any).filter(([, available]) => available).length;
 
     return (
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
         {/* Image */}
         <div className="relative h-48 bg-gray-100">
           <img
-            src={item.image}
-            alt={item.name}
+            src={item.image as any}
+            alt={item.name as any}
             className="w-full h-full object-cover"
           />
           <div className="absolute top-3 left-3">
-            <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(item.status)}`}>
-              {getStatusIcon(item.status)}
-              <span className="capitalize">{item.status}</span>
+            <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(item.status as any)}`}>
+              {getStatusIcon(item.status as any)}
+              <span className="capitalize">{item.status as any}</span>
             </div>
           </div>
           <div className="absolute top-3 right-3">
@@ -215,24 +215,24 @@ const GlobalMenuManagement = () => {
         <div className="p-4">
           {/* Title and Category */}
           <div className="mb-3">
-            <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-            <p className="text-sm text-gray-500">{item.nameKr}</p>
+            <h3 className="text-lg font-semibold text-gray-900">{item.name as any}</h3>
+            <p className="text-sm text-gray-500">{item.nameKr as any}</p>
             <span className="inline-block px-2 py-1 text-xs bg-blue-50 text-blue-600 rounded-full mt-1">
-              {item.category}
+              {item.category as any}
             </span>
           </div>
 
           {/* Description */}
-          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{item.description}</p>
+          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{item.description as any}</p>
 
           {/* Price and Stats */}
           <div className="grid grid-cols-2 gap-3 mb-3">
             <div className="text-center p-2 bg-gray-50 rounded-lg">
-              <p className="text-sm font-bold text-gray-900">{item.price.kr}</p>
+              <p className="text-sm font-bold text-gray-900">{(item.price as any).kr}</p>
               <p className="text-xs text-gray-500">Korea</p>
             </div>
             <div className="text-center p-2 bg-gray-50 rounded-lg">
-              <p className="text-sm font-bold text-gray-900">{item.price.au}</p>
+              <p className="text-sm font-bold text-gray-900">{(item.price as any).au}</p>
               <p className="text-xs text-gray-500">Australia</p>
             </div>
           </div>
@@ -241,15 +241,15 @@ const GlobalMenuManagement = () => {
           <div className="flex items-center justify-between mb-3 text-sm">
             <div className="flex items-center space-x-1">
               <Star className="w-4 h-4 text-yellow-400 fill-current" />
-              <span className="font-medium">{item.popularity}</span>
+              <span className="font-medium">{item.popularity as any}</span>
             </div>
             <div className="flex items-center space-x-1 text-gray-500">
               <Users className="w-4 h-4" />
-              <span>{item.salesCount}</span>
+              <span>{item.salesCount as any}</span>
             </div>
             <div className="flex items-center space-x-1 text-gray-500">
               <Clock className="w-4 h-4" />
-              <span>{item.prepTime}</span>
+              <span>{item.prepTime as any}</span>
             </div>
           </div>
 
@@ -260,7 +260,7 @@ const GlobalMenuManagement = () => {
               <span className="font-medium text-gray-900">{availableLocations}/5 locations</span>
             </div>
             <div className="flex flex-wrap gap-1">
-              {Object.entries(item.availability).map(([location, available]) => (
+              {Object.entries(item.availability as any).map(([location, available]) => (
                 <span
                   key={location}
                   className={`text-xs px-2 py-1 rounded-full ${
@@ -278,14 +278,14 @@ const GlobalMenuManagement = () => {
           {/* Tags */}
           <div className="mb-3">
             <div className="flex flex-wrap gap-1">
-              {item.tags.slice(0, 3).map((tag: string, index: number) => (
+              {(item.tags as any).slice(0, 3).map((tag: string, index: number) => (
                 <span key={index} className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full">
                   #{tag}
                 </span>
               ))}
-              {item.tags.length > 3 && (
+              {(item.tags as any).length > 3 && (
                 <span className="text-xs px-2 py-1 bg-gray-50 text-gray-500 rounded-full">
-                  +{item.tags.length - 3}
+                  +{(item.tags as any).length - 3}
                 </span>
               )}
             </div>
@@ -491,37 +491,37 @@ const GlobalMenuManagement = () => {
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <img className="h-10 w-10 rounded-lg object-cover mr-3" src={item.image} alt={item.name} />
+                        <img className="h-10 w-10 rounded-lg object-cover mr-3" src={item.image as any} alt={item.name as any} />
                         <div>
-                          <div className="text-sm font-medium text-gray-900">{item.name}</div>
-                          <div className="text-sm text-gray-500">{item.nameKr}</div>
+                          <div className="text-sm font-medium text-gray-900">{item.name as any}</div>
+                          <div className="text-sm text-gray-500">{item.nameKr as any}</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="inline-block px-2 py-1 text-xs bg-blue-50 text-blue-600 rounded-full">
-                        {item.category}
+                        {item.category as any}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <div>{item.price.kr}</div>
-                      <div className="text-gray-500">{item.price.au}</div>
+                      <div>{(item.price as any).kr}</div>
+                      <div className="text-gray-500">{(item.price as any).au}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(item.status)}`}>
-                        {getStatusIcon(item.status)}
-                        <span className="capitalize">{item.status}</span>
+                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(item.status as any)}`}>
+                        {getStatusIcon(item.status as any)}
+                        <span className="capitalize">{item.status as any}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {Object.entries(item.availability).filter(([, available]) => available).length}/5 locations
+                      {Object.entries(item.availability as any).filter(([, available]) => available).length}/5 locations
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       <div className="flex items-center space-x-1">
                         <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                        <span>{item.popularity}</span>
+                        <span>{item.popularity as any}</span>
                       </div>
-                      <div className="text-gray-500">{item.salesCount} orders</div>
+                      <div className="text-gray-500">{item.salesCount as any} orders</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 import { 
   QrCode, Globe, Users,
@@ -527,12 +527,12 @@ const ViableTableLandingPage = () => {
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">"{testimonial.text}"</p>
+                <p className="text-gray-600 mb-6 leading-relaxed">"{testimonial.text as any}"</p>
                 <div>
-                  <div className="font-semibold text-gray-900 text-lg">{testimonial.name}</div>
-                  <div className="text-purple-600 font-medium">{testimonial.title}</div>
-                  <div className="text-sm text-gray-500">{testimonial.business}</div>
-                  <div className="text-sm text-gray-500">{testimonial.location}</div>
+                  <div className="font-semibold text-gray-900 text-lg">{testimonial.name as any}</div>
+                  <div className="text-purple-600 font-medium">{testimonial.title as any}</div>
+                  <div className="text-sm text-gray-500">{testimonial.business as any}</div>
+                  <div className="text-sm text-gray-500">{testimonial.location as any}</div>
                 </div>
               </div>
             ))}

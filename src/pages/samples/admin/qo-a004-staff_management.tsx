@@ -195,14 +195,14 @@ const StaffManagement = () => {
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-start space-x-3">
           <img
-            src={staff.avatar}
-            alt={staff.name}
+            src={staff.avatar as any}
+            alt={staff.name as any}
             className="w-12 h-12 rounded-full object-cover border-2 border-gray-200"
           />
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">{staff.name}</h3>
-            <p className="text-sm text-gray-500">{staff.nameKr}</p>
-            <p className="text-sm text-gray-500">{staff.email}</p>
+            <h3 className="text-lg font-semibold text-gray-900">{staff.name as any}</h3>
+            <p className="text-sm text-gray-500">{staff.nameKr as any}</p>
+            <p className="text-sm text-gray-500">{staff.email as any}</p>
           </div>
         </div>
         <button className="p-1 text-gray-400 hover:text-gray-600">
@@ -212,24 +212,24 @@ const StaffManagement = () => {
 
       {/* Role and Status */}
       <div className="flex items-center space-x-2 mb-4">
-        <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getRoleColor(staff.role)}`}>
-          {getRoleIcon(staff.role)}
-          <span className="capitalize">{staff.role}</span>
+        <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getRoleColor(staff.role as any)}`}>
+          {getRoleIcon(staff.role as any)}
+          <span className="capitalize">{staff.role as any}</span>
         </div>
-        <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(staff.status)}`}>
-          {getStatusIcon(staff.status)}
-          <span className="capitalize">{staff.status.replace('_', ' ')}</span>
+        <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(staff.status as any)}`}>
+          {getStatusIcon(staff.status as any)}
+          <span className="capitalize">{(staff.status as any).replace('_', ' ')}</span>
         </div>
       </div>
 
       {/* Performance Stats */}
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <p className="text-lg font-bold text-gray-900">{staff.performance.ordersHandled}</p>
+          <p className="text-lg font-bold text-gray-900">{(staff.performance as any).ordersHandled}</p>
           <p className="text-xs text-gray-500">Orders Handled</p>
         </div>
         <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <p className="text-lg font-bold text-gray-900">{staff.performance.customerRating}</p>
+          <p className="text-lg font-bold text-gray-900">{(staff.performance as any).customerRating}</p>
           <p className="text-xs text-gray-500">Rating</p>
         </div>
       </div>
@@ -238,23 +238,23 @@ const StaffManagement = () => {
       <div className="space-y-2 text-sm mb-4">
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Location:</span>
-          <span className="font-medium text-gray-900">{staff.location}</span>
+          <span className="font-medium text-gray-900">{staff.location as any}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Department:</span>
-          <span className="font-medium text-gray-900">{staff.department}</span>
+          <span className="font-medium text-gray-900">{staff.department as any}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Work Hours:</span>
-          <span className="font-medium text-gray-900">{staff.workHours}</span>
+          <span className="font-medium text-gray-900">{staff.workHours as any}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Hire Date:</span>
-          <span className="font-medium text-gray-900">{new Date(staff.hireDate).toLocaleDateString()}</span>
+          <span className="font-medium text-gray-900">{new Date(staff.hireDate as any).toLocaleDateString()}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-500">Last Login:</span>
-          <span className="font-medium text-gray-900">{staff.lastLogin}</span>
+          <span className="font-medium text-gray-900">{staff.lastLogin as any}</span>
         </div>
       </div>
 
@@ -262,12 +262,12 @@ const StaffManagement = () => {
       <div className="mb-4">
         <div className="flex items-center justify-between text-sm mb-1">
           <span className="text-gray-500">Efficiency</span>
-          <span className="font-medium text-gray-900">{staff.performance.efficiency}%</span>
+          <span className="font-medium text-gray-900">{(staff.performance as any).efficiency}%</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div
             className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${staff.performance.efficiency}%` }}
+            style={{ width: `${(staff.performance as any).efficiency}%` }}
           ></div>
         </div>
       </div>
@@ -276,14 +276,14 @@ const StaffManagement = () => {
       <div className="mb-4">
         <span className="text-sm text-gray-500 mb-2 block">Permissions:</span>
         <div className="flex flex-wrap gap-1">
-          {staff.permissions.slice(0, 3).map((permission: string, index: number) => (
+          {(staff.permissions as any).slice(0, 3).map((permission: string, index: number) => (
             <span key={index} className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full">
               {permission.replace('_', ' ')}
             </span>
           ))}
-          {staff.permissions.length > 3 && (
+          {(staff.permissions as any).length > 3 && (
             <span className="text-xs px-2 py-1 bg-gray-50 text-gray-500 rounded-full">
-              +{staff.permissions.length - 3}
+              +{(staff.permissions as any).length - 3}
             </span>
           )}
         </div>
@@ -501,34 +501,34 @@ const StaffManagement = () => {
                   <tr key={staff.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <img className="h-10 w-10 rounded-full object-cover mr-3" src={staff.avatar} alt={staff.name} />
+                        <img className="h-10 w-10 rounded-full object-cover mr-3" src={staff.avatar as any} alt={staff.name as any} />
                         <div>
-                          <div className="text-sm font-medium text-gray-900">{staff.name}</div>
-                          <div className="text-sm text-gray-500">{staff.email}</div>
+                          <div className="text-sm font-medium text-gray-900">{staff.name as any}</div>
+                          <div className="text-sm text-gray-500">{staff.email as any}</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getRoleColor(staff.role)}`}>
-                        {getRoleIcon(staff.role)}
-                        <span className="capitalize">{staff.role}</span>
+                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getRoleColor(staff.role as any)}`}>
+                        {getRoleIcon(staff.role as any)}
+                        <span className="capitalize">{staff.role as any}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {staff.location}
+                      {staff.location as any}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(staff.status)}`}>
-                        {getStatusIcon(staff.status)}
-                        <span className="capitalize">{staff.status.replace('_', ' ')}</span>
+                      <div className={`flex items-center space-x-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(staff.status as any)}`}>
+                        {getStatusIcon(staff.status as any)}
+                        <span className="capitalize">{(staff.status as any).replace('_', ' ')}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <div>{staff.performance.efficiency}%</div>
-                      <div className="text-gray-500">{staff.performance.customerRating}★</div>
+                      <div>{(staff.performance as any).efficiency}%</div>
+                      <div className="text-gray-500">{(staff.performance as any).customerRating}★</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {staff.lastLogin}
+                      {staff.lastLogin as any}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">
