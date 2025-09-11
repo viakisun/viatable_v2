@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   Play, QrCode, Smartphone, Monitor, Clock, Star, Check,
   Eye, ShoppingCart, CreditCard, BarChart3,
@@ -217,7 +217,7 @@ const ViableTableDemoTrial = () => {
             <div className="bg-gray-50 rounded-lg p-6">
               <div className="flex items-center space-x-4 mb-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  {React.createElement(demoSteps[currentStep - 1].icon, { className: "w-6 h-6 text-blue-600" })}
+                  {demoSteps[currentStep - 1].icon && React.createElement(demoSteps[currentStep - 1].icon, { className: "w-6 h-6 text-blue-600" })}
                 </div>
                 <div>
                   <h5 className="text-xl font-semibold text-gray-900">{demoSteps[currentStep - 1].title}</h5>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-  Plus, Search, Copy, Eye, EyeOff,
+  Plus, Search, Edit, Copy, Eye, EyeOff,
   Upload, Download, Clock, Star, AlertTriangle, CheckCircle,
-  MoreVertical, TrendingUp
+  MoreVertical, TrendingUp, Users, ChefHat
 } from 'lucide-react';
 
 const GlobalMenuManagement = () => {

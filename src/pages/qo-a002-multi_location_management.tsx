@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   MapPin, Store, Plus, Wifi, Power,
   Search, MoreVertical, Eye, Settings, TrendingUp, TrendingDown,

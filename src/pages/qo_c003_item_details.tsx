@@ -106,7 +106,7 @@ const QOItemDetails = () => {
                 <MessageSquare className="w-4 h-4 absolute top-3.5 left-3 text-slate-400" />
                 <textarea
                   className="w-full border border-slate-200 rounded-lg py-2 pr-3 pl-9 focus:ring-1 focus:ring-slate-400 focus:outline-none resize-none"
-                  rows="3"
+                  rows={3}
                   placeholder={currentContent.notesPlaceholder}
                 ></textarea>
               </div>

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   BarChart3, DollarSign, Clock,
   Download, RefreshCw, Share,
   Activity, Award, MapPin, ShoppingCart,
   Star, Utensils, ArrowUpRight,
-  ArrowDownRight, AlertTriangle
+  ArrowDownRight, AlertTriangle, Users, Target, TrendingUp
 } from 'lucide-react';
 
 const AnalyticsReports = () => {
