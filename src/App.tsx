@@ -9,16 +9,16 @@ import VTL002 from './pages/vt-l002-viatable_signup_flow';
 import VTL003 from './pages/vt-l003-viatable_pricing_plans';
 import VTL004 from './pages/vt-l004-viatable_demo_trial';
 import VTL005 from './pages/vt-l005-viatable_features_new';
-import VTL017 from './pages/vt-l017-viatable_login_new';
+import VTL017 from './pages/vt-l017-viatable_login_enhanced';
 
 // Customer pages
 import QoC001 from './pages/qo_c001_landing';
-import QoC002 from './pages/qo_c002_menu';
-import QoC003 from './pages/qo_c003_item_details';
-import QoC004 from './pages/qo_c004_cart';
-import QoC005 from './pages/qo_c005_checkout';
+import QoC002 from './pages/qo_c002_menu_enhanced';
+import QoC003 from './pages/qo_c003_item_details_enhanced';
+import QoC004 from './pages/qo_c004_cart_enhanced';
+import QoC005 from './pages/qo_c005_checkout_enhanced';
 import QoC006 from './pages/qo_c006_payment';
-import QoC007 from './pages/qo_c007_order_status';
+import QoC007 from './pages/qo_c007_order_status_enhanced';
 import QoC008 from './pages/qo_c008_confirmation';
 
 // Staff pages
