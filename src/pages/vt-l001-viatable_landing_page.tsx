@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   QrCode, Globe, Users,
-  Check, Star, ArrowRight, Play, Menu, X, BarChart3, Shield, Utensils
+  Check, Star, ArrowRight, Play, Menu, X, BarChart3, Shield, Utensils, Zap
 } from 'lucide-react';
 
 const ViableTableLandingPage = () => {

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   Utensils, Eye, EyeOff, Mail, Lock, ArrowRight,
   CheckCircle, Shield, QrCode,
-  Star, Clock, ChevronRight
+  Star, Clock, ChevronRight, Users, TrendingUp
 } from 'lucide-react';
 
 const ViableTableLoginPage = () => {

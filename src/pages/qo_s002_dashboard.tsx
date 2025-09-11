@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Bell, Settings, LogOut } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/useLanguage';
 
 const QOStaffDashboard = () => {
   const { language } = useLanguage();

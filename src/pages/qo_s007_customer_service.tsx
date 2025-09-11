@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Search, Bell, BellOff, MessageSquare, ThumbsUp } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/useLanguage';
 
 type RequestStatus = 'pending' | 'resolved';
 type RequestType = 'assistance' | 'complaint' | 'compliment';

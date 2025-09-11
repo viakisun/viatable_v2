@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Settings, Shield, CreditCard, Bell,
   Save, RefreshCw, Upload, Download,

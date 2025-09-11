@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   QrCode, BarChart3, Utensils, CreditCard, Check, 
-  ChevronRight, Play, Heart, Sparkles
+  ChevronRight, Play, Heart, Sparkles, Users, Monitor, Settings, Zap, Headphones
 } from 'lucide-react';
 
 const ViableTableFeaturesOverview = () => {

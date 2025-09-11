@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Plus, Search, Edit, Copy, Eye, EyeOff,
   Upload, Download, Clock,
