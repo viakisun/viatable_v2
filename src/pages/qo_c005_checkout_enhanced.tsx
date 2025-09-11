@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { 
   CreditCard, Smartphone, Gift, ArrowLeft, CheckCircle, 
-  Shield, Lock
+  Shield, Lock, Wallet, Banknote,
+  Zap, Star, Globe, Building2
 } from 'lucide-react';
 import { 
   Button, 
@@ -40,10 +41,86 @@ const QOCheckoutEnhanced = () => {
   ];
 
   const paymentMethods = [
-    { id: 'card', name: { en: 'Credit Card', ko: '신용카드' }, icon: CreditCard, popular: true },
-    { id: 'apple', name: { en: 'Apple Pay', ko: '애플페이' }, icon: Smartphone, popular: false },
-    { id: 'google', name: { en: 'Google Pay', ko: '구글페이' }, icon: Smartphone, popular: false },
-    { id: 'paypal', name: { en: 'PayPal', ko: '페이팔' }, icon: Gift, popular: false }
+    { 
+      id: 'card', 
+      name: { en: 'Credit Card', ko: '신용카드' }, 
+      icon: CreditCard, 
+      popular: true,
+      description: { en: 'Visa, Mastercard, Amex', ko: '비자, 마스터카드, 아멕스' },
+      color: 'bg-blue-50 border-blue-200 text-blue-700'
+    },
+    { 
+      id: 'apple', 
+      name: { en: 'Apple Pay', ko: '애플페이' }, 
+      icon: Smartphone, 
+      popular: true,
+      description: { en: 'Touch ID or Face ID', ko: '터치 ID 또는 페이스 ID' },
+      color: 'bg-black border-gray-800 text-white'
+    },
+    { 
+      id: 'google', 
+      name: { en: 'Google Pay', ko: '구글페이' }, 
+      icon: Smartphone, 
+      popular: true,
+      description: { en: 'Quick & secure', ko: '빠르고 안전한' },
+      color: 'bg-blue-50 border-blue-200 text-blue-700'
+    },
+    { 
+      id: 'paypal', 
+      name: { en: 'PayPal', ko: '페이팔' }, 
+      icon: Gift, 
+      popular: false,
+      description: { en: 'Pay with PayPal balance', ko: '페이팔 잔액으로 결제' },
+      color: 'bg-yellow-50 border-yellow-200 text-yellow-700'
+    },
+    { 
+      id: 'samsung', 
+      name: { en: 'Samsung Pay', ko: '삼성페이' }, 
+      icon: Smartphone, 
+      popular: false,
+      description: { en: 'Samsung device payment', ko: '삼성 기기 결제' },
+      color: 'bg-blue-50 border-blue-200 text-blue-700'
+    },
+    { 
+      id: 'kakao', 
+      name: { en: 'Kakao Pay', ko: '카카오페이' }, 
+      icon: Wallet, 
+      popular: true,
+      description: { en: 'Korea\'s popular payment', ko: '한국의 인기 결제' },
+      color: 'bg-yellow-50 border-yellow-200 text-yellow-700'
+    },
+    { 
+      id: 'toss', 
+      name: { en: 'Toss', ko: '토스' }, 
+      icon: Zap, 
+      popular: true,
+      description: { en: 'Simple & fast payment', ko: '간편하고 빠른 결제' },
+      color: 'bg-blue-50 border-blue-200 text-blue-700'
+    },
+    { 
+      id: 'naver', 
+      name: { en: 'Naver Pay', ko: '네이버페이' }, 
+      icon: Globe, 
+      popular: false,
+      description: { en: 'Naver integrated payment', ko: '네이버 통합 결제' },
+      color: 'bg-green-50 border-green-200 text-green-700'
+    },
+    { 
+      id: 'bank', 
+      name: { en: 'Bank Transfer', ko: '계좌이체' }, 
+      icon: Building2, 
+      popular: false,
+      description: { en: 'Direct bank transfer', ko: '직접 계좌이체' },
+      color: 'bg-gray-50 border-gray-200 text-gray-700'
+    },
+    { 
+      id: 'cash', 
+      name: { en: 'Cash on Delivery', ko: '현금 결제' }, 
+      icon: Banknote, 
+      popular: false,
+      description: { en: 'Pay when delivered', ko: '배송 시 현금 결제' },
+      color: 'bg-green-50 border-green-200 text-green-700'
+    }
   ];
 
   const orderSummary = {
@@ -113,7 +190,26 @@ const QOCheckoutEnhanced = () => {
 
   const handlePayment = async () => {
     setIsProcessing(true);
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    
+    // Simulate different payment processing times based on method
+    const processingTimes = {
+      'apple': 1000,
+      'google': 1200,
+      'samsung': 1500,
+      'kakao': 2000,
+      'toss': 1800,
+      'naver': 2200,
+      'paypal': 2500,
+      'bank': 3000,
+      'cash': 500,
+      'card': 3000
+    };
+    
+    const processingTime = processingTimes[paymentMethod as keyof typeof processingTimes] || 3000;
+    
+    // Simulate payment processing
+    await new Promise(resolve => setTimeout(resolve, processingTime));
+    
     setIsProcessing(false);
     setShowSuccess(true);
   };
@@ -263,35 +359,97 @@ const QOCheckoutEnhanced = () => {
                       {currentContent.paymentMethod}
                     </h2>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                      {paymentMethods.map((method) => (
-                        <button
-                          key={method.id}
-                          onClick={() => setPaymentMethod(method.id)}
-                          className={cn(
-                            'flex items-center justify-between p-4 border-2 rounded-lg transition-all',
-                            paymentMethod === method.id
-                              ? 'border-primary-500 bg-primary-50'
-                              : 'border-neutral-200 hover:border-neutral-300'
-                          )}
-                        >
-                          <div className="flex items-center space-x-3">
-                            <method.icon className="w-6 h-6 text-neutral-600" />
-                            <span className="font-medium text-neutral-900">
+                    {/* Popular Payment Methods */}
+                    <div className="mb-6">
+                      <h3 className="text-sm font-medium text-neutral-700 mb-3 flex items-center">
+                        <Star className="w-4 h-4 mr-2 text-yellow-500" />
+                        Popular Methods
+                      </h3>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                        {paymentMethods.filter(method => method.popular).map((method) => (
+                          <button
+                            key={method.id}
+                            onClick={() => setPaymentMethod(method.id)}
+                            className={cn(
+                              'flex flex-col items-center p-4 border-2 rounded-xl transition-all hover:shadow-md',
+                              paymentMethod === method.id
+                                ? 'border-primary-500 bg-primary-50 shadow-md'
+                                : 'border-neutral-200 hover:border-neutral-300 bg-white'
+                            )}
+                          >
+                            <div className={cn(
+                              'w-12 h-12 rounded-full flex items-center justify-center mb-3',
+                              method.color
+                            )}>
+                              <method.icon className="w-6 h-6" />
+                            </div>
+                            <span className="text-sm font-medium text-neutral-900 text-center">
                               {method.name[language]}
                             </span>
-                          </div>
-                          {method.popular && (
-                            <Badge variant="error" size="sm">
-                              {currentContent.popular}
-                            </Badge>
-                          )}
-                        </button>
-                      ))}
+                            <span className="text-xs text-neutral-500 mt-1">
+                              {method.description[language]}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
                     </div>
 
+                    {/* All Payment Methods */}
+                    <div className="mb-6">
+                      <h3 className="text-sm font-medium text-neutral-700 mb-3">
+                        All Payment Methods
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {paymentMethods.map((method) => (
+                          <button
+                            key={method.id}
+                            onClick={() => setPaymentMethod(method.id)}
+                            className={cn(
+                              'flex items-center justify-between p-4 border-2 rounded-lg transition-all hover:shadow-sm',
+                              paymentMethod === method.id
+                                ? 'border-primary-500 bg-primary-50 shadow-sm'
+                                : 'border-neutral-200 hover:border-neutral-300 bg-white'
+                            )}
+                          >
+                            <div className="flex items-center space-x-3">
+                              <div className={cn(
+                                'w-10 h-10 rounded-lg flex items-center justify-center',
+                                method.color
+                              )}>
+                                <method.icon className="w-5 h-5" />
+                              </div>
+                              <div className="text-left">
+                                <span className="font-medium text-neutral-900 block">
+                                  {method.name[language]}
+                                </span>
+                                <span className="text-xs text-neutral-500">
+                                  {method.description[language]}
+                                </span>
+                              </div>
+                            </div>
+                            {method.popular && (
+                              <Badge variant="error" size="sm">
+                                {currentContent.popular}
+                              </Badge>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Payment Method Specific Forms */}
                     {paymentMethod === 'card' && (
                       <div className="space-y-4">
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                          <div className="flex items-center space-x-2 text-blue-700">
+                            <Shield className="w-5 h-5" />
+                            <span className="text-sm font-medium">Secure Payment</span>
+                          </div>
+                          <p className="text-sm text-blue-600 mt-1">
+                            Your payment information is encrypted and secure
+                          </p>
+                        </div>
+                        
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <Input
                             label={currentContent.firstName}
@@ -355,6 +513,187 @@ const QOCheckoutEnhanced = () => {
                           onChange={(e) => handleInputChange('nameOnCard', e.target.value)}
                           required
                         />
+                      </div>
+                    )}
+
+                    {/* Apple Pay */}
+                    {paymentMethod === 'apple' && (
+                      <div className="space-y-4">
+                        <div className="bg-black text-white rounded-lg p-6 text-center">
+                          <Smartphone className="w-12 h-12 mx-auto mb-4" />
+                          <h3 className="text-lg font-semibold mb-2">Apple Pay</h3>
+                          <p className="text-gray-300 text-sm mb-4">
+                            Use Touch ID or Face ID to complete your payment
+                          </p>
+                          <div className="bg-gray-800 rounded-lg p-4">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Total Amount</span>
+                              <span className="font-semibold">${orderSummary.total.AUD}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                          <div className="flex items-center space-x-2 text-green-700">
+                            <CheckCircle className="w-5 h-5" />
+                            <span className="text-sm font-medium">Secure & Fast</span>
+                          </div>
+                          <p className="text-sm text-green-600 mt-1">
+                            Your payment is processed securely through Apple Pay
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Google Pay */}
+                    {paymentMethod === 'google' && (
+                      <div className="space-y-4">
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                          <Smartphone className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+                          <h3 className="text-lg font-semibold mb-2 text-blue-900">Google Pay</h3>
+                          <p className="text-blue-700 text-sm mb-4">
+                            Quick and secure payment with Google Pay
+                          </p>
+                          <div className="bg-white rounded-lg p-4 border border-blue-200">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Total Amount</span>
+                              <span className="font-semibold">${orderSummary.total.AUD}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Kakao Pay */}
+                    {paymentMethod === 'kakao' && (
+                      <div className="space-y-4">
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+                          <Wallet className="w-12 h-12 mx-auto mb-4 text-yellow-600" />
+                          <h3 className="text-lg font-semibold mb-2 text-yellow-900">Kakao Pay</h3>
+                          <p className="text-yellow-700 text-sm mb-4">
+                            Korea's most popular payment method
+                          </p>
+                          <div className="bg-white rounded-lg p-4 border border-yellow-200">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Total Amount</span>
+                              <span className="font-semibold">₩{orderSummary.total.KRW.toLocaleString()}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Toss */}
+                    {paymentMethod === 'toss' && (
+                      <div className="space-y-4">
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                          <Zap className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+                          <h3 className="text-lg font-semibold mb-2 text-blue-900">Toss</h3>
+                          <p className="text-blue-700 text-sm mb-4">
+                            Simple and fast payment experience
+                          </p>
+                          <div className="bg-white rounded-lg p-4 border border-blue-200">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Total Amount</span>
+                              <span className="font-semibold">₩{orderSummary.total.KRW.toLocaleString()}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* PayPal */}
+                    {paymentMethod === 'paypal' && (
+                      <div className="space-y-4">
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+                          <Gift className="w-12 h-12 mx-auto mb-4 text-yellow-600" />
+                          <h3 className="text-lg font-semibold mb-2 text-yellow-900">PayPal</h3>
+                          <p className="text-yellow-700 text-sm mb-4">
+                            Pay with your PayPal balance or linked cards
+                          </p>
+                          <div className="bg-white rounded-lg p-4 border border-yellow-200">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Total Amount</span>
+                              <span className="font-semibold">${orderSummary.total.AUD}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Bank Transfer */}
+                    {paymentMethod === 'bank' && (
+                      <div className="space-y-4">
+                        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                          <Building2 className="w-12 h-12 mx-auto mb-4 text-gray-600" />
+                          <h3 className="text-lg font-semibold mb-2 text-center text-gray-900">Bank Transfer</h3>
+                          <div className="space-y-3">
+                            <div className="bg-white rounded-lg p-4 border border-gray-200">
+                              <div className="text-sm text-gray-600 mb-2">Bank Details:</div>
+                              <div className="space-y-1 text-sm">
+                                <div className="flex justify-between">
+                                  <span>Bank:</span>
+                                  <span className="font-medium">Viatable Bank</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span>Account:</span>
+                                  <span className="font-medium">123-456-789</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span>Amount:</span>
+                                  <span className="font-medium">₩{orderSummary.total.KRW.toLocaleString()}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <p className="text-xs text-gray-500 text-center">
+                              Please include your order number in the transfer memo
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Cash on Delivery */}
+                    {paymentMethod === 'cash' && (
+                      <div className="space-y-4">
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+                          <Banknote className="w-12 h-12 mx-auto mb-4 text-green-600" />
+                          <h3 className="text-lg font-semibold mb-2 text-green-900">Cash on Delivery</h3>
+                          <p className="text-green-700 text-sm mb-4">
+                            Pay with cash when your order is delivered
+                          </p>
+                          <div className="bg-white rounded-lg p-4 border border-green-200">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Amount to Pay</span>
+                              <span className="font-semibold">₩{orderSummary.total.KRW.toLocaleString()}</span>
+                            </div>
+                          </div>
+                          <p className="text-xs text-green-600 mt-2">
+                            Please have exact change ready for the delivery driver
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Other payment methods */}
+                    {!['card', 'apple', 'google', 'kakao', 'toss', 'paypal', 'bank', 'cash'].includes(paymentMethod) && (
+                      <div className="space-y-4">
+                        <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6 text-center">
+                          <Smartphone className="w-12 h-12 mx-auto mb-4 text-neutral-600" />
+                          <h3 className="text-lg font-semibold mb-2 text-neutral-900">
+                            {paymentMethods.find(m => m.id === paymentMethod)?.name[language]}
+                          </h3>
+                          <p className="text-neutral-700 text-sm mb-4">
+                            {paymentMethods.find(m => m.id === paymentMethod)?.description[language]}
+                          </p>
+                          <div className="bg-white rounded-lg p-4 border border-neutral-200">
+                            <div className="flex items-center justify-between text-sm">
+                              <span>Total Amount</span>
+                              <span className="font-semibold">
+                                {language === 'ko' ? `₩${orderSummary.total.KRW.toLocaleString()}` : `$${orderSummary.total.AUD}`}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </Card>
