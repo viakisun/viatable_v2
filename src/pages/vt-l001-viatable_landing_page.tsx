@@ -190,7 +190,7 @@ const ViableTableLandingPage = () => {
     }
   };
 
-  const currentContent = content[language];
+  const currentContent = (content as any)[language];
 
   const SignupModal = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -364,7 +364,7 @@ const ViableTableLandingPage = () => {
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {currentContent.hero.stats.map((stat, index) => (
+                {currentContent.hero.stats.map((stat: any, index: number) => (
                   <div key={index} className="text-center">
                     <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{stat.number}</div>
                     <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
@@ -439,7 +439,7 @@ const ViableTableLandingPage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentContent.features.items.map((feature, index) => (
+            {currentContent.features.items.map((feature: any, index: number) => (
               <div key={index} className="group p-8 border border-gray-200 rounded-2xl hover:shadow-xl transition-all duration-300 hover:border-purple-200 bg-white">
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-purple-200 group-hover:to-pink-200 transition-all">
                   <feature.icon className="w-8 h-8 text-purple-600" />
@@ -461,7 +461,7 @@ const ViableTableLandingPage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {currentContent.pricing.plans.map((plan) => (
+            {currentContent.pricing.plans.map((plan: any) => (
               <div 
                 key={plan.id}
                 className={`bg-white rounded-2xl p-8 transition-all duration-300 ${
@@ -488,7 +488,7 @@ const ViableTableLandingPage = () => {
                 </div>
                 
                 <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, index) => (
+                  {plan.features.map((feature: string, index: number) => (
                     <li key={index} className="flex items-center">
                       <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                       <span className="text-gray-600">{feature}</span>
@@ -520,7 +520,7 @@ const ViableTableLandingPage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {currentContent.testimonials.items.map((testimonial, index) => (
+            {currentContent.testimonials.items.map((testimonial: any, index: number) => (
               <div key={index} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all">
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (

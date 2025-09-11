@@ -243,7 +243,7 @@ const ViableTableFeaturesOverview = () => {
                 {filteredFeatures.map((feature) => (
                   <div
                     key={feature.id}
-                    onClick={() => setActiveFeature(activeFeature === feature.id ? null : feature.id)}
+                    onClick={() => setActiveFeature(activeFeature === feature.id ? '' : feature.id)}
                     className={`bg-white rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
                       activeFeature === feature.id
                         ? 'border-purple-500 shadow-xl'

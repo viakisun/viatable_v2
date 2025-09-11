@@ -157,7 +157,7 @@ const GlobalMenuManagement = () => {
   const locations = ['All', 'Seoul Gangnam', 'Seoul Hongdae', 'Sydney CBD', 'Melbourne', 'Brisbane'];
   const statuses = ['All', 'Active', 'Draft', 'Inactive'];
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'text-green-600 bg-green-50 border-green-200';
       case 'draft': return 'text-yellow-600 bg-yellow-50 border-yellow-200';
@@ -166,7 +166,7 @@ const GlobalMenuManagement = () => {
     }
   };
 
-  const getStatusIcon = (status) => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active': return <CheckCircle className="w-4 h-4" />;
       case 'draft': return <Edit className="w-4 h-4" />;
@@ -181,12 +181,12 @@ const GlobalMenuManagement = () => {
                          item.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesStatus = selectedStatus === 'all' || item.status === selectedStatus;
-    const matchesLocation = selectedLocation === 'all' || item.availability[selectedLocation];
+    const matchesLocation = selectedLocation === 'all' || (item.availability as any)[selectedLocation];
 
     return matchesSearch && matchesCategory && matchesStatus && matchesLocation;
   });
 
-  const MenuCard = ({ item }) => {
+  const MenuCard = ({ item }: { item: any }) => {
     const availableLocations = Object.entries(item.availability).filter(([, available]) => available).length;
 
     return (
@@ -278,7 +278,7 @@ const GlobalMenuManagement = () => {
           {/* Tags */}
           <div className="mb-3">
             <div className="flex flex-wrap gap-1">
-              {item.tags.slice(0, 3).map((tag, index) => (
+              {item.tags.slice(0, 3).map((tag: string, index: number) => (
                 <span key={index} className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full">
                   #{tag}
                 </span>

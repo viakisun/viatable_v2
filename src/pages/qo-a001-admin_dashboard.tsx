@@ -39,7 +39,7 @@ const AdminDashboard = () => {
     { type: 'success', message: 'Melbourne: Daily revenue target achieved', time: '1 hour ago' }
   ];
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed': return 'text-green-600 bg-green-50';
       case 'preparing': return 'text-blue-600 bg-blue-50';
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const getAlertIcon = (type) => {
+  const getAlertIcon = (type: string) => {
     switch (type) {
       case 'warning': return <AlertTriangle className="w-4 h-4 text-yellow-500" />;
       case 'info': return <Bell className="w-4 h-4 text-blue-500" />;

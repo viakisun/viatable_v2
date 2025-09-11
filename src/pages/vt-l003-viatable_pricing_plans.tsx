@@ -178,8 +178,8 @@ const ViableTablePricingPlans = () => {
     }
   ];
 
-  const formatPrice = (amount) => {
-    const symbol = currencies[selectedCurrency].symbol;
+  const formatPrice = (amount: number) => {
+    const symbol = (currencies as any)[selectedCurrency].symbol;
     if (selectedCurrency === 'KRW') {
       return `${symbol}${amount.toLocaleString()}`;
     }
@@ -191,7 +191,7 @@ const ViableTablePricingPlans = () => {
     const improvedRevenue = (roiData.monthlyOrders * (roiData.targetTableTurnover / roiData.currentTableTurnover)) * roiData.averageOrderValue;
     const monthlyIncrease = improvedRevenue - currentRevenue;
     const annualIncrease = monthlyIncrease * 12;
-    const viableTableCost = pricing.professional.yearly[selectedCurrency];
+    const viableTableCost = (pricing.professional.yearly as any)[selectedCurrency];
     const roi = ((annualIncrease - viableTableCost) / viableTableCost) * 100;
     
     return {
@@ -203,19 +203,19 @@ const ViableTablePricingPlans = () => {
     };
   };
 
-  const PlanCard = ({ plan }) => {
-    const currentPrice = pricing[plan.id][billingCycle][selectedCurrency];
-    const yearlyPrice = pricing[plan.id].yearly[selectedCurrency];
+  const PlanCard = ({ plan }: { plan: { id: string; name: string; features: { core: string[]; advanced: string[]; enterprise: string[] }; limitations: string[] } }) => {
+    const currentPrice = (pricing as any)[plan.id][billingCycle][selectedCurrency];
+    const yearlyPrice = (pricing as any)[plan.id].yearly[selectedCurrency];
     const monthlyEquivalent = yearlyPrice / 12;
     const savings = billingCycle === 'yearly' ? currentPrice - monthlyEquivalent : 0;
 
     return (
       <div className={`relative bg-white rounded-2xl border-2 transition-all duration-300 ${
-        plan.popular 
+        (plan as any).popular 
           ? 'border-purple-500 scale-105 shadow-2xl ring-4 ring-purple-100' 
           : 'border-gray-200 hover:border-purple-300 hover:shadow-xl'
       }`}>
-        {plan.popular && (
+        {(plan as any).popular && (
           <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center">
               <Star className="w-4 h-4 mr-1" />
@@ -228,7 +228,7 @@ const ViableTablePricingPlans = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-            <p className="text-gray-600 mb-6">{plan.description}</p>
+            <p className="text-gray-600 mb-6">{(plan as any).description}</p>
             
             <div className="mb-6">
               {currentPrice === 0 ? (
@@ -251,7 +251,7 @@ const ViableTablePricingPlans = () => {
             </div>
             
             <div className="text-sm text-gray-600 mb-6">
-              Transaction fee: <span className="font-semibold text-gray-900">{plan.transactionFee}</span>
+              Transaction fee: <span className="font-semibold text-gray-900">{(plan as any).transactionFee}</span>
             </div>
           </div>
           
@@ -327,7 +327,7 @@ const ViableTablePricingPlans = () => {
           
           {/* CTA Button */}
           <button className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all ${
-            plan.popular
+            (plan as any).popular
               ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 shadow-lg'
               : plan.id === 'starter'
               ? 'bg-green-600 text-white hover:bg-green-700'
@@ -369,7 +369,7 @@ const ViableTablePricingPlans = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Average Order Value ({currencies[selectedCurrency].symbol})</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Average Order Value ({(currencies as any)[selectedCurrency].symbol})</label>
               <input
                 type="number"
                 value={roiData.averageOrderValue}
@@ -565,7 +565,7 @@ const ViableTablePricingPlans = () => {
                 <h3 className="font-semibold text-gray-900 mb-2">{addon.name}</h3>
                 <p className="text-sm text-gray-600 mb-4">{addon.description}</p>
                 <div className="text-2xl font-bold text-purple-600">
-                  {formatPrice(addon.price[selectedCurrency])}/month
+                  {formatPrice((addon.price as any)[selectedCurrency])}/month
                 </div>
               </div>
             ))}
@@ -603,7 +603,7 @@ const ViableTablePricingPlans = () => {
             {faqs.map((faq, index) => (
               <div key={index} className="border border-gray-200 rounded-lg">
                 <button
-                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
+                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index as any)}
                   className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                 >
                   <span className="font-medium text-gray-900">{faq.question}</span>

@@ -243,8 +243,8 @@ const ViableTableDemoTrial = () => {
               
               {currentStep === 2 && (
                 <div className="space-y-4">
-                  <h6 className="font-semibold text-gray-900">{currentRestaurant.name} Menu</h6>
-                  {currentRestaurant.menuItems.map((item, index) => (
+                  <h6 className="font-semibold text-gray-900">{currentRestaurant?.name} Menu</h6>
+                  {currentRestaurant?.menuItems.map((item, index) => (
                     <div key={index} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg"></div>

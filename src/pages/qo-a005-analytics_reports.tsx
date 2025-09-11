@@ -93,7 +93,7 @@ const AnalyticsReports = () => {
     setTimeout(() => setIsLoading(false), 1500);
   };
 
-  const MetricCard = ({ title, value, change, icon: Icon, isPositive }) => (
+  const MetricCard = ({ title, value, change, icon: Icon, isPositive }: { title: string; value: string; change: string; icon: any; isPositive: boolean }) => (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">

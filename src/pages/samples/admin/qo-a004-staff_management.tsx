@@ -142,7 +142,7 @@ const StaffManagement = () => {
   const locations = ['All', 'Seoul Gangnam', 'Seoul Hongdae', 'Sydney CBD', 'Melbourne', 'Brisbane'];
   const statuses = ['All', 'Active', 'Inactive', 'On Leave'];
 
-  const getRoleColor = (role) => {
+  const getRoleColor = (role: string) => {
     switch (role) {
       case 'admin': return 'text-purple-600 bg-purple-50 border-purple-200';
       case 'manager': return 'text-blue-600 bg-blue-50 border-blue-200';
@@ -151,7 +151,7 @@ const StaffManagement = () => {
     }
   };
 
-  const getRoleIcon = (role) => {
+  const getRoleIcon = (role: string) => {
     switch (role) {
       case 'admin': return <Crown className="w-4 h-4" />;
       case 'manager': return <Shield className="w-4 h-4" />;
@@ -160,7 +160,7 @@ const StaffManagement = () => {
     }
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'text-green-600 bg-green-50 border-green-200';
       case 'inactive': return 'text-red-600 bg-red-50 border-red-200';
@@ -169,7 +169,7 @@ const StaffManagement = () => {
     }
   };
 
-  const getStatusIcon = (status) => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active': return <CheckCircle className="w-4 h-4" />;
       case 'inactive': return <EyeOff className="w-4 h-4" />;
@@ -189,7 +189,7 @@ const StaffManagement = () => {
     return matchesSearch && matchesRole && matchesLocation && matchesStatus;
   });
 
-  const StaffCard = ({ staff }) => (
+  const StaffCard = ({ staff }: { staff: any }) => (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
@@ -276,7 +276,7 @@ const StaffManagement = () => {
       <div className="mb-4">
         <span className="text-sm text-gray-500 mb-2 block">Permissions:</span>
         <div className="flex flex-wrap gap-1">
-          {staff.permissions.slice(0, 3).map((permission, index) => (
+          {staff.permissions.slice(0, 3).map((permission: string, index: number) => (
             <span key={index} className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full">
               {permission.replace('_', ' ')}
             </span>

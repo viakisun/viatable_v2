@@ -52,17 +52,17 @@ const SystemSettings = () => {
     }, 1500);
   };
 
-  const updateSetting = (category, key, value) => {
+  const updateSetting = (category: string, key: string, value: boolean | string | number) => {
     setSettings(prev => ({
       ...prev,
       [category]: {
-        ...prev[category],
+        ...(prev as any)[category],
         [key]: value
       }
     }));
   };
 
-  const ToggleSwitch = ({ enabled, onChange, label, description }) => (
+  const ToggleSwitch = ({ enabled, onChange, label, description }: { enabled: boolean; onChange: (value: boolean) => void; label: string; description: string }) => (
     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
       <div>
         <div className="text-sm font-medium text-gray-900">{label}</div>
@@ -139,7 +139,7 @@ const SystemSettings = () => {
 
       <ToggleSwitch
         enabled={settings.general.maintenanceMode}
-        onChange={(value) => updateSetting('general', 'maintenanceMode', value)}
+        onChange={(value: boolean) => updateSetting('general', 'maintenanceMode', value)}
         label="Maintenance Mode"
         description="Enable to temporarily disable customer access for system updates"
       />
@@ -154,21 +154,21 @@ const SystemSettings = () => {
 
           <ToggleSwitch
             enabled={settings.notifications.emailNotifications}
-            onChange={(value) => updateSetting('notifications', 'emailNotifications', value)}
+            onChange={(value: boolean) => updateSetting('notifications', 'emailNotifications', value)}
             label="Email Notifications"
             description="Send order updates via email"
           />
 
           <ToggleSwitch
             enabled={settings.notifications.smsNotifications}
-            onChange={(value) => updateSetting('notifications', 'smsNotifications', value)}
+            onChange={(value: boolean) => updateSetting('notifications', 'smsNotifications', value)}
             label="SMS Notifications"
             description="Send urgent alerts via SMS"
           />
 
           <ToggleSwitch
             enabled={settings.notifications.pushNotifications}
-            onChange={(value) => updateSetting('notifications', 'pushNotifications', value)}
+            onChange={(value: boolean) => updateSetting('notifications', 'pushNotifications', value)}
             label="Push Notifications"
             description="Browser and mobile push notifications"
           />
@@ -179,14 +179,14 @@ const SystemSettings = () => {
 
           <ToggleSwitch
             enabled={settings.notifications.orderAlerts}
-            onChange={(value) => updateSetting('notifications', 'orderAlerts', value)}
+            onChange={(value: boolean) => updateSetting('notifications', 'orderAlerts', value)}
             label="Order Alerts"
             description="New orders and status updates"
           />
 
           <ToggleSwitch
             enabled={settings.notifications.soundEnabled}
-            onChange={(value) => updateSetting('notifications', 'soundEnabled', value)}
+            onChange={(value: boolean) => updateSetting('notifications', 'soundEnabled', value)}
             label="Sound Notifications"
             description="Audio alerts for new orders"
           />
@@ -234,14 +234,14 @@ const SystemSettings = () => {
 
           <ToggleSwitch
             enabled={settings.payments.stripeEnabled}
-            onChange={(value) => updateSetting('payments', 'stripeEnabled', value)}
+            onChange={(value: boolean) => updateSetting('payments', 'stripeEnabled', value)}
             label="Stripe"
             description="Credit/debit card processing"
           />
 
           <ToggleSwitch
             enabled={settings.payments.paypalEnabled}
-            onChange={(value) => updateSetting('payments', 'paypalEnabled', value)}
+            onChange={(value: boolean) => updateSetting('payments', 'paypalEnabled', value)}
             label="PayPal"
             description="PayPal digital wallet"
           />
@@ -252,14 +252,14 @@ const SystemSettings = () => {
 
           <ToggleSwitch
             enabled={settings.payments.cardPayments}
-            onChange={(value) => updateSetting('payments', 'cardPayments', value)}
+            onChange={(value: boolean) => updateSetting('payments', 'cardPayments', value)}
             label="Card Payments"
             description="Credit and debit cards"
           />
 
           <ToggleSwitch
             enabled={settings.payments.cashPayments}
-            onChange={(value) => updateSetting('payments', 'cashPayments', value)}
+            onChange={(value: boolean) => updateSetting('payments', 'cashPayments', value)}
             label="Cash Payments"
             description="Pay at restaurant counter"
           />
@@ -300,14 +300,14 @@ const SystemSettings = () => {
       <div className="space-y-4">
         <ToggleSwitch
           enabled={settings.security.twoFactorAuth}
-          onChange={(value) => updateSetting('security', 'twoFactorAuth', value)}
+          onChange={(value: boolean) => updateSetting('security', 'twoFactorAuth', value)}
           label="Two-Factor Authentication"
           description="Require 2FA for all admin accounts"
         />
 
         <ToggleSwitch
           enabled={settings.security.accessLogging}
-          onChange={(value) => updateSetting('security', 'accessLogging', value)}
+          onChange={(value: boolean) => updateSetting('security', 'accessLogging', value)}
           label="Access Logging"
           description="Log all user access and actions for security auditing"
         />

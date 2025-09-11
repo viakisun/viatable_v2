@@ -52,17 +52,17 @@ const SystemSettings = () => {
     }, 1500);
   };
 
-  const updateSetting = (category, key, value) => {
+  const updateSetting = (category: string, key: string, value: boolean | string | number) => {
     setSettings(prev => ({
       ...prev,
       [category]: {
-        ...prev[category],
+        ...(prev as any)[category],
         [key]: value
       }
     }));
   };
 
-  const ToggleSwitch = ({ enabled, onChange, label, description }) => (
+  const ToggleSwitch = ({ enabled, onChange, label, description }: { enabled: boolean; onChange: (value: boolean) => void; label: string; description: string }) => (
     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
       <div>
         <div className="text-sm font-medium text-gray-900">{label}</div>

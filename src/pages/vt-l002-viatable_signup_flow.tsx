@@ -101,7 +101,7 @@ const ViableTableSignupFlow = () => {
     { code: 'OTHER', name: 'Other', flag: '🌍' }
   ];
 
-  const updateFormData = (field, value) => {
+  const updateFormData = (field: string, value: string | number | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 

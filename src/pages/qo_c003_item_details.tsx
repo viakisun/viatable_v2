@@ -34,7 +34,7 @@ const QOItemDetails = () => {
     </button>
   );
 
-  const TabButton = ({ id, title }) => (
+  const TabButton = ({ id, title }: { id: string; title: string }) => (
     <button
       onClick={() => setActiveTab(id)}
       className={`-mb-px px-4 py-3 font-semibold text-sm transition-colors focus:outline-none ${

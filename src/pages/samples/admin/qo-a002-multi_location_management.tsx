@@ -126,7 +126,7 @@ const MultiLocationManagement = () => {
     }
   ];
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'text-green-600 bg-green-50 border-green-200';
       case 'maintenance': return 'text-yellow-600 bg-yellow-50 border-yellow-200';
@@ -135,7 +135,7 @@ const MultiLocationManagement = () => {
     }
   };
 
-  const getStatusIcon = (status) => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'active': return <CheckCircle className="w-4 h-4" />;
       case 'maintenance': return <AlertTriangle className="w-4 h-4" />;
@@ -144,7 +144,7 @@ const MultiLocationManagement = () => {
     }
   };
 
-  const getFeatureIcon = (feature) => {
+  const getFeatureIcon = (feature: string) => {
     switch (feature) {
       case 'wifi': return <Wifi className="w-4 h-4" />;
       case 'payment': return <CheckCircle className="w-4 h-4" />;
@@ -163,7 +163,7 @@ const MultiLocationManagement = () => {
     return matchesSearch && matchesStatus && matchesRegion;
   });
 
-  const LocationCard = ({ location }) => (
+  const LocationCard = ({ location }: { location: any }) => (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
@@ -241,7 +241,7 @@ const MultiLocationManagement = () => {
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">Features:</span>
           <div className="flex items-center space-x-2">
-            {location.features.map((feature, index) => (
+            {location.features.map((feature: string, index: number) => (
               <div key={index} className="p-1 bg-blue-50 rounded text-blue-600" title={feature}>
                 {getFeatureIcon(feature)}
               </div>
