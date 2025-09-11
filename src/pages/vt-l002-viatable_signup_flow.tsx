@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
-  User, Building, MapPin, CreditCard, Check, ArrowRight, ArrowLeft,
-  Mail, Phone, Globe, Users, Utensils, Star, Shield, Zap,
-  ChevronRight, AlertCircle, CheckCircle, Eye, EyeOff, Upload
+  Check, ArrowRight, ArrowLeft,
+  Utensils, Star, Shield,
+  CheckCircle, Eye, EyeOff
 } from 'lucide-react';
 
 const ViableTableSignupFlow = () => {

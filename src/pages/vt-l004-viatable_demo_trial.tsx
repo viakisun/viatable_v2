@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { 
-  Play, QrCode, Smartphone, Monitor, Users, Clock, Star, Check,
-  ArrowRight, Eye, MousePointer, ShoppingCart, CreditCard, BarChart3,
-  Utensils, Coffee, Pizza, Calendar, Phone, Mail, Download,
-  ChevronRight, ChevronLeft, Zap, Shield, Globe, Award, Target
+  Play, QrCode, Smartphone, Monitor, Clock, Star, Check,
+  Eye, ShoppingCart, CreditCard, BarChart3,
+  Utensils, Calendar, Phone,
+  ChevronRight, ChevronLeft, Shield, Globe, Award
 } from 'lucide-react';
 
 const ViableTableDemoTrial = () => {

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import {
-  Users, Plus, Search, Filter, Edit, Trash2, Eye, EyeOff,
-  Shield, Crown, User, Clock, Phone, Mail, MapPin,
-  Calendar, Award, TrendingUp, AlertTriangle, CheckCircle,
-  MoreVertical, Settings, Key, UserPlus, Download, Upload
+  Users, Search, Eye, EyeOff,
+  Shield, Crown, User, Clock, TrendingUp, AlertTriangle, CheckCircle,
+  MoreVertical, Key, UserPlus, Download, Upload
 } from 'lucide-react';
 
 const StaffManagement = () => {
@@ -12,7 +11,6 @@ const StaffManagement = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState('grid');
-  const [showAddModal, setShowAddModal] = useState(false);
 
   // Mock data for staff members
   const staffMembers = [

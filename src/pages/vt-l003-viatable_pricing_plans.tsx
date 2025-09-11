@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { 
-  Check, X, Star, Calculator, TrendingUp, Users, Utensils,
-  Building, Shield, Zap, Phone, Mail, ArrowRight, ChevronDown,
-  ChevronUp, HelpCircle, DollarSign, Globe, Clock, Award,
-  BarChart3, Headphones, Settings, Database, CreditCard,
-  RefreshCw, Target, Smartphone, Monitor
+  Check, X, Star, Calculator, Utensils,
+  Shield, ChevronDown,
+  ChevronUp, BarChart3
 } from 'lucide-react';
 
 const ViableTablePricingPlans = () => {

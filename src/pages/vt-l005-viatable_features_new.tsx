@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  QrCode, Smartphone, BarChart3, Users, Shield, Zap, Globe, Clock,
-  Utensils, CreditCard, Bell, Settings, Eye, TrendingUp, Star, Check, 
-  ChevronRight, Play, Monitor, Database, Wifi, MessageCircle, Calendar, 
-  Target, Award, RefreshCw, Lock, Palette, Code, Cloud, Headphones, 
-  MapPin, DollarSign, Coffee, ChefHat, ShoppingCart, Truck, Heart, 
-  Megaphone, FileText, Layers, Sparkles, MousePointer2
+  QrCode, BarChart3, Utensils, CreditCard, Check, 
+  ChevronRight, Play, Heart, Sparkles
 } from 'lucide-react';
 
 const ViableTableFeaturesOverview = () => {

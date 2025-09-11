@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  QrCode, Smartphone, TrendingUp, Globe, Users, ShoppingCart,
-  Check, Star, ArrowRight, Play, Menu, X, MapPin, Clock,
-  DollarSign, BarChart3, Shield, Zap, ChevronDown, Mail,
-  Phone, Building, User, Eye, MessageCircle, Award, Utensils
+  QrCode, Globe, Users,
+  Check, Star, ArrowRight, Play, Menu, X, BarChart3, Shield, Utensils
 } from 'lucide-react';
 
 const ViableTableLandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('professional');
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [language, setLanguage] = useState('en');
 
