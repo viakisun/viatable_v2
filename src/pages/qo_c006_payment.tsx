@@ -6,7 +6,6 @@ import {
   Card, 
   AnimatedContainer
 } from '../design-system';
-import MobileHeader from '../components/MobileHeader';
 import LanguageToggle from '../components/LanguageToggle';
 
 type PaymentStatusType = 'input' | 'processing' | 'success' | 'failed';
@@ -161,18 +160,19 @@ const QOPayment = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Mobile Header */}
-      <MobileHeader
-        title={currentContent.title}
-        showBackButton={true}
-        rightElement={
+      {/* Simple Table Header */}
+      <div className="bg-white shadow-sm border-b border-neutral-200 px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="text-sm font-medium text-neutral-600">
+            {language === 'ko' ? '더 비스트로 • 테이블 12' : 'The Bistro • Table 12'}
+          </div>
           <LanguageToggle
             language={language}
             onLanguageChange={setLanguage}
             size="sm"
           />
-        }
-      />
+        </div>
+      </div>
 
       {/* Mobile Content */}
       <div className="p-4 space-y-6">

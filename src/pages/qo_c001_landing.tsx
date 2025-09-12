@@ -6,7 +6,6 @@ import {
   AnimatedContainer, 
   StaggeredContainer
 } from '../design-system';
-import MobileHeader from '../components/MobileHeader';
 import LanguageToggle from '../components/LanguageToggle';
 
 const QOLandingPage = () => {
@@ -76,19 +75,19 @@ const QOLandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50 to-secondary-50">
-      {/* Mobile Header */}
-      <MobileHeader
-        title={currentContent.title}
-        subtitle={currentContent.tableInfo}
-        showBackButton={false}
-        rightElement={
+      {/* Simple Table Header */}
+      <div className="bg-white shadow-sm border-b border-neutral-200 px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="text-sm font-medium text-neutral-600">
+            {language === 'ko' ? '더 비스트로 • 테이블 12' : 'The Bistro • Table 12'}
+          </div>
           <LanguageToggle
             language={language}
             onLanguageChange={setLanguage}
             size="sm"
           />
-        }
-      />
+        </div>
+      </div>
 
       {/* Mobile Content */}
       <div className="p-4 space-y-6">
