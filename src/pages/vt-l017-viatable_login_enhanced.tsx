@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Utensils, Eye, EyeOff, Mail, Lock, ArrowRight,
+  Eye, EyeOff, Mail, Lock, ArrowRight,
   Shield, Star, Clock, ChevronRight, 
   Users, TrendingUp, Smartphone, CreditCard, Bell, Globe,
   Sparkles, Heart
@@ -13,6 +13,9 @@ import {
   StaggeredContainer,
   FloatingElement
 } from '../design-system';
+import MobileHeader from '../components/MobileHeader';
+import LanguageToggle from '../components/LanguageToggle';
+import ViatableLogo from '../components/ViatableLogo';
 
 const ViableTableLoginEnhanced = () => {
   const [email, setEmail] = useState('');
@@ -112,46 +115,26 @@ const ViableTableLoginEnhanced = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50 to-secondary-50">
       {/* Mobile Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <div className="px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
-                <Utensils className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                  VIATABLE
-                </span>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-1">
-              <div className="flex bg-gray-100 rounded-md p-0.5">
-                <button
-                  onClick={() => setLanguage('en')}
-                  className={`px-2 py-1 text-xs font-medium rounded-sm transition-all ${
-                    language === 'en' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
-                  }`}
-                >
-                  EN
-                </button>
-                <button
-                  onClick={() => setLanguage('ko')}
-                  className={`px-2 py-1 text-xs font-medium rounded-sm transition-all ${
-                    language === 'ko' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
-                  }`}
-                >
-                  KO
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <MobileHeader
+        title={currentContent.title}
+        showBackButton={false}
+        rightElement={
+          <LanguageToggle
+            language={language}
+            onLanguageChange={setLanguage}
+            size="sm"
+          />
+        }
+      />
 
       {/* Mobile Content */}
       <div className="p-4 space-y-6">
+        {/* VIATABLE Logo */}
+        <div className="text-center pt-4">
+          <ViatableLogo size="lg" className="justify-center" />
+          <p className="text-sm text-neutral-600 mt-2 font-medium">Smart QR Ordering Platform</p>
+        </div>
+
         {/* Welcome Section */}
         <AnimatedContainer animation="slideUp" className="text-center">
           <h1 className="text-2xl font-bold text-neutral-900 mb-2">

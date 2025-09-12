@@ -3,7 +3,7 @@ import {
   Search, Filter, Star, Clock, 
   ShoppingCart, TrendingUp, 
   ChevronDown, SortAsc, SortDesc,
-  Timer, ArrowLeft, Heart, Plus
+  Timer, Heart, Plus
 } from 'lucide-react';
 import { 
   Button, 
@@ -15,6 +15,8 @@ import {
   Skeleton
 } from '../design-system';
 import { cn } from '../utils/cn';
+import MobileHeader from '../components/MobileHeader';
+import LanguageToggle from '../components/LanguageToggle';
 
 const QOMenuCatalogEnhanced = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -221,9 +223,7 @@ const QOMenuCatalogEnhanced = () => {
     addToCart: language === 'ko' ? '추가' : 'Add',
     filters: language === 'ko' ? '필터' : 'Filters',
     sort: language === 'ko' ? '정렬' : 'Sort',
-    view: language === 'ko' ? '보기' : 'View',
     results: language === 'ko' ? '개 결과' : ' results',
-    back: language === 'ko' ? '뒤로' : 'Back',
     tags: language === 'ko' ? '태그' : 'Tags',
     priceRange: language === 'ko' ? '가격 범위' : 'Price Range',
     prepTime: language === 'ko' ? '조리 시간' : 'Prep Time',
@@ -246,106 +246,58 @@ const QOMenuCatalogEnhanced = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Mobile Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <div className="px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => window.history.back()}
-                className="w-8 h-8"
-              >
-                <ArrowLeft className="w-4 h-4" />
-              </Button>
-              <div>
-                <h1 className="text-lg font-bold text-gray-900">{currentContent.title}</h1>
-                <p className="text-xs text-gray-500">{currentContent.tableInfo}</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              {/* Language Toggle */}
-              <div className="flex bg-gray-100 rounded-md p-0.5">
-                <button
-                  onClick={() => setLanguage('en')}
-                  className={cn(
-                    'px-2 py-1 text-xs font-medium rounded-sm transition-all',
-                    language === 'en' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
-                  )}
-                >
-                  EN
-                </button>
-                <button
-                  onClick={() => setLanguage('ko')}
-                  className={cn(
-                    'px-2 py-1 text-xs font-medium rounded-sm transition-all',
-                    language === 'ko' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
-                  )}
-                >
-                  KO
-                </button>
-              </div>
+      <MobileHeader
+        title={currentContent.title}
+        subtitle={currentContent.tableInfo}
+        showCartButton={true}
+        cartCount={cartCount}
+        rightElement={
+          <LanguageToggle
+            language={language}
+            onLanguageChange={setLanguage}
+            size="sm"
+          />
+        }
+      />
 
-              {/* Cart Button */}
-              <div className="relative">
-                <Button
-                  size="icon"
-                  variant="primary"
-                  className="relative w-10 h-10"
-                >
-                  <ShoppingCart className="w-4 h-4" />
-                  {cartCount > 0 && (
-                    <Badge 
-                      variant="error" 
-                      size="sm"
-                      className="absolute -top-1 -right-1 min-w-[16px] h-4 flex items-center justify-center text-xs"
-                    >
-                      {cartCount}
-                    </Badge>
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
+      {/* Search and Controls */}
+      <div className="bg-white border-b border-gray-200 px-4 py-3">
+        {/* Search Bar */}
+        <div className="mb-3">
+          <Input
+            placeholder={currentContent.searchPlaceholder}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            leftIcon={<Search className="w-4 h-4" />}
+            size="sm"
+          />
+        </div>
 
-          {/* Search Bar */}
-          <div className="mt-3">
-            <Input
-              placeholder={currentContent.searchPlaceholder}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              leftIcon={<Search className="w-4 h-4" />}
+        {/* Mobile Controls */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
               size="sm"
-            />
-          </div>
-
-          {/* Mobile Controls */}
-          <div className="mt-3 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowFilters(!showFilters)}
-                leftIcon={<Filter className="w-3 h-3" />}
+              onClick={() => setShowFilters(!showFilters)}
+              leftIcon={<Filter className="w-3 h-3" />}
+            >
+              {currentContent.filters}
+            </Button>
+            
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="appearance-none bg-white border border-gray-300 rounded-md px-3 py-1.5 pr-6 text-xs focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
-                {currentContent.filters}
-              </Button>
-              
-              <div className="relative">
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-white border border-gray-300 rounded-md px-3 py-1.5 pr-6 text-xs focus:outline-none focus:ring-2 focus:ring-primary-500"
-                >
-                  {sortOptions.map(option => (
-                    <option key={option.id} value={option.id}>
-                      {option.name[language]}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-1 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
-              </div>
+                {sortOptions.map(option => (
+                  <option key={option.id} value={option.id}>
+                    {option.name[language]}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-1 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
             </div>
           </div>
         </div>
@@ -457,10 +409,10 @@ const QOMenuCatalogEnhanced = () => {
             className="space-y-4"
           >
             {filteredAndSortedItems.map((item) => (
-              <Card key={item.id} className="p-4">
+              <Card key={item.id} className="p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-start space-x-3">
                   {/* Item Image */}
-                  <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center text-2xl flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg flex items-center justify-center text-2xl flex-shrink-0 border border-primary-100">
                     {item.image}
                   </div>
 
