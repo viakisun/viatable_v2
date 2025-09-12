@@ -8,7 +8,6 @@ import {
 } from '../design-system';
 import MobileHeader from '../components/MobileHeader';
 import LanguageToggle from '../components/LanguageToggle';
-import ViatableLogo from '../components/ViatableLogo';
 
 type PaymentStatusType = 'input' | 'processing' | 'success' | 'failed';
 
@@ -177,9 +176,9 @@ const QOPayment = () => {
 
       {/* Mobile Content */}
       <div className="p-4 space-y-6">
-        {/* VIATABLE Logo */}
+        {/* Brand Text */}
         <div className="text-center pt-4">
-          <ViatableLogo size="md" className="justify-center" />
+          <h2 className="text-lg font-bold text-neutral-900">VIATABLE</h2>
         </div>
 
         {/* Security Badge */}

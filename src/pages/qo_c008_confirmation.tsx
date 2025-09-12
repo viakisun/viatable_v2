@@ -9,7 +9,6 @@ import {
 } from '../design-system';
 import MobileHeader from '../components/MobileHeader';
 import LanguageToggle from '../components/LanguageToggle';
-import ViatableLogo from '../components/ViatableLogo';
 
 const QOOrderConfirmation = () => {
   const [language, setLanguage] = useState<'en' | 'ko'>('en');
@@ -124,10 +123,6 @@ const QOOrderConfirmation = () => {
 
       {/* Mobile Content */}
       <div className="p-4 space-y-6 -mt-24">
-        {/* VIATABLE Logo */}
-        <div className="text-center pt-4">
-          <ViatableLogo size="md" className="justify-center" />
-        </div>
 
         {/* Order Info Card */}
         <AnimatedContainer animation="slideUp">

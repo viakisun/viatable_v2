@@ -8,7 +8,6 @@ import {
 } from '../design-system';
 import MobileHeader from '../components/MobileHeader';
 import LanguageToggle from '../components/LanguageToggle';
-import ViatableLogo from '../components/ViatableLogo';
 
 const QOLandingPage = () => {
   const [language, setLanguage] = useState<'en' | 'ko'>('en');
@@ -93,10 +92,10 @@ const QOLandingPage = () => {
 
       {/* Mobile Content */}
       <div className="p-4 space-y-6">
-        {/* VIATABLE Logo */}
+        {/* Brand Text */}
         <div className="text-center pt-4">
-          <ViatableLogo size="lg" className="justify-center" />
-          <p className="text-sm text-neutral-600 mt-2 font-medium">Smart QR Ordering Platform</p>
+          <h2 className="text-lg font-bold text-neutral-900 mb-1">VIATABLE</h2>
+          <p className="text-sm text-neutral-600 font-medium">Smart QR Ordering Platform</p>
         </div>
 
         {/* Welcome Section */}
