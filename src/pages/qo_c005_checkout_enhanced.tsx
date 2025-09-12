@@ -147,7 +147,7 @@ const QOCheckoutEnhanced = () => {
   };
 
   const currentContent = {
-    title: language === 'ko' ? '결제 (Enhanced)' : 'Checkout (Enhanced)',
+    title: language === 'ko' ? '결제' : 'Checkout',
     back: language === 'ko' ? '뒤로' : 'Back',
     paymentMethod: language === 'ko' ? '결제 방법' : 'Payment Method',
     billingInfo: language === 'ko' ? '청구 정보' : 'Billing Information',

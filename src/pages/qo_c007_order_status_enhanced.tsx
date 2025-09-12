@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { 
-  Clock, CheckCircle, ChefHat, Truck, Utensils,
+  CheckCircle, ChefHat, Truck, Utensils,
   ArrowLeft, RefreshCw, Phone, Share2, Download, Star
 } from 'lucide-react';
 import { 
@@ -8,15 +8,13 @@ import {
   Input, 
   Card, 
   Badge, 
-  Modal,
-  AnimatedContainer, 
-  StaggeredContainer
+  Modal
 } from '../design-system';
 import { cn } from '../utils/cn';
 
 const QOOrderStatusEnhanced = () => {
-  const [currentStatus, setCurrentStatus] = useState('preparing');
-  const [estimatedTime, setEstimatedTime] = useState(12);
+  const [currentStatus] = useState('preparing');
+  const [estimatedTime] = useState(12);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [language, setLanguage] = useState<'en' | 'ko'>('en');
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
@@ -103,69 +101,43 @@ const QOOrderStatusEnhanced = () => {
   const currentContent = {
     title: language === 'ko' ? '주문 상태' : 'Order Status',
     back: language === 'ko' ? '뒤로' : 'Back',
-    orderNumber: language === 'ko' ? '주문 번호' : 'Order Number',
+    orderNumber: language === 'ko' ? '주문번호' : 'Order Number',
     tableNumber: language === 'ko' ? '테이블 번호' : 'Table Number',
-    orderTime: language === 'ko' ? '주문 시간' : 'Order Time',
-    estimatedReady: language === 'ko' ? '예상 완료 시간' : 'Estimated Ready Time',
-    refresh: language === 'ko' ? '새로고침' : 'Refresh',
-    orderDetails: language === 'ko' ? '주문 상세' : 'Order Details',
-    paymentMethod: language === 'ko' ? '결제 방법' : 'Payment Method',
-    specialInstructions: language === 'ko' ? '특별 지시사항' : 'Special Instructions',
-    total: language === 'ko' ? '총계' : 'Total',
-    estimatedTime: language === 'ko' ? '예상 조리시간' : 'Estimated Prep Time',
+    estimatedTime: language === 'ko' ? '예상 시간' : 'Estimated Time',
     minutes: language === 'ko' ? '분' : 'min',
+    orderDetails: language === 'ko' ? '주문 상세' : 'Order Details',
+    total: language === 'ko' ? '총계' : 'Total',
+    paymentMethod: language === 'ko' ? '결제 방법' : 'Payment Method',
+    specialInstructions: language === 'ko' ? '특별 요청사항' : 'Special Instructions',
+    refresh: language === 'ko' ? '새로고침' : 'Refresh',
+    refreshing: language === 'ko' ? '새로고침 중...' : 'Refreshing...',
+    contactRestaurant: language === 'ko' ? '레스토랑 연락' : 'Contact Restaurant',
+    shareOrder: language === 'ko' ? '주문 공유' : 'Share Order',
+    downloadReceipt: language === 'ko' ? '영수증 다운로드' : 'Download Receipt',
+    leaveFeedback: language === 'ko' ? '피드백 남기기' : 'Leave Feedback',
+    orderComplete: language === 'ko' ? '주문 완료' : 'Order Complete',
+    thankYou: language === 'ko' ? '주문해주셔서 감사합니다!' : 'Thank you for your order!',
+    backToMenu: language === 'ko' ? '메뉴로 돌아가기' : 'Back to Menu',
+    orderItems: language === 'ko' ? '주문 항목' : 'Order Items',
     status: language === 'ko' ? '상태' : 'Status',
     preparing: language === 'ko' ? '조리 중' : 'Preparing',
     ready: language === 'ko' ? '준비 완료' : 'Ready',
-    served: language === 'ko' ? '서빙 완료' : 'Served',
-    contactRestaurant: language === 'ko' ? '레스토랑 연락' : 'Contact Restaurant',
-    giveFeedback: language === 'ko' ? '피드백 주기' : 'Give Feedback',
-    shareOrder: language === 'ko' ? '주문 공유' : 'Share Order',
-    downloadReceipt: language === 'ko' ? '영수증 다운로드' : 'Download Receipt',
-    orderTracking: language === 'ko' ? '주문 추적' : 'Order Tracking',
-    currentStatus: language === 'ko' ? '현재 상태' : 'Current Status',
-    nextUpdate: language === 'ko' ? '다음 업데이트' : 'Next Update',
-    inMinutes: language === 'ko' ? '분 후' : 'minutes',
-    liveUpdates: language === 'ko' ? '실시간 업데이트' : 'Live Updates',
-    notifications: language === 'ko' ? '알림' : 'Notifications',
-    feedbackTitle: language === 'ko' ? '주문 피드백' : 'Order Feedback',
+    completed: language === 'ko' ? '완료' : 'Completed',
+    feedback: language === 'ko' ? '피드백' : 'Feedback',
     rating: language === 'ko' ? '평점' : 'Rating',
     comment: language === 'ko' ? '댓글' : 'Comment',
     submitFeedback: language === 'ko' ? '피드백 제출' : 'Submit Feedback',
-    thankYou: language === 'ko' ? '피드백을 주셔서 감사합니다!' : 'Thank you for your feedback!',
-    backToMenu: language === 'ko' ? '메뉴로 돌아가기' : 'Back to Menu'
+    close: language === 'ko' ? '닫기' : 'Close'
   };
 
   const currencyCode = language === 'ko' ? 'KRW' : 'AUD';
 
-  const formatPrice = (amount: number) => {
-    if (currencyCode === 'KRW') {
-      return `${amount.toLocaleString()}원`;
-    }
-    return `$${amount.toFixed(2)}`;
-  };
-
-  const formatTime = (timeString: string) => {
-    const date = new Date(timeString);
-    return date.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit',
-      hour12: false 
-    });
-  };
-
   const handleRefresh = async () => {
     setIsRefreshing(true);
+    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     setIsRefreshing(false);
-    
-    // Simulate status progression
-    if (currentStatus === 'preparing') {
-      setCurrentStatus('ready');
-      setEstimatedTime(0);
-    } else if (currentStatus === 'ready') {
-      setCurrentStatus('served');
-    }
+    console.log('Order status refreshed');
   };
 
   const handleFeedbackSubmit = () => {
@@ -174,50 +146,61 @@ const QOOrderStatusEnhanced = () => {
     setFeedback({ rating: 0, comment: '' });
   };
 
-
-  const getStatusIcon = (status: string) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
-      case 'preparing': return ChefHat;
-      case 'ready': return CheckCircle;
-      case 'served': return Truck;
-      default: return Clock;
+      case 'preparing': return 'text-yellow-600 bg-yellow-100';
+      case 'ready': return 'text-green-600 bg-green-100';
+      case 'completed': return 'text-blue-600 bg-blue-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'preparing': return currentContent.preparing;
+      case 'ready': return currentContent.ready;
+      case 'completed': return currentContent.completed;
+      default: return status;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-40">
-        <div className="px-4 py-4">
+    <div className="min-h-screen bg-gray-50">
+      {/* Mobile Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => window.history.back()}
+                className="w-8 h-8"
               >
-                <ArrowLeft className="w-5 h-5" />
+                <ArrowLeft className="w-4 h-4" />
               </Button>
-              <h1 className="text-2xl font-bold text-neutral-900">{currentContent.title}</h1>
+              <div>
+                <h1 className="text-lg font-bold text-gray-900">{currentContent.title}</h1>
+                <p className="text-xs text-gray-500">{orderData.restaurantName[language]}</p>
+              </div>
             </div>
             
             <div className="flex items-center space-x-2">
               <Button
-                variant="outline"
-                size="sm"
+                variant="ghost"
+                size="icon"
                 onClick={handleRefresh}
                 loading={isRefreshing}
-                leftIcon={<RefreshCw className="w-4 h-4" />}
+                className="w-8 h-8"
               >
-                {currentContent.refresh}
+                <RefreshCw className={cn('w-4 h-4', isRefreshing && 'animate-spin')} />
               </Button>
-              
-              <div className="flex bg-neutral-100 rounded-lg p-1">
+              <div className="flex bg-gray-100 rounded-md p-0.5">
                 <button
                   onClick={() => setLanguage('en')}
                   className={cn(
-                    'px-3 py-1 text-sm font-medium rounded-md transition-all',
-                    language === 'en' ? 'bg-white shadow-sm text-neutral-900' : 'text-neutral-600'
+                    'px-2 py-1 text-xs font-medium rounded-sm transition-all',
+                    language === 'en' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
                   )}
                 >
                   EN
@@ -225,8 +208,8 @@ const QOOrderStatusEnhanced = () => {
                 <button
                   onClick={() => setLanguage('ko')}
                   className={cn(
-                    'px-3 py-1 text-sm font-medium rounded-md transition-all',
-                    language === 'ko' ? 'bg-white shadow-sm text-neutral-900' : 'text-neutral-600'
+                    'px-2 py-1 text-xs font-medium rounded-sm transition-all',
+                    language === 'ko' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
                   )}
                 >
                   KO
@@ -237,288 +220,235 @@ const QOOrderStatusEnhanced = () => {
         </div>
       </div>
 
-      <div className="px-4 py-6">
-        <div className="max-w-4xl mx-auto space-y-6">
-          {/* Order Header */}
-          <AnimatedContainer animation="slideUp">
-            <Card className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-neutral-900">
-                    {currentContent.orderNumber}: {orderData.id}
-                  </h2>
-                  <p className="text-neutral-600">
-                    {currentContent.tableNumber} {orderData.tableNumber} • {orderData.restaurantName[language]}
-                  </p>
-                </div>
-                <Badge variant="primary" size="lg">
-                  {currentContent[currentStatus as keyof typeof currentContent]}
-                </Badge>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-                <div>
-                  <span className="text-neutral-600">{currentContent.orderTime}:</span>
-                  <div className="font-medium">{formatTime(orderData.orderTime)}</div>
-                </div>
-                <div>
-                  <span className="text-neutral-600">{currentContent.estimatedReady}:</span>
-                  <div className="font-medium">{formatTime(orderData.estimatedReadyTime)}</div>
-                </div>
-                <div>
-                  <span className="text-neutral-600">{currentContent.estimatedTime}:</span>
-                  <div className="font-medium">{estimatedTime} {currentContent.minutes}</div>
-                </div>
-              </div>
-            </Card>
-          </AnimatedContainer>
+      {/* Mobile Content */}
+      <div className="p-4 space-y-4">
+        {/* Order Info */}
+        <Card className="p-4">
+          <div className="text-center mb-4">
+            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <ChefHat className="w-8 h-8 text-primary-600" />
+            </div>
+            <h2 className="text-lg font-bold text-gray-900 mb-1">{currentContent.orderNumber}</h2>
+            <p className="text-2xl font-mono font-bold text-primary-600">{orderData.id}</p>
+          </div>
 
-          {/* Status Timeline */}
-          <AnimatedContainer animation="slideUp" delay={200}>
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold text-neutral-900 mb-6">
-                {currentContent.orderTracking}
-              </h3>
-              
-              <div className="space-y-4">
-                {statusSteps.map((step, index) => (
-                  <div key={step.id} className="flex items-start space-x-4">
-                    <div className={cn(
-                      'flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all',
-                      step.completed
-                        ? 'bg-primary-500 border-primary-500 text-white'
-                        : step.current
-                        ? 'bg-warning-500 border-warning-500 text-white animate-pulse'
-                        : 'bg-white border-neutral-300 text-neutral-400'
+          <div className="grid grid-cols-2 gap-4 text-center">
+            <div>
+              <div className="text-sm text-gray-600">{currentContent.tableNumber}</div>
+              <div className="text-lg font-bold text-gray-900">{orderData.tableNumber}</div>
+            </div>
+            <div>
+              <div className="text-sm text-gray-600">{currentContent.estimatedTime}</div>
+              <div className="text-lg font-bold text-gray-900">{estimatedTime}{currentContent.minutes}</div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Status Progress */}
+        <Card className="p-4">
+          <h3 className="font-medium text-gray-900 mb-4">{currentContent.status}</h3>
+          <div className="space-y-4">
+            {statusSteps.map((step) => (
+              <div key={step.id} className="flex items-start space-x-3">
+                <div className={cn(
+                  'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0',
+                  step.completed ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-400'
+                )}>
+                  {step.completed ? (
+                    <CheckCircle className="w-4 h-4" />
+                  ) : (
+                    <step.icon className="w-4 h-4" />
+                  )}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <h4 className={cn(
+                      'font-medium text-sm',
+                      step.completed ? 'text-gray-900' : 'text-gray-600'
                     )}>
-                      <step.icon className="w-6 h-6" />
-                    </div>
-                    
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <h4 className={cn(
-                          'font-medium',
-                          step.completed || step.current ? 'text-neutral-900' : 'text-neutral-400'
-                        )}>
-                          {step.name[language]}
-                        </h4>
-                        <span className="text-sm text-neutral-500">{step.time}</span>
-                      </div>
-                      <p className={cn(
-                        'text-sm',
-                        step.completed || step.current ? 'text-neutral-600' : 'text-neutral-400'
-                      )}>
-                        {step.description[language]}
-                      </p>
-                    </div>
-                    
-                    {index < statusSteps.length - 1 && (
-                      <div className={cn(
-                        'w-0.5 h-8 ml-6 transition-all',
-                        step.completed ? 'bg-primary-500' : 'bg-neutral-300'
-                      )} />
-                    )}
+                      {step.name[language]}
+                    </h4>
+                    <span className="text-xs text-gray-500">{step.time}</span>
                   </div>
-                ))}
-              </div>
-            </Card>
-          </AnimatedContainer>
-
-          {/* Order Items */}
-          <AnimatedContainer animation="slideUp" delay={300}>
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold text-neutral-900 mb-6">
-                {currentContent.orderDetails}
-              </h3>
-              
-              <div className="space-y-4">
-                {orderData.items.map((item) => {
-                  const StatusIcon = getStatusIcon(item.status);
-                  return (
-                    <div key={item.id} className="flex items-center space-x-4 p-4 bg-neutral-50 rounded-lg">
-                      <div className="w-16 h-16 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-xl flex items-center justify-center text-2xl">
-                        {item.image}
-                      </div>
-                      
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-medium text-neutral-900">
-                            {item.name[language]}
-                          </h4>
-                          <Badge 
-                            variant={item.status === 'ready' ? 'success' : item.status === 'preparing' ? 'warning' : 'primary'}
-                            size="sm"
-                          >
-                            {currentContent[item.status as keyof typeof currentContent]}
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-neutral-600">
-                          {language === 'ko' ? '수량' : 'Quantity'}: {item.quantity} • {formatPrice(item.price[currencyCode])}
-                        </p>
-                      </div>
-                      
-                      <div className="flex items-center space-x-2">
-                        <StatusIcon className={cn(
-                          'w-5 h-5',
-                          item.status === 'ready' ? 'text-success-500' : 
-                          item.status === 'preparing' ? 'text-warning-500' : 'text-primary-500'
-                        )} />
-                        {item.status === 'preparing' && (
-                          <span className="text-sm text-neutral-600">
-                            {item.estimatedTime} {currentContent.minutes}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </Card>
-          </AnimatedContainer>
-
-          {/* Order Summary */}
-          <AnimatedContainer animation="slideUp" delay={400}>
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold text-neutral-900 mb-4">
-                {language === 'ko' ? '주문 요약' : 'Order Summary'}
-              </h3>
-              
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">{currentContent.paymentMethod}:</span>
-                  <span className="font-medium">{orderData.paymentMethod[language]}</span>
+                  <p className="text-xs text-gray-600 mt-1">{step.description[language]}</p>
                 </div>
-                
-                {orderData.specialInstructions && (
-                  <div className="flex justify-between text-sm">
-                    <span className="text-neutral-600">{currentContent.specialInstructions}:</span>
-                    <span className="font-medium">{orderData.specialInstructions}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* Order Items */}
+        <Card className="p-4">
+          <h3 className="font-medium text-gray-900 mb-4">{currentContent.orderItems}</h3>
+          <div className="space-y-3">
+            {orderData.items.map((item) => (
+              <div key={item.id} className="flex items-center space-x-3">
+                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-xl flex-shrink-0">
+                  {item.image}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-medium text-gray-900 text-sm">{item.name[language]}</h4>
+                    <Badge 
+                      variant="secondary" 
+                      size="sm"
+                      className={cn('text-xs', getStatusColor(item.status))}
+                    >
+                      {getStatusText(item.status)}
+                    </Badge>
                   </div>
-                )}
-                
-                <div className="border-t border-neutral-200 pt-3">
-                  <div className="flex justify-between">
-                    <span className="text-lg font-semibold text-neutral-900">{currentContent.total}:</span>
-                    <span className="text-xl font-bold text-neutral-900">
-                      {formatPrice(orderData.total[currencyCode])}
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-xs text-gray-600">Qty: {item.quantity}</span>
+                    <span className="text-sm font-medium text-gray-900">
+                      {currencyCode === 'KRW' ? `₩${(item.price.KRW * item.quantity).toLocaleString()}` : `$${(item.price.AUD * item.quantity).toFixed(2)}`}
                     </span>
                   </div>
                 </div>
               </div>
-            </Card>
-          </AnimatedContainer>
+            ))}
+          </div>
+        </Card>
 
-          {/* Action Buttons */}
-          <StaggeredContainer animation="slideUp" staggerDelay={100} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Button
-              variant="outline"
-              size="lg"
-              leftIcon={<Phone className="w-5 h-5" />}
-              fullWidth
-            >
-              {currentContent.contactRestaurant}
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="lg"
-              leftIcon={<Star className="w-5 h-5" />}
-              onClick={() => setShowFeedbackModal(true)}
-              fullWidth
-            >
-              {currentContent.giveFeedback}
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="lg"
-              leftIcon={<Share2 className="w-5 h-5" />}
-              fullWidth
-            >
-              {currentContent.shareOrder}
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="lg"
-              leftIcon={<Download className="w-5 h-5" />}
-              fullWidth
-            >
-              {currentContent.downloadReceipt}
-            </Button>
-          </StaggeredContainer>
-
-          {/* Live Updates Banner */}
-          <AnimatedContainer animation="slideUp" delay={600}>
-            <Card className="p-4 bg-primary-50 border-primary-200">
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-primary-700">
-                  {currentContent.liveUpdates}
-                </span>
-                <Badge variant="primary" size="sm">
-                  {currentContent.notifications}
-                </Badge>
+        {/* Order Summary */}
+        <Card className="p-4">
+          <h3 className="font-medium text-gray-900 mb-3">{currentContent.orderDetails}</h3>
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">{currentContent.total}</span>
+              <span className="font-medium text-gray-900">
+                {currencyCode === 'KRW' ? `₩${orderData.total.KRW.toLocaleString()}` : `$${orderData.total.AUD}`}
+              </span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">{currentContent.paymentMethod}</span>
+              <span className="text-gray-900">{orderData.paymentMethod[language]}</span>
+            </div>
+            {orderData.specialInstructions && (
+              <div className="pt-2 border-t border-gray-200">
+                <div className="text-sm text-gray-600">{currentContent.specialInstructions}</div>
+                <div className="text-sm text-gray-900 mt-1">{orderData.specialInstructions}</div>
               </div>
-            </Card>
-          </AnimatedContainer>
+            )}
+          </div>
+        </Card>
+
+        {/* Action Buttons */}
+        <div className="grid grid-cols-2 gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            leftIcon={<Phone className="w-4 h-4" />}
+            fullWidth
+          >
+            {currentContent.contactRestaurant}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            leftIcon={<Share2 className="w-4 h-4" />}
+            fullWidth
+          >
+            {currentContent.shareOrder}
+          </Button>
         </div>
+
+        <Button
+          variant="outline"
+          size="sm"
+          leftIcon={<Download className="w-4 h-4" />}
+          fullWidth
+        >
+          {currentContent.downloadReceipt}
+        </Button>
+
+        {currentStatus === 'served' && (
+          <Button
+            variant="primary"
+            size="lg"
+            leftIcon={<Star className="w-4 h-4" />}
+            fullWidth
+            onClick={() => setShowFeedbackModal(true)}
+          >
+            {currentContent.leaveFeedback}
+          </Button>
+        )}
+
+        {/* Success Message */}
+        {currentStatus === 'served' && (
+          <Card className="p-4 bg-green-50 border-green-200">
+            <div className="text-center">
+              <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
+              <h3 className="text-lg font-bold text-green-800 mb-2">{currentContent.orderComplete}</h3>
+              <p className="text-green-700 text-sm mb-4">{currentContent.thankYou}</p>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => window.location.href = '/menu'}
+              >
+                {currentContent.backToMenu}
+              </Button>
+            </div>
+          </Card>
+        )}
       </div>
 
       {/* Feedback Modal */}
       <Modal
         isOpen={showFeedbackModal}
         onClose={() => setShowFeedbackModal(false)}
-        title={currentContent.feedbackTitle}
-        size="md"
+        title={currentContent.feedback}
+        size="sm"
       >
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-3">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               {currentContent.rating}
             </label>
-            <div className="flex space-x-2">
-              {[1, 2, 3, 4, 5].map((star) => (
+            <div className="flex space-x-1">
+              {[1, 2, 3, 4, 5].map((rating) => (
                 <button
-                  key={star}
-                  onClick={() => setFeedback(prev => ({ ...prev, rating: star }))}
-                  className={cn(
-                    'p-2 rounded-lg transition-colors',
-                    star <= feedback.rating
-                      ? 'text-warning-500 bg-warning-50'
-                      : 'text-neutral-300 hover:text-warning-400'
-                  )}
+                  key={rating}
+                  onClick={() => setFeedback(prev => ({ ...prev, rating }))}
+                  className="p-1"
                 >
-                  <Star className={cn('w-6 h-6', star <= feedback.rating && 'fill-current')} />
+                  <Star
+                    className={cn(
+                      'w-6 h-6',
+                      rating <= feedback.rating ? 'text-yellow-500 fill-current' : 'text-gray-300'
+                    )}
+                  />
                 </button>
               ))}
             </div>
           </div>
-          
+
           <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               {currentContent.comment}
             </label>
             <Input
-              placeholder={language === 'ko' ? '주문에 대한 의견을 남겨주세요...' : 'Share your thoughts about the order...'}
               value={feedback.comment}
               onChange={(e) => setFeedback(prev => ({ ...prev, comment: e.target.value }))}
-              rows={4}
+              placeholder={language === 'ko' ? '리뷰를 작성해주세요...' : 'Write your review...'}
+              rows={3}
+              size="sm"
             />
           </div>
-          
-          <div className="flex space-x-3">
+
+          <div className="flex space-x-2">
             <Button
               variant="outline"
+              size="sm"
               onClick={() => setShowFeedbackModal(false)}
-              fullWidth
+              className="flex-1"
             >
-              {language === 'ko' ? '취소' : 'Cancel'}
+              {currentContent.close}
             </Button>
             <Button
+              variant="primary"
+              size="sm"
               onClick={handleFeedbackSubmit}
-              disabled={feedback.rating === 0}
-              fullWidth
+              className="flex-1"
             >
               {currentContent.submitFeedback}
             </Button>

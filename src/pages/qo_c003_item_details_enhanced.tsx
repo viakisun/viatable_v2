@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { 
   Plus, Minus, Heart, Star, Clock, Users, MessageSquare, 
-  Leaf, AlertTriangle, ArrowLeft, Share2, Bookmark,
-  Camera, ChevronLeft, ChevronRight, Check, Info,
+  Leaf, AlertTriangle, ArrowLeft, Share2,
+  Check, Info,
   ShoppingCart
 } from 'lucide-react';
 import { 
   Button, 
   Input, 
-  Card, 
   Badge, 
-  Modal,
-  AnimatedContainer, 
+  Modal
 } from '../design-system';
 import { cn } from '../utils/cn';
 
@@ -24,7 +22,7 @@ const QOItemDetailsEnhanced = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageModal, setShowImageModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [language] = useState<'en' | 'ko'>('en');
+  const [language, setLanguage] = useState<'en' | 'ko'>('en');
 
   // Enhanced item data
   const itemData = {
@@ -103,535 +101,446 @@ const QOItemDetailsEnhanced = () => {
         name: 'Emma Wilson',
         rating: 5,
         date: '2024-01-10',
-        comment: { en: 'My go-to breakfast! Always fresh and beautifully presented.', ko: '제가 자주 먹는 아침식사예요! 항상 신선하고 예쁘게 나와요.' },
+        comment: { en: 'Perfect for brunch! The combination of flavors is incredible.', ko: '브런치에 완벽해요! 맛의 조합이 정말 놀라워요.' },
         helpful: 15
       }
-    ],
-    similarItems: [
-      { id: 1, name: { en: 'Classic Avocado Toast', ko: '클래식 아보카도 토스트' }, price: { AUD: 14.50, KRW: 20800 }, image: '🥑', rating: 4.7 },
-      { id: 2, name: { en: 'Smoked Salmon Toast', ko: '훈제 연어 토스트' }, price: { AUD: 19.50, KRW: 27900 }, image: '🐟', rating: 4.8 },
-      { id: 4, name: { en: 'Pancake Stack', ko: '팬케이크 스택' }, price: { AUD: 16.80, KRW: 24000 }, image: '🥞', rating: 4.7 }
     ]
   };
 
+  const tabs = [
+    { id: 'overview', name: { en: 'Overview', ko: '개요' }, icon: Info },
+    { id: 'ingredients', name: { en: 'Ingredients', ko: '재료' }, icon: Leaf },
+    { id: 'nutrition', name: { en: 'Nutrition', ko: '영양정보' }, icon: Users },
+    { id: 'reviews', name: { en: 'Reviews', ko: '리뷰' }, icon: MessageSquare }
+  ];
+
   const currentContent = {
-    addToCart: language === 'ko' ? '장바구니 담기' : 'Add to Cart',
-    quantity: language === 'ko' ? '수량' : 'Quantity',
-    customizations: language === 'ko' ? '커스터마이징' : 'Customizations',
-    specialNotes: language === 'ko' ? '특별 요청사항' : 'Special Notes',
-    notesPlaceholder: language === 'ko' ? '특별한 요청사항...' : 'Any special requests?',
-    ingredients: language === 'ko' ? '재료' : 'Ingredients',
-    nutrition: language === 'ko' ? '영양 정보' : 'Nutrition Info',
-    allergens: language === 'ko' ? '알레르기 정보' : 'Allergens',
-    reviews: language === 'ko' ? '리뷰' : 'Reviews',
-    similar: language === 'ko' ? '비슷한 메뉴' : 'Similar Items',
-    overview: language === 'ko' ? '개요' : 'Overview',
-    required: language === 'ko' ? '필수' : 'Required',
-    optional: language === 'ko' ? '선택' : 'Optional',
     back: language === 'ko' ? '뒤로' : 'Back',
+    addToCart: language === 'ko' ? '장바구니에 추가' : 'Add to Cart',
+    adding: language === 'ko' ? '추가 중...' : 'Adding...',
     share: language === 'ko' ? '공유' : 'Share',
-    save: language === 'ko' ? '저장' : 'Save',
+    bookmark: language === 'ko' ? '북마크' : 'Bookmark',
     prepTime: language === 'ko' ? '조리시간' : 'Prep Time',
-    servings: language === 'ko' ? '인분' : 'Servings',
-    calories: language === 'ko' ? '칼로리' : 'Calories',
-    rating: language === 'ko' ? '평점' : 'Rating',
+    minutes: language === 'ko' ? '분' : 'min',
+    servings: language === 'ko' ? '인분' : 'servings',
+    calories: language === 'ko' ? '칼로리' : 'calories',
+    rating: language === 'ko' ? '평점' : 'rating',
+    reviews: language === 'ko' ? '리뷰' : 'reviews',
+    specialNotes: language === 'ko' ? '특별 요청사항' : 'Special Notes',
+    specialNotesPlaceholder: language === 'ko' ? '특별한 요청사항이 있으시면 입력해주세요...' : 'Any special requests...',
+    allergens: language === 'ko' ? '알레르기 정보' : 'Allergens',
+    contains: language === 'ko' ? '포함' : 'Contains',
+    ingredients: language === 'ko' ? '재료' : 'Ingredients',
+    nutrition: language === 'ko' ? '영양정보' : 'Nutrition',
+    protein: language === 'ko' ? '단백질' : 'Protein',
+    carbs: language === 'ko' ? '탄수화물' : 'Carbs',
+    fat: language === 'ko' ? '지방' : 'Fat',
+    fiber: language === 'ko' ? '식이섬유' : 'Fiber',
+    sugar: language === 'ko' ? '당분' : 'Sugar',
     helpful: language === 'ko' ? '도움됨' : 'Helpful',
+    required: language === 'ko' ? '필수' : 'Required',
+    optional: language === 'ko' ? '선택' : 'Optional'
   };
 
   const currencyCode = language === 'ko' ? 'KRW' : 'AUD';
 
-  const formatPrice = (amount: number) => {
-    if (currencyCode === 'KRW') {
-      return `${amount.toLocaleString()}원`;
-    }
-    return `$${amount.toFixed(2)}`;
-  };
-
   const calculateTotalPrice = () => {
-    let total = itemData.price[currencyCode] * quantity;
+    let total = itemData.price[currencyCode];
     
     // Add option prices
-    Object.entries(selectedOptions).forEach(([optionKey, choiceId]) => {
-      const option = itemData.options[optionKey as keyof typeof itemData.options];
-      if (option) {
-        const choice = option.choices.find(c => c.id === choiceId);
-        if (choice && choice.price > 0) {
-          total += choice.price * quantity;
-        }
+    Object.values(itemData.options).forEach(option => {
+      const selectedChoice = option.choices.find(choice => 
+        selectedOptions[option.name[language]] === choice.id
+      );
+      if (selectedChoice) {
+        total += selectedChoice.price;
       }
     });
     
-    return total;
+    return total * quantity;
   };
 
   const handleAddToCart = async () => {
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
     setIsLoading(false);
-    console.log('Added to cart:', { item: itemData.id, quantity, options: selectedOptions, notes: specialNotes });
+    console.log('Added to cart:', { item: itemData.name[language], quantity, options: selectedOptions });
   };
 
-  const handleOptionChange = (optionKey: string, choiceId: string) => {
+  const handleOptionChange = (optionName: string, choiceId: string) => {
     setSelectedOptions(prev => ({
       ...prev,
-      [optionKey]: choiceId
+      [optionName]: choiceId
     }));
   };
 
-  const tabs = [
-    { id: 'overview', name: currentContent.overview, icon: Info },
-    { id: 'ingredients', name: currentContent.ingredients, icon: Leaf },
-    { id: 'nutrition', name: currentContent.nutrition, icon: Leaf },
-    { id: 'reviews', name: currentContent.reviews, icon: MessageSquare },
-  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-primary-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-40">
-        <div className="px-4 py-4">
+    <div className="min-h-screen bg-gray-50">
+      {/* Mobile Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => window.history.back()}
+                className="w-8 h-8"
               >
-                <ArrowLeft className="w-5 h-5" />
+                <ArrowLeft className="w-4 h-4" />
               </Button>
-              <h1 className="text-xl font-semibold text-neutral-900">
-                {itemData.name[language]}
-              </h1>
+              <h1 className="text-lg font-bold text-gray-900">{currentContent.back}</h1>
             </div>
             
             <div className="flex items-center space-x-2">
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setShowImageModal(true)}
+                onClick={() => setIsFavorite(!isFavorite)}
+                className="w-8 h-8"
               >
-                <Camera className="w-5 h-5" />
+                <Heart className={cn('w-4 h-4', isFavorite ? 'text-red-500 fill-current' : 'text-gray-400')} />
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setIsFavorite(!isFavorite)}
+                onClick={() => setShowImageModal(true)}
+                className="w-8 h-8"
               >
-                <Heart className={cn('w-5 h-5', isFavorite && 'fill-current text-red-500')} />
+                <Share2 className="w-4 h-4 text-gray-400" />
               </Button>
-              <Button variant="ghost" size="icon">
-                <Share2 className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Bookmark className="w-5 h-5" />
-              </Button>
+              <div className="flex bg-gray-100 rounded-md p-0.5">
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={cn(
+                    'px-2 py-1 text-xs font-medium rounded-sm transition-all',
+                    language === 'en' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
+                  )}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLanguage('ko')}
+                  className={cn(
+                    'px-2 py-1 text-xs font-medium rounded-sm transition-all',
+                    language === 'ko' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
+                  )}
+                >
+                  KO
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="px-4 py-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left Column - Images and Info */}
-            <div className="space-y-6">
-              {/* Image Gallery */}
-              <AnimatedContainer animation="slideUp">
-                <Card className="overflow-hidden">
-                  <div className="relative aspect-square bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center text-8xl">
-                    {itemData.images[currentImageIndex]}
-                    
-                    {/* Image Navigation */}
-                    {itemData.images.length > 1 && (
-                      <>
-                        <button
-                          onClick={() => setCurrentImageIndex((prev) => 
-                            prev === 0 ? itemData.images.length - 1 : prev - 1
-                          )}
-                          className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-white/80 rounded-full shadow-lg hover:bg-white transition-colors"
-                        >
-                          <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <button
-                          onClick={() => setCurrentImageIndex((prev) => 
-                            prev === itemData.images.length - 1 ? 0 : prev + 1
-                          )}
-                          className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-white/80 rounded-full shadow-lg hover:bg-white transition-colors"
-                        >
-                          <ChevronRight className="w-5 h-5" />
-                        </button>
-                      </>
-                    )}
-                    
-                    {/* Image Indicators */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      {itemData.images.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentImageIndex(index)}
-                          className={cn(
-                            'w-2 h-2 rounded-full transition-all',
-                            index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                          )}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-              </AnimatedContainer>
-
-              {/* Quick Info */}
-              <div>
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="p-4 text-center">
-                    <Clock className="w-6 h-6 text-primary-500 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-neutral-900">{itemData.prepTime}</div>
-                    <div className="text-sm text-neutral-600">{currentContent.prepTime}</div>
-                  </Card>
-                  <Card className="p-4 text-center">
-                    <Users className="w-6 h-6 text-primary-500 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-neutral-900">{itemData.servings}</div>
-                    <div className="text-sm text-neutral-600">{currentContent.servings}</div>
-                  </Card>
-                  <Card className="p-4 text-center">
-                    <Leaf className="w-6 h-6 text-primary-500 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-neutral-900">{itemData.calories}</div>
-                    <div className="text-sm text-neutral-600">{currentContent.calories}</div>
-                  </Card>
-                  <Card className="p-4 text-center">
-                    <Star className="w-6 h-6 text-warning-500 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-neutral-900">{itemData.rating}</div>
-                    <div className="text-sm text-neutral-600">{currentContent.rating}</div>
-                  </Card>
+      {/* Mobile Content */}
+      <div className="space-y-4">
+        {/* Image Gallery - Mobile */}
+        <div className="bg-white">
+          <div className="relative">
+            <div className="flex overflow-x-auto snap-x snap-mandatory">
+              {itemData.images.map((image, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-full h-64 flex items-center justify-center text-8xl bg-gray-100 snap-center"
+                  onClick={() => setCurrentImageIndex(index)}
+                >
+                  {image}
                 </div>
+              ))}
+            </div>
+            
+            {/* Image Indicators */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {itemData.images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={cn(
+                    'w-2 h-2 rounded-full transition-all',
+                    index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                  )}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Item Info */}
+        <div className="p-4 space-y-4">
+          {/* Title and Rating */}
+          <div>
+            <div className="flex items-start justify-between mb-2">
+              <h1 className="text-xl font-bold text-gray-900 flex-1">
+                {itemData.name[language]}
+              </h1>
+              <div className="flex items-center space-x-1 ml-2">
+                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                <span className="text-sm font-medium text-gray-900">{itemData.rating}</span>
               </div>
             </div>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {itemData.description[language]}
+            </p>
+          </div>
 
-            {/* Right Column - Details and Order */}
-            <div className="space-y-6">
-              {/* Title and Price */}
-              <AnimatedContainer animation="slideUp" delay={200}>
-                <div>
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h1 className="text-3xl font-bold text-neutral-900 mb-2">
-                        {itemData.name[language]}
-                      </h1>
-                      <p className="text-lg text-neutral-600 leading-relaxed">
-                        {itemData.description[language]}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 mb-6">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-3xl font-bold text-neutral-900">
-                        {formatPrice(itemData.price[currencyCode])}
-                      </span>
-                      {itemData.originalPrice && (
-                        <span className="text-lg text-neutral-500 line-through">
-                          {formatPrice(itemData.originalPrice[currencyCode])}
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {itemData.tags.map((tag) => (
+              <Badge key={tag} variant="secondary" size="sm">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+
+          {/* Price and Info */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl font-bold text-gray-900">
+                {currencyCode === 'KRW' ? `₩${itemData.price.KRW.toLocaleString()}` : `$${itemData.price.AUD}`}
+              </span>
+              {itemData.originalPrice && (
+                <span className="text-lg text-gray-500 line-through">
+                  {currencyCode === 'KRW' ? `₩${itemData.originalPrice.KRW.toLocaleString()}` : `$${itemData.originalPrice.AUD}`}
+                </span>
+              )}
+            </div>
+            <div className="flex items-center space-x-4 text-sm text-gray-600">
+              <div className="flex items-center space-x-1">
+                <Clock className="w-3 h-3" />
+                <span>{itemData.prepTime}{currentContent.minutes}</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <Users className="w-3 h-3" />
+                <span>{itemData.servings}{currentContent.servings}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4 py-3 bg-gray-50 rounded-lg">
+            <div className="text-center">
+              <div className="text-lg font-bold text-gray-900">{itemData.calories}</div>
+              <div className="text-xs text-gray-600">{currentContent.calories}</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-gray-900">{itemData.rating}</div>
+              <div className="text-xs text-gray-600">{currentContent.rating}</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-gray-900">{itemData.reviewsCount}</div>
+              <div className="text-xs text-gray-600">{currentContent.reviews}</div>
+            </div>
+          </div>
+
+          {/* Options */}
+          <div className="space-y-4">
+            {Object.entries(itemData.options).map(([key, option]) => (
+              <div key={key}>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-medium text-gray-900">{option.name[language]}</h3>
+                  <Badge variant={option.required ? 'error' : 'secondary'} size="sm">
+                    {option.required ? currentContent.required : currentContent.optional}
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  {option.choices.map((choice) => (
+                    <button
+                      key={choice.id}
+                      onClick={() => handleOptionChange(option.name[language], choice.id)}
+                      className={cn(
+                        'w-full flex items-center justify-between p-3 border-2 rounded-lg transition-all',
+                        selectedOptions[option.name[language]] === choice.id
+                          ? 'border-primary-500 bg-primary-50'
+                          : 'border-gray-200 hover:border-gray-300 bg-white'
+                      )}
+                    >
+                      <span className="font-medium text-gray-900">{choice.name[language]}</span>
+                      {choice.price !== 0 && (
+                        <span className={cn(
+                          'text-sm font-medium',
+                          choice.price > 0 ? 'text-gray-900' : 'text-green-600'
+                        )}>
+                          {choice.price > 0 ? '+' : ''}
+                          {currencyCode === 'KRW' ? `₩${(choice.price * 1000).toLocaleString()}` : `$${choice.price}`}
                         </span>
                       )}
-                    </div>
-                    <Badge variant="error" size="lg">
-                      {language === 'ko' ? '특가' : 'Special'}
-                    </Badge>
-                  </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {itemData.tags.map((tag, index) => (
-                      <Badge key={index} variant="secondary" size="sm">
-                        {tag}
+          {/* Special Notes */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              {currentContent.specialNotes}
+            </label>
+            <Input
+              value={specialNotes}
+              onChange={(e) => setSpecialNotes(e.target.value)}
+              placeholder={currentContent.specialNotesPlaceholder}
+              rows={3}
+              size="sm"
+            />
+          </div>
+
+          {/* Quantity and Add to Cart */}
+          <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+            <div className="flex items-center space-x-3">
+              <span className="text-sm font-medium text-gray-700">Quantity:</span>
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="w-8 h-8"
+                >
+                  <Minus className="w-3 h-3" />
+                </Button>
+                <span className="w-8 text-center font-medium">{quantity}</span>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="w-8 h-8"
+                >
+                  <Plus className="w-3 h-3" />
+                </Button>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-gray-900">
+                {currencyCode === 'KRW' ? `₩${calculateTotalPrice().toLocaleString()}` : `$${calculateTotalPrice().toFixed(2)}`}
+              </div>
+            </div>
+          </div>
+
+          <Button
+            onClick={handleAddToCart}
+            loading={isLoading}
+            size="lg"
+            variant="primary"
+            fullWidth
+            leftIcon={<ShoppingCart className="w-4 h-4" />}
+          >
+            {isLoading ? currentContent.adding : currentContent.addToCart}
+          </Button>
+        </div>
+
+        {/* Tabs - Mobile */}
+        <div className="bg-white">
+          <div className="border-b border-gray-200">
+            <div className="flex overflow-x-auto">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={cn(
+                    'flex-shrink-0 px-4 py-3 text-sm font-medium border-b-2 transition-all',
+                    activeTab === tab.id
+                      ? 'border-primary-500 text-primary-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  )}
+                >
+                  <tab.icon className="w-4 h-4 mr-2" />
+                  {tab.name[language]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          <div className="p-4">
+            {activeTab === 'overview' && (
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-2">{currentContent.allergens}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {itemData.allergens[language].map((allergen) => (
+                      <Badge key={allergen} variant="error" size="sm">
+                        <AlertTriangle className="w-3 h-3 mr-1" />
+                        {allergen}
                       </Badge>
                     ))}
                   </div>
                 </div>
-              </AnimatedContainer>
+              </div>
+            )}
 
-              {/* Customization Options */}
-              <AnimatedContainer animation="slideUp" delay={300}>
-                <Card className="p-6">
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-4">
-                    {currentContent.customizations}
-                  </h3>
-                  
-                  <div className="space-y-6">
-                    {Object.entries(itemData.options).map(([optionKey, option]) => (
-                      <div key={optionKey}>
-                        <div className="flex items-center justify-between mb-3">
-                          <label className="text-sm font-medium text-neutral-700">
-                            {option.name[language]}
-                          </label>
-                          <Badge 
-                            variant={option.required ? 'error' : 'secondary'} 
-                            size="sm"
-                          >
-                            {option.required ? currentContent.required : currentContent.optional}
-                          </Badge>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 gap-2">
-                          {option.choices.map((choice) => (
-                            <label
-                              key={choice.id}
+            {activeTab === 'ingredients' && (
+              <div>
+                <h3 className="font-medium text-gray-900 mb-3">{currentContent.ingredients}</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {itemData.ingredients[language].map((ingredient, index) => (
+                    <div key={index} className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg">
+                      <Leaf className="w-3 h-3 text-green-600" />
+                      <span className="text-sm text-gray-700">{ingredient}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'nutrition' && (
+              <div>
+                <h3 className="font-medium text-gray-900 mb-3">{currentContent.nutrition}</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 bg-gray-50 rounded-lg text-center">
+                    <div className="text-lg font-bold text-gray-900">{itemData.nutrition.calories}</div>
+                    <div className="text-xs text-gray-600">{currentContent.calories}</div>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg text-center">
+                    <div className="text-lg font-bold text-gray-900">{itemData.nutrition.protein}g</div>
+                    <div className="text-xs text-gray-600">{currentContent.protein}</div>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg text-center">
+                    <div className="text-lg font-bold text-gray-900">{itemData.nutrition.carbs}g</div>
+                    <div className="text-xs text-gray-600">{currentContent.carbs}</div>
+                  </div>
+                  <div className="p-3 bg-gray-50 rounded-lg text-center">
+                    <div className="text-lg font-bold text-gray-900">{itemData.nutrition.fat}g</div>
+                    <div className="text-xs text-gray-600">{currentContent.fat}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'reviews' && (
+              <div className="space-y-4">
+                {itemData.reviews.map((review) => (
+                  <div key={review.id} className="p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center space-x-2">
+                        <span className="font-medium text-gray-900">{review.name}</span>
+                        <div className="flex items-center space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
                               className={cn(
-                                'flex items-center justify-between p-3 border rounded-lg cursor-pointer transition-all hover:bg-neutral-50',
-                                selectedOptions[optionKey] === choice.id
-                                  ? 'border-primary-500 bg-primary-50'
-                                  : 'border-neutral-200'
+                                'w-3 h-3',
+                                i < review.rating ? 'text-yellow-500 fill-current' : 'text-gray-300'
                               )}
-                            >
-                              <div className="flex items-center space-x-3">
-                                <input
-                                  type="radio"
-                                  name={optionKey}
-                                  value={choice.id}
-                                  checked={selectedOptions[optionKey] === choice.id}
-                                  onChange={() => handleOptionChange(optionKey, choice.id)}
-                                  className="w-4 h-4 text-primary-600"
-                                />
-                                <span className="text-sm font-medium text-neutral-900">
-                                  {choice.name[language]}
-                                </span>
-                              </div>
-                              {choice.price !== 0 && (
-                                <span className="text-sm font-medium text-neutral-600">
-                                  {choice.price > 0 ? '+' : ''}{formatPrice(Math.abs(choice.price))}
-                                </span>
-                              )}
-                            </label>
+                            />
                           ))}
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </Card>
-              </AnimatedContainer>
-
-              {/* Special Notes */}
-              <AnimatedContainer animation="slideUp" delay={400}>
-                <Card className="p-6">
-                  <h3 className="text-lg font-semibold text-neutral-900 mb-3">
-                    {currentContent.specialNotes}
-                  </h3>
-                  <Input
-                    placeholder={currentContent.notesPlaceholder}
-                    value={specialNotes}
-                    onChange={(e) => setSpecialNotes(e.target.value)}
-                    rows={3}
-                  />
-                </Card>
-              </AnimatedContainer>
-
-              {/* Quantity and Add to Cart */}
-              <AnimatedContainer animation="slideUp" delay={500}>
-                <Card className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-lg font-medium text-neutral-700">
-                      {currentContent.quantity}
-                    </span>
-                    <div className="flex items-center border border-neutral-300 rounded-lg">
-                      <button
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="p-3 hover:bg-neutral-100 transition-colors"
-                      >
-                        <Minus className="w-4 h-4" />
-                      </button>
-                      <span className="px-4 py-3 text-lg font-medium min-w-[3rem] text-center">
-                        {quantity}
-                      </span>
-                      <button
-                        onClick={() => setQuantity(quantity + 1)}
-                        className="p-3 hover:bg-neutral-100 transition-colors"
-                      >
-                        <Plus className="w-4 h-4" />
-                      </button>
+                      <span className="text-xs text-gray-500">{review.date}</span>
+                    </div>
+                    <p className="text-sm text-gray-700 mb-2">{review.comment[language]}</p>
+                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                      <Check className="w-3 h-3" />
+                      <span>{review.helpful} {currentContent.helpful}</span>
                     </div>
                   </div>
-                  
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-lg font-medium text-neutral-700">Total:</span>
-                    <span className="text-2xl font-bold text-neutral-900">
-                      {formatPrice(calculateTotalPrice())}
-                    </span>
-                  </div>
-                  
-                  <Button
-                    onClick={handleAddToCart}
-                    loading={isLoading}
-                    size="lg"
-                    variant="gradient"
-                    fullWidth
-                    leftIcon={<ShoppingCart className="w-5 h-5" />}
-                  >
-                    {isLoading ? 'Adding...' : currentContent.addToCart}
-                  </Button>
-                </Card>
-              </AnimatedContainer>
-            </div>
+                ))}
+              </div>
+            )}
           </div>
-
-          {/* Tabs Section */}
-          <AnimatedContainer animation="slideUp" delay={600} className="mt-12">
-            <Card className="p-6">
-              {/* Tab Navigation */}
-              <div className="flex border-b border-neutral-200 mb-6">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={cn(
-                      'flex items-center space-x-2 px-4 py-3 font-medium text-sm transition-colors border-b-2',
-                      activeTab === tab.id
-                        ? 'border-primary-500 text-primary-600'
-                        : 'border-transparent text-neutral-600 hover:text-neutral-900'
-                    )}
-                  >
-                    <tab.icon className="w-4 h-4" />
-                    <span>{tab.name}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Tab Content */}
-              <div className="min-h-[300px]">
-                {activeTab === 'overview' && (
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-lg font-semibold text-neutral-900 mb-3">
-                        {language === 'ko' ? '상품 정보' : 'Product Information'}
-                      </h3>
-                      <p className="text-neutral-600 leading-relaxed">
-                        {itemData.description[language]}
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-lg font-semibold text-neutral-900 mb-3">
-                        {language === 'ko' ? '알레르기 정보' : 'Allergen Information'}
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {itemData.allergens[language].map((allergen, index) => (
-                          <Badge key={index} variant="warning" size="sm">
-                            <AlertTriangle className="w-3 h-3 mr-1" />
-                            {allergen}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === 'ingredients' && (
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-900 mb-4">
-                      {language === 'ko' ? '주요 재료' : 'Ingredients'}
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {itemData.ingredients[language].map((ingredient, index) => (
-                        <div key={index} className="flex items-center space-x-3 p-3 bg-neutral-50 rounded-lg">
-                          <Check className="w-4 h-4 text-success-500" />
-                          <span className="text-neutral-700">{ingredient}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === 'nutrition' && (
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-900 mb-4">
-                      {language === 'ko' ? '영양 성분 (1인분 기준)' : 'Nutrition Facts (per serving)'}
-                    </h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      {Object.entries(itemData.nutrition).map(([key, value]) => (
-                        <div key={key} className="text-center p-4 bg-neutral-50 rounded-lg">
-                          <div className="text-2xl font-bold text-neutral-900">{value}</div>
-                          <div className="text-sm text-neutral-600 capitalize">{key}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === 'reviews' && (
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-semibold text-neutral-900">
-                        {language === 'ko' ? '고객 리뷰' : 'Customer Reviews'}
-                      </h3>
-                      <div className="flex items-center space-x-2">
-                        <Star className="w-5 h-5 fill-warning-400 text-warning-400" />
-                        <span className="font-medium">{itemData.rating}</span>
-                        <span className="text-neutral-600">({itemData.reviewsCount} {currentContent.reviews})</span>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {itemData.reviews.map((review) => (
-                        <Card key={review.id} variant="outlined" className="p-4">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <div className="font-medium text-neutral-900">{review.name}</div>
-                              <div className="flex items-center space-x-2">
-                                <div className="flex">
-                                  {Array.from({ length: 5 }).map((_, i) => (
-                                    <Star
-                                      key={i}
-                                      className={cn(
-                                        'w-4 h-4',
-                                        i < review.rating ? 'fill-warning-400 text-warning-400' : 'text-neutral-300'
-                                      )}
-                                    />
-                                  ))}
-                                </div>
-                                <span className="text-sm text-neutral-500">{review.date}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <p className="text-neutral-700 mb-3">{review.comment[language]}</p>
-                          <div className="flex items-center space-x-4 text-sm text-neutral-500">
-                            <button className="flex items-center space-x-1 hover:text-neutral-700">
-                              <Heart className="w-4 h-4" />
-                              <span>{currentContent.helpful} ({review.helpful})</span>
-                            </button>
-                          </div>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Card>
-          </AnimatedContainer>
-
-          {/* Similar Items */}
-          <AnimatedContainer animation="slideUp" delay={700} className="mt-12">
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold text-neutral-900 mb-6">
-                {currentContent.similar}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {itemData.similarItems.map((item) => (
-                  <Card key={item.id} variant="outlined" className="p-4 cursor-pointer hover:shadow-md transition-shadow">
-                    <div className="text-center">
-                      <div className="text-4xl mb-3">{item.image}</div>
-                      <h4 className="font-medium text-neutral-900 mb-1">{item.name[language]}</h4>
-                      <div className="flex items-center justify-center space-x-2 mb-2">
-                        <Star className="w-4 h-4 fill-warning-400 text-warning-400" />
-                        <span className="text-sm text-neutral-600">{item.rating}</span>
-                      </div>
-                      <div className="font-semibold text-neutral-900">
-                        {formatPrice(item.price[currencyCode])}
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </Card>
-          </AnimatedContainer>
         </div>
       </div>
 
@@ -639,11 +548,19 @@ const QOItemDetailsEnhanced = () => {
       <Modal
         isOpen={showImageModal}
         onClose={() => setShowImageModal(false)}
-        size="xl"
-        title={itemData.name[language]}
+        title=""
+        size="full"
       >
-        <div className="aspect-square bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center text-9xl">
-          {itemData.images[currentImageIndex]}
+        <div className="relative h-96">
+          <div className="flex items-center justify-center h-full text-8xl bg-gray-100">
+            {itemData.images[currentImageIndex]}
+          </div>
+          <button
+            onClick={() => setShowImageModal(false)}
+            className="absolute top-4 right-4 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center"
+          >
+            ×
+          </button>
         </div>
       </Modal>
     </div>
