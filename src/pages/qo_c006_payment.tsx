@@ -178,7 +178,7 @@ const QOPayment = () => {
       <div className="p-4 space-y-6">
         {/* Brand Text */}
         <div className="text-center pt-4">
-          <h2 className="text-lg font-bold text-neutral-900">VIATABLE</h2>
+          <h2 className="text-base font-bold text-neutral-900">VIATABLE</h2>
         </div>
 
         {/* Security Badge */}
@@ -203,12 +203,12 @@ const QOPayment = () => {
         {/* Order Summary */}
         <AnimatedContainer animation="slideUp" delay={100}>
           <Card className="p-4">
-            <h3 className="font-semibold text-gray-900 mb-3">{currentContent.totalAmount}</h3>
+            <h3 className="font-semibold text-gray-900 mb-3 text-sm">{currentContent.totalAmount}</h3>
             <div className="flex items-center justify-between">
               <span className="text-gray-600">
                 {language === 'ko' ? '총 결제 금액' : 'Total Payment Amount'}
               </span>
-              <span className="text-2xl font-bold text-gray-900">
+              <span className="text-xl font-bold text-gray-900">
                 {currencyCode === 'KRW' 
                   ? `₩${orderData.total.KRW.toLocaleString()}` 
                   : `$${orderData.total.AUD}`
@@ -225,7 +225,7 @@ const QOPayment = () => {
         {/* Payment Form */}
         <AnimatedContainer animation="slideUp" delay={200}>
           <Card className="p-4">
-            <h3 className="font-semibold text-gray-900 mb-4">
+            <h3 className="font-semibold text-gray-900 mb-4 text-sm">
               {language === 'ko' ? '결제 정보 입력' : 'Payment Information'}
             </h3>
             

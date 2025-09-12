@@ -94,16 +94,16 @@ const QOLandingPage = () => {
       <div className="p-4 space-y-6">
         {/* Brand Text */}
         <div className="text-center pt-4">
-          <h2 className="text-lg font-bold text-neutral-900 mb-1">VIATABLE</h2>
-          <p className="text-sm text-neutral-600 font-medium">Smart QR Ordering Platform</p>
+          <h2 className="text-base font-bold text-neutral-900 mb-1">VIATABLE</h2>
+          <p className="text-xs text-neutral-600 font-medium">Smart QR Ordering Platform</p>
         </div>
 
         {/* Welcome Section */}
         <AnimatedContainer animation="slideUp" className="text-center">
-          <h1 className="text-2xl font-bold text-neutral-900 mb-2">
+          <h1 className="text-xl font-bold text-neutral-900 mb-2">
             {currentContent.title}
           </h1>
-          <p className="text-neutral-600 mb-4">{currentContent.subtitle}</p>
+          <p className="text-sm text-neutral-600 mb-4">{currentContent.subtitle}</p>
           
           {/* Current Time */}
           <Card className="p-4 bg-white/80 backdrop-blur-sm">
@@ -111,7 +111,7 @@ const QOLandingPage = () => {
               <Clock className="w-4 h-4" />
               <span>{currentContent.currentTime}</span>
             </div>
-            <div className="text-2xl font-mono font-bold text-gray-900">
+            <div className="text-lg font-mono font-bold text-gray-900">
               {currentTime.toLocaleTimeString(language === 'ko' ? 'ko-KR' : 'en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -126,7 +126,7 @@ const QOLandingPage = () => {
 
         {/* Quick Features */}
         <AnimatedContainer animation="slideUp" delay={100}>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+          <h2 className="text-base font-semibold text-gray-900 mb-4 text-center">
             {currentContent.quickFeatures}
           </h2>
           <StaggeredContainer animation="slideUp" staggerDelay={100} className="space-y-3">

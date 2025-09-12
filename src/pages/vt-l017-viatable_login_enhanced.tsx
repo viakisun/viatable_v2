@@ -67,10 +67,10 @@ const ViableTableLoginEnhanced = () => {
       <div className="p-4 space-y-6">
         {/* Welcome Section */}
         <AnimatedContainer animation="slideUp" className="text-center pt-4">
-          <h1 className="text-2xl font-bold text-neutral-900 mb-2">
+          <h1 className="text-xl font-bold text-neutral-900 mb-2">
             {currentContent.welcome}
           </h1>
-          <p className="text-neutral-600 mb-6">{currentContent.subtitle}</p>
+          <p className="text-sm text-neutral-600 mb-6">{currentContent.subtitle}</p>
           
           {/* Current Time */}
           <Card className="p-4 bg-white/80 backdrop-blur-sm mb-6">
@@ -78,7 +78,7 @@ const ViableTableLoginEnhanced = () => {
               <Clock className="w-4 h-4" />
               <span>{currentContent.currentTime}</span>
             </div>
-            <div className="text-xl font-mono font-bold text-gray-900">
+            <div className="text-lg font-mono font-bold text-gray-900">
               {currentTime}
             </div>
             <div className="text-xs text-gray-500 mt-1">
