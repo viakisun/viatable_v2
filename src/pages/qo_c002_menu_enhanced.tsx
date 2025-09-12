@@ -2,15 +2,14 @@ import { useState, useMemo } from 'react';
 import { 
   Search, Filter, Star, Clock, 
   ShoppingCart, TrendingUp, 
-  ChevronDown, Grid, List, SortAsc, SortDesc,
-  Timer, ArrowLeft
+  ChevronDown, SortAsc, SortDesc,
+  Timer, ArrowLeft, Heart, Plus
 } from 'lucide-react';
 import { 
   Button, 
   Input, 
   Card, 
-  Badge, 
-  ProductCard,
+  Badge,
   AnimatedContainer, 
   StaggeredContainer,
   Skeleton
@@ -21,7 +20,6 @@ const QOMenuCatalogEnhanced = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('popular');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
   const [cartCount, setCartCount] = useState(3);
   const [favorites, setFavorites] = useState<Set<string>>(new Set(['1', '3']));
@@ -148,7 +146,7 @@ const QOMenuCatalogEnhanced = () => {
   ], []);
 
   const categories = [
-    { id: 'all', name: { en: 'All', ko: '전체' }, icon: Grid, count: menuItems.length },
+    { id: 'all', name: { en: 'All', ko: '전체' }, icon: ShoppingCart, count: menuItems.length },
     { id: 'coffee', name: { en: 'Coffee', ko: '커피' }, icon: ShoppingCart, count: menuItems.filter(item => item.category === 'coffee').length },
     { id: 'brunch', name: { en: 'Brunch', ko: '브런치' }, icon: Timer, count: menuItems.filter(item => item.category === 'brunch').length },
     { id: 'beverages', name: { en: 'Beverages', ko: '음료' }, icon: Clock, count: menuItems.filter(item => item.category === 'beverages').length },
@@ -233,7 +231,14 @@ const QOMenuCatalogEnhanced = () => {
     under10min: language === 'ko' ? '10분 이하' : 'Under 10 min',
     noItemsFound: language === 'ko' ? '검색 결과가 없습니다' : 'No items found',
     tryDifferent: language === 'ko' ? '다른 검색어나 필터를 시도해보세요' : 'Try different search terms or filters',
-    clearFilters: language === 'ko' ? '필터 초기화' : 'Clear Filters'
+    clearFilters: language === 'ko' ? '필터 초기화' : 'Clear Filters',
+    popular: language === 'ko' ? '인기' : 'Popular',
+    new: language === 'ko' ? '신메뉴' : 'New',
+    vegetarian: language === 'ko' ? '채식' : 'Vegetarian',
+    spicy: language === 'ko' ? '매운맛' : 'Spicy',
+    healthy: language === 'ko' ? '건강식' : 'Healthy',
+    minutes: language === 'ko' ? '분' : 'min',
+    reviews: language === 'ko' ? '리뷰' : 'reviews'
   };
 
   const currencyCode = language === 'ko' ? 'KRW' : 'AUD';
@@ -342,28 +347,6 @@ const QOMenuCatalogEnhanced = () => {
                 <ChevronDown className="absolute right-1 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" />
               </div>
             </div>
-
-            {/* View Mode Toggle */}
-            <div className="flex bg-gray-100 rounded-md p-0.5">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={cn(
-                  'p-1.5 rounded-sm transition-all',
-                  viewMode === 'grid' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
-                )}
-              >
-                <Grid className="w-3 h-3" />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={cn(
-                  'p-1.5 rounded-sm transition-all',
-                  viewMode === 'list' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
-                )}
-              >
-                <List className="w-3 h-3" />
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -447,20 +430,22 @@ const QOMenuCatalogEnhanced = () => {
           </AnimatedContainer>
         )}
 
-        {/* Menu Items - Mobile Grid */}
+        {/* Menu Items - Mobile Single Column */}
         {isLoading ? (
-          <div className={cn(
-            'grid gap-4',
-            viewMode === 'grid' ? 'grid-cols-2' : 'grid-cols-1'
-          )}>
+          <div className="space-y-4">
             {Array.from({ length: 6 }).map((_, index) => (
-              <Card key={index} className="p-3">
-                <Skeleton className="w-full h-32 mb-3" />
-                <Skeleton className="w-3/4 h-3 mb-2" />
-                <Skeleton className="w-1/2 h-3 mb-3" />
-                <div className="flex justify-between items-center">
-                  <Skeleton className="w-12 h-3" />
-                  <Skeleton className="w-16 h-6" />
+              <Card key={index} className="p-4">
+                <div className="flex items-start space-x-3">
+                  <Skeleton className="w-16 h-16 rounded-lg flex-shrink-0" />
+                  <div className="flex-1 space-y-2">
+                    <Skeleton className="w-3/4 h-4" />
+                    <Skeleton className="w-full h-3" />
+                    <Skeleton className="w-1/2 h-3" />
+                    <div className="flex justify-between items-center">
+                      <Skeleton className="w-16 h-4" />
+                      <Skeleton className="w-20 h-8" />
+                    </div>
+                  </div>
                 </div>
               </Card>
             ))}
@@ -469,35 +454,92 @@ const QOMenuCatalogEnhanced = () => {
           <StaggeredContainer
             animation="slideUp"
             staggerDelay={50}
-            className={cn(
-              'grid gap-4',
-              viewMode === 'grid' ? 'grid-cols-2' : 'grid-cols-1'
-            )}
+            className="space-y-4"
           >
             {filteredAndSortedItems.map((item) => (
-              <ProductCard
-                key={item.id}
-                id={item.id.toString()}
-                name={item.name[language]}
-                description={item.description[language]}
-                price={item.price[currencyCode]}
-                originalPrice={item.originalPrice?.[currencyCode]}
-                currency={currencyCode}
-                image={item.image}
-                rating={item.rating}
-                reviewCount={item.reviews}
-                prepTime={item.prepTime}
-                tags={item.tags}
-                isFavorite={favorites.has(item.id.toString())}
-                isNew={item.isNew}
-                isPopular={item.isPopular}
-                isVegetarian={item.isVegetarian}
-                isSpicy={item.isSpicy}
-                onFavoriteToggle={handleFavoriteToggle}
-                onAddToCart={handleAddToCart}
-                language={language}
-                className={viewMode === 'list' ? 'flex flex-row' : ''}
-              />
+              <Card key={item.id} className="p-4">
+                <div className="flex items-start space-x-3">
+                  {/* Item Image */}
+                  <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center text-2xl flex-shrink-0">
+                    {item.image}
+                  </div>
+
+                  {/* Item Details */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-gray-900 text-sm leading-tight">
+                          {item.name[language]}
+                        </h3>
+                        <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                          {item.description[language]}
+                        </p>
+                      </div>
+                      
+                      {/* Favorite Button */}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleFavoriteToggle(item.id.toString())}
+                        className="w-6 h-6 ml-2 flex-shrink-0"
+                      >
+                        <Heart className={cn('w-3 h-3', favorites.has(item.id.toString()) ? 'text-red-500 fill-current' : 'text-gray-400')} />
+                      </Button>
+                    </div>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {item.tags.slice(0, 3).map((tag) => (
+                        <Badge key={tag} variant="secondary" size="sm" className="text-xs">
+                          {tag === 'popular' && currentContent.popular}
+                          {tag === 'new' && currentContent.new}
+                          {tag === 'vegetarian' && currentContent.vegetarian}
+                          {tag === 'spicy' && currentContent.spicy}
+                          {tag === 'healthy' && currentContent.healthy}
+                          {!['popular', 'new', 'vegetarian', 'spicy', 'healthy'].includes(tag) && tag}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    {/* Rating and Prep Time */}
+                    <div className="flex items-center space-x-3 text-xs text-gray-600 mb-3">
+                      <div className="flex items-center space-x-1">
+                        <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                        <span>{item.rating}</span>
+                        <span>({item.reviews} {currentContent.reviews})</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{item.prepTime}{currentContent.minutes}</span>
+                      </div>
+                    </div>
+
+                    {/* Price and Add Button */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-lg font-bold text-gray-900">
+                          {currencyCode === 'KRW' ? `₩${item.price.KRW.toLocaleString()}` : `$${item.price.AUD}`}
+                        </span>
+                        {item.originalPrice && (
+                          <span className="text-sm text-gray-500 line-through">
+                            {currencyCode === 'KRW' ? `₩${item.originalPrice.KRW.toLocaleString()}` : `$${item.originalPrice.AUD}`}
+                          </span>
+                        )}
+                      </div>
+                      
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={() => handleAddToCart(item.id.toString(), 1)}
+                        leftIcon={<Plus className="w-3 h-3" />}
+                        className="flex-shrink-0"
+                      >
+                        {currentContent.addToCart}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Card>
             ))}
           </StaggeredContainer>
         )}
